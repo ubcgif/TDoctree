@@ -1,0 +1,7 @@
+LOG_MODEL                           ! LOG_MODEL | LIN_MODEL
+input_files\octree_mesh.txt         ! input octree mesh file
+input_files\3D_mesh.txt             ! input 3D mesh
+output_files\3Dmodel.con            ! input 3D model
+USE_INPUT_MESH                      ! output octree mesh file
+octree_model.con                    ! output octree model file
+START_LARGE_CELLS                   ! START_LARGE_CELLS | START_SMALL_CELLS
