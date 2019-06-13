@@ -3,7 +3,7 @@
 Running the programs
 ====================
 
-This section provides describes how to run all executables pertaining to the E3D package.
+This section provides describes how to run all executables pertaining to the TDoctree package.
 
 .. note::
 
@@ -15,16 +15,14 @@ This section provides describes how to run all executables pertaining to the E3D
 
     Executable files should **not** be renamed. However, input file names can be specified by the user if desired.
 
-The main executable programs within the E3D version 1 program library are:
+The main executable programs within the TDoctree version 1 program library are:
 
-    - **create_octree_mesh_e3d:** creates an OcTree mesh based on the survey geometry
-    - **e3dinv:** used to forward model or invert FEM data
+    - **create_octree_1mesh_td:** creates an OcTree mesh based on the survey geometry
+    - **TDoctreeinv:** used to forward model or invert TEM data
 
 Also included are the following Octree utility programs:
 
-    - **blk3cell:** creates conductivity models on the underlying tensor mesh
-    - **3DModel2Octree:** interpolates models from tensor to OcTree meshes
-    - **create_weight_file:** creates the weighting on each cell in the model
+    - **blk3cellOct:** creates conductivity models on an octree mesh
     - **interface_weights:** creates weights on the faces of cells
 
 Contents

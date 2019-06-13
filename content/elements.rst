@@ -15,9 +15,7 @@ The main executable programs within the TDoctree version 1 program library are:
 
 Also included are the following OcTree utility programs:
 
-    - **blk3cell:** creates conductivity models on the underlying tensor mesh
-    - **3DModel2Octree:** interpolates models from tensor to OcTree meshes
-    - **create_weight_file:** creates the weighting on each cell in the model
+    - **blk3cellOct:** creates conductivity models on an OcTree mesh
     - **interface_weights:** creates weights on the faces of cells
 
 Main Input Files
@@ -47,7 +45,6 @@ Here, we describe the formats of supporting files used to run TDoctree executabl
     Predicted Data File <files/preFile>
     Observations File <files/obsFile>
     Topography File <files/topoFile>
-    Tensor Mesh File <files/tensor_mesh>
     OcTree Mesh File <files/octree_mesh>
     Model File <files/model>
     Model and Face Weights Files <files/weights>

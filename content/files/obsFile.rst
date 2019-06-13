@@ -3,7 +3,7 @@
 Observations File
 =================
 
-The observations contains the set of field measurements used in the inversion. This file contains all necessary survey information including: the number of transmitters, transmitter geometry, observation locations, frequencies, observed fields and uncertainties. 
+The observations contains the set of field measurements used in the inversion. This file contains all necessary survey information including: the number of transmitters, transmitter geometry, observation locations, time channels, observed fields and uncertainties. 
 
 .. note:: Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
 
@@ -11,50 +11,51 @@ The observations contains the set of field measurements used in the inversion. T
 The lines the observations file are formatted as follows:
 
 
-| **N_TRX** :math:`\;` :ref:`n_trx<e3d_dobs_ln1>`
-| **IGNORE** :ref:`reg_exp<e3d_dobs_ln1b>`
+| **IGNORE** :ref:`reg_exp<tdoctree_dobs_ln1b>`
+|
+| **N_TRX** :math:`\;` :ref:`n_trx<tdoctree_dobs_ln1>`
 |
 |
-| :ref:`trx type<e3d_dobs_ln2>`
-| :ref:`n_nodes<e3d_dobs_ln3>`
-| :math:`\;\;` :ref:`x1 y1 z1<e3d_dobs_ln4>`
-| :math:`\;\;` :ref:`x2 y2 z2<e3d_dobs_ln4>`
+| :ref:`trx type<tdoctree_dobs_ln2>`
+| :ref:`n_nodes<tdoctree_dobs_ln3>`
+| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
+| :math:`\;\;` :ref:`x2 y2 z2<tdoctree_dobs_ln4>`
 | :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\;` :ref:`xn yn zn<e3d_dobs_ln4>`
-| :math:`\;\;` :ref:`x1 y1 z1<e3d_dobs_ln4>`
+| :math:`\;\;` :ref:`xn yn zn<tdoctree_dobs_ln4>`
+| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
 | 
-| **FREQUENCY** :math:`\;` :ref:`f1<e3d_dobs_ln5>`
-| **N_RECV** :math:`\;` :ref:`n_recv<e3d_dobs_ln6>`
-| :math:`\;\;` :ref:`Data Array<e3d_dobs_ln7>`
+| **FREQUENCY** :math:`\;` :ref:`f1<tdoctree_dobs_ln5>`
+| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_dobs_ln6>`
+| :math:`\;\;` :ref:`Data Array<tdoctree_dobs_ln7>`
 |
 |
-| :ref:`trx type<e3d_dobs_ln2>`
-| :ref:`n_nodes<e3d_dobs_ln3>`
-| :math:`\;\;` :ref:`x1 y1 z1<e3d_dobs_ln4>`
-| :math:`\;\;` :ref:`x2 y2 z2<e3d_dobs_ln4>`
+| :ref:`trx type<tdoctree_dobs_ln2>`
+| :ref:`n_nodes<tdoctree_dobs_ln3>`
+| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
+| :math:`\;\;` :ref:`x2 y2 z2<tdoctree_dobs_ln4>`
 | :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\;` :ref:`xn yn zn<e3d_dobs_ln4>`
-| :math:`\;\;` :ref:`x1 y1 z1<e3d_dobs_ln4>`
+| :math:`\;\;` :ref:`xn yn zn<tdoctree_dobs_ln4>`
+| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
 |
-| **FREQUENCY** :math:`\;` :ref:`f2<e3d_dobs_ln5>`
-| **N_RECV** :math:`\;` :ref:`n_recv<e3d_dobs_ln6>`
-| :math:`\;\;` :ref:`Data Array<e3d_dobs_ln7>`
+| **FREQUENCY** :math:`\;` :ref:`f2<tdoctree_dobs_ln5>`
+| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_dobs_ln6>`
+| :math:`\;\;` :ref:`Data Array<tdoctree_dobs_ln7>`
 |
 |
 | :math:`\;\;\;\;\;\; \vdots`
 |
 |
-| :ref:`trx type<e3d_dobs_ln2>`
-| :ref:`n_nodes<e3d_dobs_ln3>`
-| :math:`\;\;` :ref:`x1 y1 z1<e3d_dobs_ln4>`
-| :math:`\;\;` :ref:`x2 y2 z2<e3d_dobs_ln4>`
+| :ref:`trx type<tdoctree_dobs_ln2>`
+| :ref:`n_nodes<tdoctree_dobs_ln3>`
+| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
+| :math:`\;\;` :ref:`x2 y2 z2<tdoctree_dobs_ln4>`
 | :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\;` :ref:`xn yn zn<e3d_dobs_ln4>`
-| :math:`\;\;` :ref:`x1 y1 z1<e3d_dobs_ln4>`
+| :math:`\;\;` :ref:`xn yn zn<tdoctree_dobs_ln4>`
+| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
 |
-| **FREQUENCY** :math:`\;` :ref:`fn<e3d_dobs_ln5>`
-| **N_RECV** :math:`\;` :ref:`n_recv<e3d_dobs_ln6>`
-| :math:`\;\;` :ref:`Data Array<e3d_dobs_ln7>`
+| **FREQUENCY** :math:`\;` :ref:`fn<tdoctree_dobs_ln5>`
+| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_dobs_ln6>`
+| :math:`\;\;` :ref:`Data Array<tdoctree_dobs_ln7>`
 |
 | *Repeat for number of unique transmitter-frequency pairs*
 |
@@ -72,38 +73,41 @@ The lines the observations file are formatted as follows:
 Parameter Descriptions
 ----------------------
 
+.. _tdoctree_dobs_ln0:
 
-.. _e3d_dobs_ln1:
+    - **ignore_flag:** Set the regular expression for data that are to be ignored during the inversion
+
+.. _tdoctree_dobs_ln1:
 
     - **n_trx:** The total number of transmitters. Example: *N_TRX 3*
 
-.. _e3d_dobs_ln1b:
+.. _tdoctree_dobs_ln1b:
 
     - **reg_exp:** Regular expression (flag) used to data points that are ignored during the inversion
 
-.. _e3d_dobs_ln2:
+.. _tdoctree_dobs_ln2:
 
     - **trx type:** For some codes, various transmitter types can be used. For E3D, the transmitter type will always be defined using the flag *TRX_ORIG*. This type of transmitter is a closed inductive loop source.
 
-.. _e3d_dobs_ln3:
+.. _tdoctree_dobs_ln3:
 
     - **n_nodes:** The number of nodes defining a particular transmitter loop. Note that:
 
-.. _e3d_dobs_ln4:
+.. _tdoctree_dobs_ln4:
 
     - **xi yi zi:** This refers to the X (Easting), Y (Northing) and Z (elevation) locations of the nodes defining the transmitter loop. Transmitters are defined using a left-handed coordinate system. Which means you must define a horizontal transmitter loop in the clockwise direction for a dipole moment in the vertical direction.
 
-.. _e3d_dobs_ln5:
+.. _tdoctree_dobs_ln5:
 
     - **fi:** The frequency (in Hz) at which the subsequent set of measurements are made.
 
-.. _e3d_dobs_ln6:
+.. _tdoctree_dobs_ln6:
 
     - **n_recv:** The number of receivers collecting field observations at a particular frequency for a particular transmitter.
 
-.. _e3d_dobs_ln7:
+.. _tdoctree_dobs_ln7:
 
-    - **Data Array:** Contains the X (Easting), Y (Northing) and Z (elevation) locations, observations and uncertainties at a particular frequency for a particular transmitter. It has dimensions :ref:`n_recv<e3d_dobs_ln6>` :math:`\times` 27.
+    - **Data Array:** Contains the X (Easting), Y (Northing) and Z (elevation) locations, observations and uncertainties at a particular frequency for a particular transmitter. It has dimensions :ref:`n_recv<tdoctree_dobs_ln6>` :math:`\times` 27.
 
 
 Data Array

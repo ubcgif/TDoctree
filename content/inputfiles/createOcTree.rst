@@ -23,17 +23,16 @@ The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using t
 +--------+---------------------------------------------------------------+-----------------------------------------------------------------+
 | 6      |:ref:`topoFile<tdoctree_input_octreeln6>`                      | sets topography                                                 |
 +--------+---------------------------------------------------------------+-----------------------------------------------------------------+
-| 7      |:ref:`shift_data<tdoctree_input_octreeln7>`                    | *description needed. leave as NOT_SHIFT_DATA*                   |
+| 7      |:ref:`polygon options<tdoctree_input_octreeln7>`               | Sets lateral extent of core region                              |
 +--------+---------------------------------------------------------------+-----------------------------------------------------------------+
-.. | 8      |:ref:`interp_topo<tdoctree_input_octreeln8>`                   | sets level of discretization for surface topography             |
-.. +--------+---------------------------------------------------------------+-----------------------------------------------------------------+
 
 
-.. figure:: images/create_octree_input.png
-     :align: center
-     :width: 700
 
-     Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctree_mesh.inp>`__ )
+.. .. figure:: images/create_octree_input.png
+..      :align: center
+..      :width: 700
+
+..      Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctree_mesh.inp>`__ )
 
 
 Line Descriptions
@@ -50,7 +49,7 @@ Line Descriptions
 
 .. _tdoctree_input_octreeln3:
 
-    - **h1 h2 h3:** Sets cell sizes within the core mesh region. Up to a depth of *h1* from surface topography and within a horizontal distance of *h1* from any receiver, the smallest cell size is used (set by *dx, dy, dz*). For the following *h2* metres, the cell widths are doubled. For the following *h3* metres, the cell widths are doubled again. Outside a depth and horizontal distance of *h1+h2+h3*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
+    - **h1 h2 h3:** Sets cell sizes within the core mesh region. Up to a depth of *h1* from surface topography, the smallest cell size is used (set by *dx, dy, dz*). For the following *h2* metres, the cell widths are doubled. For the following *h3* metres, the cell widths are doubled again. Outside a depth and horizontal distance of *h1+h2+h3*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
 
 .. _tdoctree_input_octreeln4:
 
@@ -66,28 +65,13 @@ Line Descriptions
 
 .. _tdoctree_input_octreeln7:
 
-    - **shift_data:** If the flag "NOT_SHIFT_DATA" is used, then it is possible for transmitters and receiver to lie below the surface topography. If "SHIFT_DATA *filename*" is used, then a new survey file is output in which the transmitter and receivers have been projected to the surface topography.
+    - **polygon options:** This sets the lateral extent of the core mesh region. Here, there are two options
 
-.. .. _tdoctree_input_octreeln8:
-
-..     - **interp_topo:** Set as either "APPROXTOPO" or "GOODTOPO". If "APPROXTOPO" is chosen, there will only be fine cells close to the survey, whereas "GOODTOPO" will place fine cells everywhere on the surface.
-
-
-.. .. figure:: images/octree_example.png
-..      :align: center
-..      :width: 400
-
-..      Octree mesh showing and surface topography. Cells below the surface topography are assigned a value of 1 in the active cells model.
-
-.. Approximate versus Good Topography
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. Below, we see the difference between entering "APPROXTOPO" (top) and "GOODTOPO" (bottom) into :ref:`interp_top<tdoctree_input_octreeln7>`. For "APPROXTOPO", the mesh ultimately contains a smaller total number of cells, as discretization near the surface is coarser. For "GOODTOPO", the mesh contains a larger total number of cells because the surface topography is discretized to the finest cell size.
+        1. The flag *MAKE_POLYGON* is entered followed by a positive value (*val*). Up to a lateral distance *val* from all transmitters, the finest mesh discretization is used.
+        2. Enter the file path to a :ref:`polygon file<topoFile>`. The polygon denotes the points of a convex hull that is used to define the lateral extent of the core mesh region.
 
 
-.. .. figure:: images/create_octree_topo.png
-..      :align: center
-..      :width: 500
+
 
 
 

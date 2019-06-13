@@ -27,6 +27,12 @@ Conductivity Models
 For conductivity models, conductivity values are entered in units S/m.
 
 
+Susceptibility Models
+^^^^^^^^^^^^^^^^^^^^^
+
+For susceptibility models, conductivity values are entered in SI units.
+
+
 Active Cells Model
 ^^^^^^^^^^^^^^^^^^
 

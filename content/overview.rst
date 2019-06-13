@@ -28,7 +28,7 @@ command line only.
 The program library provides codes to do the following:
 
     - Construct models on OcTree meshes.
-    - Forward model electric and magnetic field anomaly responses to a 3D volume of contrasting conductivity, on and octree mesh.
+    - Forward model time domain magnetic field responses to a 3D volume of contrasting conductivity, on and octree mesh.
     - Invert of surface, borehole and/or airborne EM data to recover 3D conductivity models:
 
 The equations are discretized in time using backward Euler method and discretized in space by using a finite volume technique on a staggered grid. The sources can be grounded dipoles or loop currents that reside in the air, on the surface, or inside the earth. The responses can be any combination of components of E, H, or dB/dt. The transmitter waveform is user-defined and there are no restrictions on the length or shape of the waveform. Data can be simulated in the “on-time” or “off-time”. The earth model is an arbitrary 3D conductivity defined on a structured rectangular mesh. The earth can also have an arbitrary 3D magnetic susceptibility.
@@ -64,9 +64,7 @@ The main executable programs within the TDoctree version 1 program library are:
 
 Also included are the following Octree utility programs:
 
-      - blk3cell
-      - 3Dmodel2Octree
-      - create_weight_file
+      - blk3cellOct
       - interface_weights
 
 Licensing
@@ -76,8 +74,8 @@ Licensing for commercial use is managed by distributors, not by the UBC-GIF rese
 Details are in the `Licensing policy document <http://gif.eos.ubc.ca/software/licensing>`__.
 
 
-Installing E3D
---------------
+Installing TDoctree
+-------------------
 
 TDoctree Executables
 ^^^^^^^^^^^^^^^^^^^^
@@ -89,18 +87,18 @@ order to use the software:
     2. Add this directory as new path to your environment variables.
     3. Make sure to create a separate directory for each new inversion, where all the associated files will be stored. Do not store anything in the bin directory other than executable applications and Graphical User Interface applications (GUIs).
 
-MPI Executables
-^^^^^^^^^^^^^^^
+.. MPI Executables
+.. ^^^^^^^^^^^^^^^
 
-Message passaging interface (MPI) programming allows TDoctree version 1 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the TDoctree version 1 executables. To set up MPI:
+.. Message passaging interface (MPI) programming allows TDoctree version 1 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the TDoctree version 1 executables. To set up MPI:
 
-    1. Download and install:
+..     1. Download and install:
       
-      - `Microsoft MPI v10.0 <https://www.microsoft.com/en-us/download/details.aspx?id=57467>`__ : Required for window machines
-      - `MPICH <https://www.mpich.org/downloads/>`__ : Required for Linux machines
-      - `Open MPI v4 <https://www.open-mpi.org/software/ompi/v4.0/>`__ : Optional programming to set MPI threads
+..       - `Microsoft MPI v10.0 <https://www.microsoft.com/en-us/download/details.aspx?id=57467>`__ : Required for window machines
+..       - `MPICH <https://www.mpich.org/downloads/>`__ : Required for Linux machines
+..       - `Open MPI v4 <https://www.open-mpi.org/software/ompi/v4.0/>`__ : Optional programming to set MPI threads
 
-    2. Path the folders containing MPI executables to your environment variables.
+..     2. Path the folders containing MPI executables to your environment variables.
 
 
 
