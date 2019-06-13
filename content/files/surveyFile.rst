@@ -55,7 +55,7 @@ The lines of the survey file are formatted as follows:
 | **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_survey_ln6>`
 | :math:`\;\;` :ref:`Loc Array<tdoctree_survey_ln7>`
 |
-| *Repeat for number of unique transmitter-frequency pairs*
+| *Repeat for number of unique transmitters*
 |
 |
 
