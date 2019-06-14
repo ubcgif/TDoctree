@@ -3,7 +3,7 @@
 Predicted Data File
 ===================
 
-predicted data files output from **e3dfwd_pardiso.exe** and **e3dinv_pardiso.exe** contain the locations and predicted data. The order of the data points is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter and frequency. Thus predicted data files take the format:
+predicted data files output from **TDoctree.exe** contain the locations and predicted data. The order of the data points is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter. Thus predicted data files take the format:
 
 |
 | **Data Array 1**
@@ -20,30 +20,56 @@ predicted data files output from **e3dfwd_pardiso.exe** and **e3dinv_pardiso.exe
 Data Array
 ----------
 
-.. important:: The data are represented in a left-handed coordinate system where X is Easting, Y is Northing and Z is +ve downward.
 
-
-For each transmitter at each frequency, a set of field observations are made for a set of receivers. These field observations include real and imaginary components of the electric and magnetic fields. The rows of the data array are formatted as follows:
+For each transmitter, a set of field observations are made for a set of receivers. It has 13 columns. The rows of the data array are formatted as follows:
 
 .. math::
-    | \; x \; | \; y \; | \; z \; | \;\;\; E_x \; data \;\;\; | \;\;\; E_y \; data \;\;\; | \;\;\; E_z \; data \;\;\; | \;\;\; H_x \; data \;\;\; | \;\;\; H_y \; data \;\;\; | \;\;\; H_z \; data \;\;\; |
+	\begin{align}
+    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; |
+    \end{align}
 
-such that :math:`E_x \; data` is comprised of 2 columns:
+
+|
+|
+
+such that :math:`E \; data` is in units V/m and is comprised of 3 columns:
 
 .. math::
 
-    | \; E_x^\prime \; | \; E_x^{\prime \prime} \; |
+    | \; E_x \; | \; E_y \; | \; E_z \; |
 
-where
+:math:`H \; data` is in units A/m and is comprised of 3 columns:
 
-    - :math:`E_x^\prime` is the real component of the electric field along the Easting direction
-    - :math:`E_x^{\prime\prime}` is the imaginary component of the electric field along the Easting direction
+.. math::
+
+    | \; H_x \; | \; H_y \; | \; H_z \; |
+
+and :math:`dB/dt \; data` is in units T/s and is comprised of 3 columns:
+
+.. math::
+
+    | \; dB_x/dt \; | \; dB_y/dt \; | \; -dB_z/dt \; |
 
 
-This is done likewise for :math:`E_y`, :math:`E_z`, :math:`H_x`, :math:`E_y`, :math:`H_z`.
 
+.. important::
 
-
+	- The data are represented in a left-handed coordinate system where X is Easting, Y is Northing and Z is +ve downward.
+	- The vertical component of dB/dt is represented using :math:`\mathbf{-dB_z/dt}` **!!!** This is done due to a common plotting convention.
 
 
 

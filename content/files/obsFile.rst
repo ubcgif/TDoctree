@@ -3,7 +3,7 @@
 Observations File
 =================
 
-The observations contains the set of field measurements used in the inversion. This file contains all necessary survey information including: the number of transmitters, transmitter geometry, observation locations, time channels, observed fields and uncertainties. 
+The observations contains the set of field measurements used in the inversion. This file contains all necessary survey information including: the number of transmitters, transmitter geometry, observation locations, frequencies, observed fields and uncertainties. 
 
 .. note:: Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
 
@@ -11,134 +11,125 @@ The observations contains the set of field measurements used in the inversion. T
 The lines the observations file are formatted as follows:
 
 
-| **IGNORE** :ref:`reg_exp<tdoctree_dobs_ln1b>`
 |
-| **N_TRX** :math:`\;` :ref:`n_trx<tdoctree_dobs_ln1>`
+| **IGNORE** :ref:`reg_exp<tdoctree_obs_ln0>`
+|
+| **N_TRX** :math:`\;` :ref:`n_trx<tdoctree_obs_ln1>`
 |
 |
-| :ref:`trx type<tdoctree_dobs_ln2>`
-| :ref:`n_nodes<tdoctree_dobs_ln3>`
-| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
-| :math:`\;\;` :ref:`x2 y2 z2<tdoctree_dobs_ln4>`
-| :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\;` :ref:`xn yn zn<tdoctree_dobs_ln4>`
-| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
+| :ref:`DEFINE TRANSMITTER<tdoctree_obs_transmitter>`
 | 
-| **FREQUENCY** :math:`\;` :ref:`f1<tdoctree_dobs_ln5>`
-| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_dobs_ln6>`
-| :math:`\;\;` :ref:`Data Array<tdoctree_dobs_ln7>`
+| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_obs_ln2>`
+| **N_TIME** :math:`\;` :ref:`n_time<tdoctree_obs_ln3>`
+| :math:`\;\;` :ref:`Data Array<tdoctree_obs_ln4>`
 |
 |
-| :ref:`trx type<tdoctree_dobs_ln2>`
-| :ref:`n_nodes<tdoctree_dobs_ln3>`
-| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
-| :math:`\;\;` :ref:`x2 y2 z2<tdoctree_dobs_ln4>`
-| :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\;` :ref:`xn yn zn<tdoctree_dobs_ln4>`
-| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
+| :ref:`DEFINE TRANSMITTER<tdoctree_obs_transmitter>`
 |
-| **FREQUENCY** :math:`\;` :ref:`f2<tdoctree_dobs_ln5>`
-| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_dobs_ln6>`
-| :math:`\;\;` :ref:`Data Array<tdoctree_dobs_ln7>`
+| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_obs_ln2>`
+| **N_TIME** :math:`\;` :ref:`n_time<tdoctree_obs_ln3>`
+| :math:`\;\;` :ref:`Data Array<tdoctree_obs_ln4>`
 |
 |
-| :math:`\;\;\;\;\;\; \vdots`
+| :math:`\;\;\;\;\;\;\;\;\;\; \vdots`
 |
 |
-| :ref:`trx type<tdoctree_dobs_ln2>`
-| :ref:`n_nodes<tdoctree_dobs_ln3>`
-| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
-| :math:`\;\;` :ref:`x2 y2 z2<tdoctree_dobs_ln4>`
-| :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\;` :ref:`xn yn zn<tdoctree_dobs_ln4>`
-| :math:`\;\;` :ref:`x1 y1 z1<tdoctree_dobs_ln4>`
+| :ref:`DEFINE TRANSMITTER<tdoctree_obs_transmitter>`
 |
-| **FREQUENCY** :math:`\;` :ref:`fn<tdoctree_dobs_ln5>`
-| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_dobs_ln6>`
-| :math:`\;\;` :ref:`Data Array<tdoctree_dobs_ln7>`
+| **N_RECV** :math:`\;` :ref:`n_recv<tdoctree_obs_ln2>`
+| **N_TIME** :math:`\;` :ref:`n_time<tdoctree_obs_ln3>`
+| :math:`\;\;` :ref:`Data Array<tdoctree_obs_ln4>`
 |
-| *Repeat for number of unique transmitter-frequency pairs*
+| *Repeat for number of unique transmitters*
 |
 |
 
 
-.. figure:: images/files_locations.png
-     :align: center
-     :width: 700
+.. .. figure:: images/files_locations.png
+..      :align: center
+..      :width: 400
 
-     Example locations file for MTZ data.
+..      Example survey file with various types of transmitters.
 
 
 
 Parameter Descriptions
 ----------------------
 
-.. _tdoctree_dobs_ln0:
+.. _tdoctree_obs_ln0:
 
-    - **ignore_flag:** Set the regular expression for data that are to be ignored during the inversion
+    - **reg_exp:** A regular expression denoting which data are ignored during the inversion; examples include *-9999* and *NaN*
 
-.. _tdoctree_dobs_ln1:
+.. _tdoctree_obs_ln1:
 
-    - **n_trx:** The total number of transmitters. Example: *N_TRX 3*
+    - **n_trx:** The total number of unique transmitters. Example: *N_TRX 3*
 
-.. _tdoctree_dobs_ln1b:
+.. _tdoctree_obs_ln2:
 
-    - **reg_exp:** Regular expression (flag) used to data points that are ignored during the inversion
+    - **n_recv:** The number of receivers collecting field observations for a particular transmitter.
 
-.. _tdoctree_dobs_ln2:
+.. _tdoctree_obs_ln3:
 
-    - **trx type:** For some codes, various transmitter types can be used. For E3D, the transmitter type will always be defined using the flag *TRX_ORIG*. This type of transmitter is a closed inductive loop source.
+    - **n_time:** The number of time channels for each receiver
 
-.. _tdoctree_dobs_ln3:
+.. _tdoctree_obs_ln4:
 
-    - **n_nodes:** The number of nodes defining a particular transmitter loop. Note that:
-
-.. _tdoctree_dobs_ln4:
-
-    - **xi yi zi:** This refers to the X (Easting), Y (Northing) and Z (elevation) locations of the nodes defining the transmitter loop. Transmitters are defined using a left-handed coordinate system. Which means you must define a horizontal transmitter loop in the clockwise direction for a dipole moment in the vertical direction.
-
-.. _tdoctree_dobs_ln5:
-
-    - **fi:** The frequency (in Hz) at which the subsequent set of measurements are made.
-
-.. _tdoctree_dobs_ln6:
-
-    - **n_recv:** The number of receivers collecting field observations at a particular frequency for a particular transmitter.
-
-.. _tdoctree_dobs_ln7:
-
-    - **Data Array:** Contains the X (Easting), Y (Northing) and Z (elevation) locations, observations and uncertainties at a particular frequency for a particular transmitter. It has dimensions :ref:`n_recv<tdoctree_dobs_ln6>` :math:`\times` 27.
-
-
-Data Array
-----------
-
-.. important:: The data are represented in a left-handed coordinate system where X is Easting, Y is Northing and Z is +ve downward. 
-
-
-For each transmitter at each frequency, a set of field observations are made for a set of receivers. These field observations include real and imaginary components of the electric and magnetic fields as well as their uncertainties. The rows of the data array are formatted as follows:
+    - **Data Array:** Contains the X (Easting), Y (Northing), Z (elevation) locations and time channels for all receivers for a particular transmitter. It has has :ref:`n_recv<tdoctree_obs_ln2>` :math:`\times` :ref:`n_time<tdoctree_obs_ln2>` rows and 22 columns. The time-locations array is organized as follows:
 
 .. math::
-    | \; x \; | \; y \; | \; z \; | \;\;\; E_x \; data \;\;\; | \;\;\; E_y \; data \;\;\; | \;\;\; E_z \; data \;\;\; | \;\;\; H_x \; data \;\;\; | \;\;\; H_y \; data \;\;\; | \;\;\; H_z \; data \;\;\; |
+    \begin{align}
+    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; |
+    \end{align}
 
-such that :math:`E_x \; data` is comprised of 4 columns:
+
+|
+|
+
+such that :math:`E \; data` is in units V/m and is comprised of 6 columns:
 
 .. math::
 
-    | \; E_x^\prime \; | \; U_x^\prime \; | \; E_x^{\prime \prime} \; | \; U_x^{\prime \prime} \; |
+    | \; E_x \; | \; E_x \; Unc. \; | \; E_y \; | \; E_y \; Unc. \; | \; E_z \; | \; E_z \; Unc. \; |
 
-where
+:math:`H \; data` is in units A/m and is comprised of 6 columns:
 
-    - :math:`E_x^\prime` is the real component of the electric field along the Easting direction
-    - :math:`E_x^{\prime\prime}` is the imaginary component of the electric field along the Easting direction
-    - :math:`U_x^\prime` is the uncertainty on :math:`E_x^\prime`
-    - :math:`U_x^{\prime\prime}` is the uncertainty on :math:`E_x^{\prime\prime}`
+.. math::
+
+    | \; H_x \; | \; H_x \; Unc. \; | \; H_y \; | \; H_y \; Unc. \; | \; H_z \; | \; H_z \; Unc. \; |
+
+and :math:`dB/dt \; data` is in units T/s and is comprised of 6 columns:
+
+.. math::
+
+    | \; dB_x/dt \; | \; dB_x/dt \; Unc. \; | \; dB_y/dt \; | \; dB_y/dt \; Unc. \; | \; -dB_z/dt \; | \; -dB_z/dt \; Unc. \; |
 
 
-This is done likewise for :math:`E_y`, :math:`E_z`, :math:`H_x`, :math:`E_y`, :math:`H_z`.
+
+.. important::
+
+    - The data are represented in a left-handed coordinate system where X is Easting, Y is Northing and Z is +ve downward.
+    - The vertical component of dB/dt is represented using :math:`\mathbf{-dB_z/dt}` **!!!** This is done due to a common plotting convention. The associated uncertainties are still positive values however!
 
 
+.. _tdoctree_obs_transmitter:
 
+Defining Transmitters
+---------------------
 
+There are two types of transmitters that *TDoctree* survey files can use. These were defined in the :ref:`survey file section <tdoctree_obs_transmitter>`.
 
 

@@ -48,6 +48,7 @@ Here, we describe the formats of supporting files used to run TDoctree executabl
     OcTree Mesh File <files/octree_mesh>
     Model File <files/model>
     Model and Face Weights Files <files/weights>
+    Wave File <files/waveFile>
 
 
 
