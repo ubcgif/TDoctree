@@ -12,7 +12,7 @@ Unlike some other UBC-GIF programs, the *mpiexec* call **cannot** be used to par
 
 .. figure:: images/run_tdoctreeinv.png
      :align: center
-     :width: 700
+     :width: 500
 
 Setting Number of Threads with Open MPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

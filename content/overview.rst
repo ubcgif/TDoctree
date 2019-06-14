@@ -64,8 +64,8 @@ The main executable programs within the TDoctree version 1 program library are:
 
 Also included are the following Octree utility programs:
 
-      - blk3cellOct
-      - interface_weights
+      - **blk3cellOct:** creates block models directly on OcTree meshes
+      - **interface_weights:** generates interface weights
 
 Licensing
 ---------

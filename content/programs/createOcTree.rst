@@ -7,9 +7,9 @@ Create OcTree Mesh
 
 To generate the OcTree mesh, open a command window. Type the path to the code **create_octree_1mesh_td.exe**, followed by a space, followed by the path to the input file.
 
-.. .. figure:: images/run_create_mesh.png
-..      :align: center
-..      :width: 700
+.. figure:: images/run_create_mesh.png
+     :align: center
+     :width: 500
 
 
 

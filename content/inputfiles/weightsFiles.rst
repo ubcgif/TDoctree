@@ -1,68 +1,7 @@
 .. _tdoctree_input_weights:
 
-Cell and Face Weights
-=====================
-
-Cell Weights Input File
------------------------
-
-The parameters used to create cell weights are defined in the input file. The lines within the input file are as follows:
-
-
-.. tabularcolumns:: |L|C|C|
-
-+--------+---------------------------------------------------------+--------------------------------------------------------------------------------------+
-| Line # | Parameter                                               | Description                                                                          |
-+========+=========================================================+======================================================================================+
-| 1      | :ref:`OcTree Mesh<tdoctree_weight_ln1>`                 | path to octree mesh                                                                  |
-+--------+---------------------------------------------------------+--------------------------------------------------------------------------------------+
-| 2      | :ref:`Active Cells<tdoctree_weight_ln2>`                | path to active cells model                                                           |
-+--------+---------------------------------------------------------+--------------------------------------------------------------------------------------+
-| 3      | :ref:`# Surface Layers<tdoctree_weight_ln3>`            | set number of cells below surface in which weighting horizontal smoothing is applied |
-+--------+---------------------------------------------------------+--------------------------------------------------------------------------------------+
-| 4      | :ref:`Horizontal Surface Weights<tdoctree_weight_ln4>`  | surface weights values                                                               |
-+--------+---------------------------------------------------------+--------------------------------------------------------------------------------------+
-| 5      | :ref:`Output Name<tdoctree_weight_ln5>`                 | name for output face weighting file                                                  |
-+--------+---------------------------------------------------------+--------------------------------------------------------------------------------------+
-
-
-.. figure:: images/interface_weights_input.png
-     :align: center
-     :width: 700
-
-     Example input file for creating interface weights.
-
-
-.. _tdoctree_input_weights_lines:
-
-Line Descriptions
-^^^^^^^^^^^^^^^^^
-
-.. _tdoctree_weight_ln1:
-
-    - **OcTree Mesh:** file path to the OcTree mesh file
-
-.. _tdoctree_weight_ln2:
-
-    - **Active Topography Cells:** Here, the user can choose to specify the cells which lie below the surface topography. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
-
-.. _tdoctree_weight_ln3:
-
-    - **# Surface Layers:** This represents the first parameter used to apply surface weighting. Here, the user specifies how many cell layers below the surface will have surface weighting in X and Y.
-
-.. _tdoctree_weight_ln4:
-
-    - **Horizontal Surface Weights:** Here, the user specifies the weights on X and Y faces for every layer (from surface layer downwards). Essentially, we are invoking a smoothness along the X and Y directions that decreases with depth. The user must enter a set of decreasing values separated by spaces. The number of values that must be entered is equal to the integer value set on the previous line.
-
-.. _tdoctree_weight_ln5:
-
-    - **Output Name:** File name for the output interface weights file.
-
-
-.. _tdoctree_input_face_weights:
-
-Interface Weights Input File
-----------------------------
+Interface Weights
+=================
 
 The parameters used to create interface weights are defined in the input file. The lines within the input file are as follows:
 

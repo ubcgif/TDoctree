@@ -85,7 +85,7 @@ Line Descriptions
     
     - **Wave file:** Set the path to a :ref:`wave file<waveFile>`. This file defines the time-steps for the problem.
 
-.. _tdoctree_input_inv2_ln5:
+.. _tdoctree_input_inv_ln5:
 
     - **Initial/FWD Model:** On this line we specify either the starting model for the inversion or the conductivity model for the forward modeling. On this line, there are 3 possible options:
 
@@ -135,11 +135,11 @@ Line Descriptions
 
     - **Chi Factor:** The chi factor defines the target misfit for the inversion. A chi factor of 1 means the target misfit is equal to the total number of data observations.
 
-.. _e3d_input_inv2_ln15:
+.. _e3d_input_inv_ln15:
 
     - **iter_per_beta nBetas:** Here, *iter_per_beta* is the number of Gauss-Newton iterations per beta value. *nBetas* is the number of times the inverse problem is solved for smaller and smaller trade-off parameters until it quits. See theory section for :ref:`cooling schedule <theory_cooling>` and :ref:`Gauss-Newton update <theory_GN>`.
 
-.. _e3d_input_inv2_ln16:
+.. _e3d_input_inv_ln16:
 
     - **tol_ipcg max_iter_ipcg:** Here, the user specifies solver parameters. *tol_ipcg* defines how well the iterative solver does when solving for :math:`\delta m` and *max_iter_ipcg* is the maximum iterations of incomplete-preconditioned-conjugate gradient. See theory on :ref:`Gauss-Newton solve <theory_IPCG>`
 
