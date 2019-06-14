@@ -1,20 +1,18 @@
-.. _e3d_inv:
+.. _tdoctree_inv:
 
 Inversion Program
 =================
 
-Both the forward and inverse problems are solved using the **e3dinv.exe** executable program. In each case, format of the :ref:`input file<e3d_input_inv>` (denoted here as **e3dinv.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
+Both the forward and inverse problems are solved using the **TDoctreeinv.exe** executable program. In each case, format of the :ref:`input file<tdoctree_input_inv>` (denoted here as **tdoctreeinv.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
 
 Running the Program
 ^^^^^^^^^^^^^^^^^^^
 
-Here, the *mpiexec* call is used to parallelize multiple processes (large-scale independent operations) within the code. To run the executable, open a command window and type the following:
+Unlike some other UBC-GIF programs, the *mpiexec* call **cannot** be used to parallelize multiple processes (large-scale independent operations) within the code. To run the executable, open a command window and type the following:
 
-.. figure:: images/run_e3dinv.png
+.. figure:: images/run_tdoctreeinv.png
      :align: center
      :width: 700
-
-The call *mpiexec* is followed by the flag *-n*, then the number of processes (*"nFreq"* ) to be carried out simultaneously. This is followed by the paths to the executable and the corresponding input file, respectively. The number of simultaneous processes (*"nFreq"* ) **must** be equal or less than the number of frequencies. Ideally there is enough memory for *nFreq* to be equal to the number of frequencies.
 
 Setting Number of Threads with Open MPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -30,9 +28,11 @@ Before running the executable, the number of threads used to carry out all simul
 Units
 ^^^^^
 
-    - **Electric field data:** Real and imaginary components of *Ex*, *Ey* and *Ez* in units V/m
-    - **Magnetic field data:** Real and imaginary components of the total magnetic field *Hx*, *Hy* and *Hz* in units A/m. 
+    - **Electric field data:** *Ex*, *Ey* and *Ez* in units V/m
+    - **Magnetic field data:** *Hx*, *Hy* and *Hz* in units A/m. 
+    - **Magnetic field data:** *dBx/dt*, *dBy/dt* and *-dBz/dt* in units T/s. The vertical component of dB/dt is represented using -dBz/dt due to a long-standing plotting convention 
     - **Conductivity model:** S/m
+    - **Susceptibility model:** SI
     - **Reference/starting conductivity model:** S/m 
     - **Model/interface weights:** unitless
 
@@ -44,23 +44,19 @@ Units
 Output Files
 ^^^^^^^^^^^^
 
-The program **e3dinv.exe** creates the following output files:
+The program **TDoctreeinv.exe** creates the following output files:
 
-    - **dpred_fwd.txt** predicted data if forward modeling is used
+    - **dpred0.txt** data predicted using the starting model or forward model
 
-    - **model0.con:** the starting model
+    - **inv_xxx.con:** recovered model at iteration 'xxx'
 
-    - **dpred0.txt** data predicted using the starting model
-
-    - **inv_xx.con:** recovered model at iteration 'xx'
-
-    - **dpred_xx.txt** data predicted using model 'xx'
+    - **dpred_xxx.txt** data predicted using model 'xxx'
 
     - **inv.con:** final conductivity model
 
-    - **e3d_octree_inv_pardiso.log:** log file for the inversion
+    - **TD_octree_inv_1mesh.log:** log file for the inversion
 
-    - **e3d_octree_inv.pardiso.out:** stores details regarding the inversion
+    - **TD_octree_inv_1mesh.out:** stores details regarding the inversion
 
 
 

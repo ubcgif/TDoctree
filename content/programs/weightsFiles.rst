@@ -1,4 +1,4 @@
-.. _e3d_weights:
+.. _tdoctree_weights:
 
 Create Additional Cell and Face Weights
 =======================================
@@ -9,7 +9,7 @@ The creation of specific cell and face weights is not required to run the invers
 Generating Model Weights File
 -----------------------------
 
-Model weights are applied in the smallness term of the model objective function; see :ref:`theory: inversion <theory_inv>`. To generate a model weights file, use the same workflow described on the :ref:`create model <e3d_model>` page. When creating a model weight file, consider the following:
+Model weights are applied in the smallness term of the model objective function; see :ref:`theory: inversion <theory_inv>`. To generate a model weights file, use the same workflow described on the :ref:`create model <tdoctree_model>` page. When creating a model weight file, consider the following:
 
      - All cells **must** be assigned a weight values larger than 0! This is to ensure the problem is sufficiently well-conditioned.
      - Model weight values should be set relative to a value of 1. This is to ensure the relative emphasis on model weights and surface weights is preserved.
@@ -27,7 +27,7 @@ Interface weights are used to preserve the gradients or edges within certain reg
      - Large interface weights (:math:`w \gg 1` ) preserve gradients within reference model. Small interface weights (:math:`w \ll 1` ) results in smoother gradients within the recovered model. 
 
 
-To generate interface weights on an Octree mesh, open a command window. In order, enter the path to **interface_weights.exe**, followed by the path to the :ref:`input file<e3d_input_weights>`; denoted here as **interface_weights.inp**: 
+To generate interface weights on an Octree mesh, open a command window. In order, enter the path to **interface_weights.exe**, followed by the path to the :ref:`input file<tdoctree_input_weights>`; denoted here as **interface_weights.inp**: 
 
 .. figure:: images/run_interface_weights.png
      :align: center
