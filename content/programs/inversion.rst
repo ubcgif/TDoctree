@@ -10,9 +10,9 @@ Running the Program
 
 Unlike some other UBC-GIF programs, the *mpiexec* call **cannot** be used to parallelize multiple processes (large-scale independent operations) within the code. To run the executable, open a command window and type the following:
 
-.. .. figure:: images/run_tdoctree.png
-..      :align: center
-..      :width: 500
+.. figure:: images/run_tdoctree.png
+     :align: center
+     :width: 500
 
 Setting Number of Threads with Open MPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -54,9 +54,9 @@ The program **tdoctree.exe** creates the following output files:
 
     - **inv.con:** final conductivity model
 
-    - **TD_octree_inv_1mesh.log:** log file for the inversion
+    - **tdoctree.log:** log file for the inversion
 
-    - **TD_octree_inv_1mesh.out:** stores details regarding the inversion
+    - **tdoctree.out:** stores details regarding the inversion
 
 
 
