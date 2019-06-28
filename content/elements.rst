@@ -41,9 +41,11 @@ Here, we describe the formats of supporting files used to run TDoctree executabl
 .. toctree::
     :maxdepth: 1
 
-    Survey and Locations File <files/surveyFile>
-    Predicted Data File <files/preFile>
+    Survey Index File <files/indexFile>
     Observations File <files/obsFile>
+    Predicted Data File <files/preFile>
+    Time Channels File <files/timeFile>
+    Transmitter/Receiver File <files/receiverFile>
     Topography File <files/topoFile>
     OcTree Mesh File <files/octree_mesh>
     Model File <files/model>

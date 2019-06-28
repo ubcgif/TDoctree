@@ -3,79 +3,40 @@
 Predicted Data File
 ===================
 
-predicted data files output from **TDoctree.exe** contain the locations and predicted data. The order of the data points is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter. Thus predicted data files take the format:
+predicted data files output from **tdoctree_v2.exe** contain the transmitter, receiver and time indecies as well as the predicted data. The order of the data points is in the same order as the :ref:`survey index file <indexFile>`. Predicted data files take the format:
 
 |
-| **Data Array 1**
-|
-| **Data Array 2**
-|
-| :math:`\;\;\;\;\;\;\;\; \vdots`
-|
-| **Data Array N**
+| :ref:`tx_ind<tdoctree_pre_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_pre_ln2>` :math:`\;` :ref:`t_ind<tdoctree_pre_ln3>` :math:`\;` :ref:`data_opt<tdoctree_pre_ln4>` :math:`\;` :ref:`data<tdoctree_pre_ln5>`
+| :ref:`tx_ind<tdoctree_pre_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_pre_ln2>` :math:`\;` :ref:`t_ind<tdoctree_pre_ln3>` :math:`\;` :ref:`data_opt<tdoctree_pre_ln4>` :math:`\;` :ref:`data<tdoctree_pre_ln5>`
+| :ref:`tx_ind<tdoctree_pre_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_pre_ln2>` :math:`\;` :ref:`t_ind<tdoctree_pre_ln3>` :math:`\;` :ref:`data_opt<tdoctree_pre_ln4>` :math:`\;` :ref:`data<tdoctree_pre_ln5>`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :ref:`tx_ind<tdoctree_pre_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_pre_ln2>` :math:`\;` :ref:`t_ind<tdoctree_pre_ln3>` :math:`\;` :ref:`data_opt<tdoctree_pre_ln4>` :math:`\;` :ref:`data<tdoctree_pre_ln5>`
 |
 |
 
-
-Data Array
-----------
+**Parameter Descriptions**
 
 
-For each transmitter, a set of field observations are made for a set of receivers. It has 13 columns. The rows of the data array are formatted as follows:
+.. _tdoctree_pre_ln1:
 
-.. math::
-	\begin{align}
-    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
-    &| \;\, x_1 \,\; | \;\, y_1 \,\; | \;\, z_1 \,\; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
-    &| \;\, x_2 \,\; | \;\, y_2 \,\; | \;\, z_2 \,\; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
-    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
-    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
-    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_1 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_2 \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; | \\
-    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
-    &| \; x_m \; | \; y_m \; | \; z_m \; | \; t_n \; | \;\;\; E \; data \;\;\; | \;\;\; H \; data \;\;\; | \;\;\; dB/dt \; data \;\;\; |
-    \end{align}
+    - **tx_ind:** The index corresponding to the desired transmitter within the :ref:`transmitter file<receiverFile>`. 
 
+.. _tdoctree_pre_ln2:
 
-|
-|
+    - **rx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>`.
 
-such that :math:`E \; data` is in units V/m and is comprised of 3 columns:
+.. _tdoctree_pre_ln3:
 
-.. math::
+    - **t_ind:** The index corresponding to the desired time within the :ref:`time channel file<timeFile>`.
 
-    | \; E_x \; | \; E_y \; | \; E_z \; |
+.. _tdoctree_pre_ln4:
 
-:math:`H \; data` is in units A/m and is comprised of 3 columns:
+    - **data_opt:**
 
-.. math::
+        - A flag value of *--------* is entered if the datum is the magnetic field *H* in units A/m
+        - A flag value of *--------* is entered if the datum is the time-derivative *dB/dt* in units T/s
 
-    | \; H_x \; | \; H_y \; | \; H_z \; |
+.. _tdoctree_pre_ln4:
 
-and :math:`dB/dt \; data` is in units T/s and is comprised of 3 columns:
-
-.. math::
-
-    | \; dB_x/dt \; | \; dB_y/dt \; | \; -dB_z/dt \; |
-
-
-
-.. important::
-
-	- The data are represented in a left-handed coordinate system where X is Easting, Y is Northing and Z is +ve downward.
-	- The vertical component of dB/dt is represented using :math:`\mathbf{-dB_z/dt}` **!!!** This is done due to a common plotting convention.
-
-
-
-
-
-
-
-
+    - **data:** The datum. Either H or dB/dt
 
