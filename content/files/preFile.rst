@@ -3,7 +3,7 @@
 Predicted Data File
 ===================
 
-predicted data files output from **TDoctree.exe** contain the locations and predicted data. The order of the data points is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter. Thus predicted data files take the format:
+predicted data files output from **tdoctree.exe** contain the locations and predicted data. The order of the data points is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter. Thus predicted data files take the format:
 
 |
 | **Data Array 1**

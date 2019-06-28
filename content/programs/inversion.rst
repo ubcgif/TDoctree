@@ -3,16 +3,16 @@
 Inversion Program
 =================
 
-Both the forward and inverse problems are solved using the **TDoctreeinv.exe** executable program. In each case, format of the :ref:`input file<tdoctree_input_inv>` (denoted here as **tdoctreeinv.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
+Both the forward and inverse problems are solved using the **tdoctree.exe** executable program. In each case, format of the :ref:`input file<tdoctree_input_inv>` (denoted here as **tdoctree.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
 
 Running the Program
 ^^^^^^^^^^^^^^^^^^^
 
 Unlike some other UBC-GIF programs, the *mpiexec* call **cannot** be used to parallelize multiple processes (large-scale independent operations) within the code. To run the executable, open a command window and type the following:
 
-.. figure:: images/run_tdoctreeinv.png
-     :align: center
-     :width: 500
+.. .. figure:: images/run_tdoctree.png
+..      :align: center
+..      :width: 500
 
 Setting Number of Threads with Open MPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -44,7 +44,7 @@ Units
 Output Files
 ^^^^^^^^^^^^
 
-The program **TDoctreeinv.exe** creates the following output files:
+The program **tdoctree.exe** creates the following output files:
 
     - **dpred0.txt** data predicted using the starting model or forward model
 

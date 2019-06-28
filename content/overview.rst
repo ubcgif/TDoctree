@@ -3,7 +3,7 @@
 Package overview
 ================
 
-.. important:: TDoctree version 1 performs forward modeling and inversion with the executable **TDoctreeinv.exe**. Past iterations of this code may have been given the name 'TDoctreeinv_1mesh.exe'. To use this code, ensure you have downloaded 'TDoctreeinv.exe' and all related files from the UBC-GIF website.
+.. important:: TDoctree version 1 performs forward modeling and inversion with the executable **tdoctree.exe**. Past iterations of this code may have been given the name 'TDoctreeinv_1mesh.exe'. To use this code, ensure you have downloaded 'tdoctree.exe' and all related files from the UBC-GIF website.
 
 Description
 -----------
