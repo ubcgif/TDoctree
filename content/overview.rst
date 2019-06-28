@@ -59,11 +59,12 @@ Program Library Content
 
 The main executable programs within the TDoctree version 1 tiled program library are:
 
-    - **create_octree_td_tiled:** creates an OcTree mesh based on the survey geometry
+    - **create_octree_td_tiled:** creates a global OcTree mesh for the inversion based on the survey geometry and a set of local OcTree meshes about each transmitter and its receivers
     - **tdoctree_tiled:** used to forward model and inverted TEM data
 
 Also included are the following Octree utility programs:
 
+      - **extract_mesh:** extracts a specified local OcTree mesh from a hexidecimal file containing all local forward meshes
       - **blk3cellOct:** creates block models directly on OcTree meshes
       - **interface_weights:** generates interface weights
 

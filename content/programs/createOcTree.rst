@@ -1,4 +1,4 @@
-.. _tdoctreeoctree:
+.. _tdoctree_octree:
 
 Create OcTree Mesh
 ==================
@@ -16,13 +16,15 @@ To generate the OcTree mesh, open a command window. Type the path to the code **
 .. _tdoctreeoctree_output:
 
 
-The program **create_octree_mesh_td_tiled.exe** creates 5 output files:
+The program **create_octree_mesh_td_tiled.exe** creates 6 output files:
 
     - **3D_mesh.txt:** the underlying regular tensor mesh`. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
 
     - **3D_core_mesh.txt:** A 3D regular tensor mesh defining the core region. 
 
     - **octree_mesh.txt:** :ref:`OcTree mesh<octreeFile>` used in the forward modeling and inversion codes
+
+    - **octree_small_mesh.dat:** a binary data file containing the local forward meshes for all transmitters
 
     - **active_cells_topo.txt:** :ref:`active cells model<modelFile>` on the OcTree mesh. Cells are active if assigned a value of 1 and inactive if assigned a value of 0 
 

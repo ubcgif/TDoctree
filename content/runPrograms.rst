@@ -15,15 +15,16 @@ This section provides describes how to run all executables pertaining to the TDo
 
     Executable files should **not** be renamed. However, input file names can be specified by the user if desired.
 
-The main executable programs within the TDoctree version 1 program library are:
+The main executable programs within the TDoctree version 1 tiled program library are:
 
-    - **create_octree_td_tiled:** creates an OcTree mesh based on the survey geometry
-    - **tdoctree_tiled:** used to forward model or invert TEM data
+    - **create_octree_td_tiled:** creates a global OcTree mesh for the inversion based on the survey geometry and a set of local OcTree meshes about each transmitter and its receivers
+    - **tdoctree_tiled:** used to forward model and inverted TEM data
 
 Also included are the following Octree utility programs:
 
-    - **blk3cellOct:** creates conductivity models on an octree mesh
-    - **interface_weights:** creates weights on the faces of cells
+      - **extract_mesh:** extracts a specified local OcTree mesh from a hexidecimal file containing all local forward meshes
+      - **blk3cellOct:** creates block models directly on OcTree meshes
+      - **interface_weights:** generates interface weights
 
 Contents
 --------
@@ -34,6 +35,7 @@ To learn the specifics of running each executable, see the following sections:
     :maxdepth: 1
 
     OcTree Mesh Generation <programs/createOcTree>
+    Extract Tile <programs/extractOcTree>
     Creating Octree Models <programs/createModel>
     Forward Modeling <programs/forward>
     Additional Cell and Face Weights <programs/weightsFiles>
