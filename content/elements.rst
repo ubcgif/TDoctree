@@ -3,15 +3,15 @@
 Elements of the TDoctree version 1 package
 ==========================================
 
-This section provides a brief description of each program in the TDoctree version 1 package. In addition, we describe the file formats for all input and supporting files used by the coding library.
+This section provides a brief description of each program in the TDoctree version 1 tiled package. In addition, we describe the file formats for all input and supporting files used by the coding library.
 
 Program Library
 ---------------
 
 The main executable programs within the TDoctree version 1 program library are:
 
-    - **create_octree_1mesh_td:** creates an OcTree mesh based on the survey geometry
-    - **TDoctreeinv:** used to forward model or invert TEM data
+    - **create_octree_td_tiled:** creates an OcTree mesh based on the survey geometry
+    - **tdoctree_tiled:** used to forward model or invert TEM data
 
 Also included are the following OcTree utility programs:
 
@@ -21,7 +21,7 @@ Also included are the following OcTree utility programs:
 Main Input Files
 ----------------
 
-Here, we describe the main input files for executables contained with the TDoctree version 1 coding package.
+Here, we describe the main input files for executables contained with the TDoctree version 1 tiled coding package.
 
 .. tOcTree::
     :maxdepth: 2

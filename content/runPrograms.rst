@@ -17,8 +17,8 @@ This section provides describes how to run all executables pertaining to the TDo
 
 The main executable programs within the TDoctree version 1 program library are:
 
-    - **create_octree_1mesh_td:** creates an OcTree mesh based on the survey geometry
-    - **TDoctreeinv:** used to forward model or invert TEM data
+    - **create_octree_td_tiled:** creates an OcTree mesh based on the survey geometry
+    - **tdoctree_tiled:** used to forward model or invert TEM data
 
 Also included are the following Octree utility programs:
 

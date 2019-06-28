@@ -3,12 +3,12 @@
 Package overview
 ================
 
-.. important:: TDoctree version 1 performs forward modeling and inversion with the executable **TDoctreeinv.exe**. Past iterations of this code may have been given the name 'TDoctreeinv_1mesh.exe'. To use this code, ensure you have downloaded 'TDoctreeinv.exe' and all related files from the UBC-GIF website.
+.. important:: TDoctree version 1 tiled performs forward modeling and inversion with the executable **tdoctree_tiled.exe**. Past iterations of this code may have been given the name 'tdinv_GN.exe'. To use this code, ensure you have downloaded 'tdoctree_tiled.exe' and all related files from the UBC-GIF website.
 
 Description
 -----------
 
-This manual provides instruction and background for the **TDoctree version 1** program library for the forward
+This manual provides instruction and background for the **TDoctree version 1 tiled** program library for the forward
 modelling and inversion of time domain electromagnetic survey data. In order to decrease
 computational time and increase accuracy by mesh refinement in areas of interest, conductivity models
 are discretized on an Octree mesh.  
@@ -28,7 +28,7 @@ command line only.
 The program library provides codes to do the following:
 
     - Construct models on OcTree meshes.
-    - Forward model time domain magnetic field responses to a 3D volume of contrasting conductivity, on and octree mesh.
+    - Forward model time domain magnetic field responses to a 3D volume of contrasting conductivity, using tiled octree meshes.
     - Invert of surface, borehole and/or airborne EM data to recover 3D conductivity models:
 
 The equations are discretized in time using backward Euler method and discretized in space by using a finite volume technique on a staggered grid. The sources can be grounded dipoles or loop currents that reside in the air, on the surface, or inside the earth. The responses can be any combination of components of E, H, or dB/dt. The transmitter waveform is user-defined and there are no restrictions on the length or shape of the waveform. Data can be simulated in the “on-time” or “off-time”. The earth model is an arbitrary 3D conductivity defined on a structured rectangular mesh. The earth can also have an arbitrary 3D magnetic susceptibility.
@@ -57,10 +57,10 @@ Noranda Exploration, Placer Dome, and WMC.
 Program Library Content
 -----------------------
 
-The main executable programs within the TDoctree version 1 program library are:
+The main executable programs within the TDoctree version 1 tiled program library are:
 
-    - **create_octree_1mesh_td:** creates an OcTree mesh based on the survey geometry
-    - **TDoctreeinv:** used to forward model and inverted TEM data
+    - **create_octree_td_tiled:** creates an OcTree mesh based on the survey geometry
+    - **tdoctree_tiled:** used to forward model and inverted TEM data
 
 Also included are the following Octree utility programs:
 
