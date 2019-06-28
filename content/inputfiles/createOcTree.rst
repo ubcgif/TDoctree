@@ -13,7 +13,7 @@ The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using t
 +========+===============================================================+=================================================================+
 | 1      |:ref:`dx dy dz<tdoctree_input_octreeln1>`                      | min. cell widths in x, y and z for base mesh                    |
 +--------+---------------------------------------------------------------+-----------------------------------------------------------------+
-| 2      |:ref:`x_pad y_pad down_pad up_pad<tdoctree_input_octreeln2>`   | sets the thickness of padding in x, y, down and up directions   |
+| 2      |:ref:`x_pad y_pad down_pad up_pad<tdoctree_input_octreeln2>`   | sets the total mesh extent in x, y, down and up directions      |
 +--------+---------------------------------------------------------------+-----------------------------------------------------------------+
 | 3      |:ref:`h1 h2 h3<tdoctree_input_octreeln3>`                      | sets cell sizes within core mesh region                         |
 +--------+---------------------------------------------------------------+-----------------------------------------------------------------+

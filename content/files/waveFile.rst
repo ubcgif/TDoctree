@@ -8,11 +8,11 @@ The wave file defines the time-stepping that is used to solve the problem and th
 
 |
 |
-:math:`t_0 \;\;\; I_0`
-:math:`t_1 \;\;\; I_1 \;\;\; n_1`
-:math:`t_2 \;\;\; I_2 \;\;\; n_2`
-:math:`\;\;\;\;\; \vdots`
-:math:`t_f \;\;\; I_f \;\;\; n_f`
+| :math:`t_0 \;\;\; I_0`
+| :math:`t_1 \;\;\; I_1 \;\;\; n_1`
+| :math:`t_2 \;\;\; I_2 \;\;\; n_2`
+| :math:`\;\;\;\;\;\;\, \vdots`
+| :math:`t_f \;\;\; I_f \;\;\; n_f`
 |
 |
 
