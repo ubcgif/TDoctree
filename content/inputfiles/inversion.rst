@@ -3,7 +3,7 @@
 Inversion Input File
 ====================
 
-The inverse problem is solved using the executable program **tdoctreeinv.exe**. The lines of input file are as follows:
+The inverse problem is solved using the executable program **tdoctree_v2.exe**. The lines of input file are as follows:
 
 .. tabularcolumns:: |L|C|C|
 

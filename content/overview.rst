@@ -3,12 +3,12 @@
 Package overview
 ================
 
-.. important:: TDoctree version 1 performs forward modeling and inversion with the executable **TDoctreeinv.exe**. Past iterations of this code may have been given the name 'TDoctreeinv_1mesh.exe'. To use this code, ensure you have downloaded 'TDoctreeinv.exe' and all related files from the UBC-GIF website.
+.. important:: TDoctree version 2 performs forward modeling and inversion with the executable **tdoctree_v2.exe**. Past iterations of this code may have been given the name 'tdinvInt16.exe'. To use this code, ensure you have downloaded 'tdoctree_v2.exe' and all related files from the UBC-GIF website.
 
 Description
 -----------
 
-This manual provides instruction and background for the **TDoctree version 1** program library for the forward
+This manual provides instruction and background for the **TDoctree version 2** program library for the forward
 modelling and inversion of time domain electromagnetic survey data. In order to decrease
 computational time and increase accuracy by mesh refinement in areas of interest, conductivity models
 are discretized on an Octree mesh.  
@@ -57,10 +57,10 @@ Noranda Exploration, Placer Dome, and WMC.
 Program Library Content
 -----------------------
 
-The main executable programs within the TDoctree version 1 program library are:
+The main executable programs within the TDoctree version 2 program library are:
 
-    - **create_octree_1mesh_td:** creates an OcTree mesh based on the survey geometry
-    - **TDoctreeinv:** used to forward model and inverted TEM data
+    - **create_octree_mesh_td_v2:** creates an OcTree mesh based on the survey geometry
+    - **tdoctree_v2:** used to forward model and inverted TEM data
 
 Also included are the following Octree utility programs:
 
@@ -80,7 +80,7 @@ Installing TDoctree
 TDoctree Executables
 ^^^^^^^^^^^^^^^^^^^^
 
-There is no automatic installer currently available for TDoctree version 1. Please follow the following steps in
+There is no automatic installer currently available for TDoctree version 2. Please follow the following steps in
 order to use the software:
 
     1. Extract all files provided from the given zip-based archive and place them all together in a new folder.
@@ -90,7 +90,7 @@ order to use the software:
 .. MPI Executables
 .. ^^^^^^^^^^^^^^^
 
-.. Message passaging interface (MPI) programming allows TDoctree version 1 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the TDoctree version 1 executables. To set up MPI:
+.. Message passaging interface (MPI) programming allows TDoctree version 2 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the TDoctree version 2 executables. To set up MPI:
 
 ..     1. Download and install:
       

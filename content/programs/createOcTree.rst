@@ -3,9 +3,9 @@
 Create OcTree Mesh
 ==================
 
-:ref:`OcTree meshes<octreeFile>` used in the TDoctree version 1 code are created using the program **create_octree_1mesh_td.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<tdoctree_input_octree>`; referred to here as **octree_mesh.inp**.
+:ref:`OcTree meshes<octreeFile>` used in the TDoctree version 2 code are created using the program **create_octree_td_v2.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<tdoctree_input_octree>`; referred to here as **octree_mesh.inp**.
 
-To generate the OcTree mesh, open a command window. Type the path to the code **create_octree_1mesh_td.exe**, followed by a space, followed by the path to the input file.
+To generate the OcTree mesh, open a command window. Type the path to the code **create_octree_mesh_td_v2.exe**, followed by a space, followed by the path to the input file.
 
 .. figure:: images/run_create_mesh.png
      :align: center
