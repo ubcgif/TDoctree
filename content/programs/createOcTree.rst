@@ -3,9 +3,9 @@
 Create OcTree Mesh
 ==================
 
-:ref:`OcTree meshes<octreeFile>` used in the TDoctree version 1 code are created using the program **create_octree_1mesh_td.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<tdoctree_input_octree>`; referred to here as **octree_mesh.inp**.
+:ref:`OcTree meshes<octreeFile>` used in the TDoctree version 1 code are created using the program **create_octree_mesh_td_tiled.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<tdoctree_input_octree>`; referred to here as **octree_mesh.inp**.
 
-To generate the OcTree mesh, open a command window. Type the path to the code **create_octree_1mesh_td.exe**, followed by a space, followed by the path to the input file.
+To generate the OcTree mesh, open a command window. Type the path to the code **create_octree_mesh_td_tiled.exe**, followed by a space, followed by the path to the input file.
 
 .. figure:: images/run_create_mesh.png
      :align: center
@@ -16,7 +16,7 @@ To generate the OcTree mesh, open a command window. Type the path to the code **
 .. _tdoctreeoctree_output:
 
 
-The program **create_octree_1mesh_td.exe** creates 5 output files:
+The program **create_octree_mesh_td_tiled.exe** creates 5 output files:
 
     - **3D_mesh.txt:** the underlying regular tensor mesh`. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
 

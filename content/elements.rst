@@ -8,7 +8,7 @@ This section provides a brief description of each program in the TDoctree versio
 Program Library
 ---------------
 
-The main executable programs within the TDoctree version 1 program library are:
+The main executable programs within the TDoctree version 1 tiled program library are:
 
     - **create_octree_td_tiled:** creates an OcTree mesh based on the survey geometry
     - **tdoctree_tiled:** used to forward model or invert TEM data
