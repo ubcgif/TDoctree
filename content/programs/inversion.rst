@@ -10,7 +10,7 @@ Running the Program
 
 Unlike some other UBC-GIF programs, the *mpiexec* call **cannot** be used to parallelize multiple processes (large-scale independent operations) within the code. To run the executable, open a command window and type the following:
 
-.. figure:: images/run_tdoctree_tiled.png
+.. figure:: images/run_tdoctree.png
      :align: center
      :width: 500
 

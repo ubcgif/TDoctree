@@ -110,7 +110,7 @@ Line Descriptions
 
 .. important::
 
-    If data are only being forward modeled, only the :ref:`active topography cells<e3d_input_inv2_ln7>` and :ref:`tol_ipcg max_iter_ipcg<e3d_input_inv2_ln16>` fields are relevant. **However**, the remaining fields must **not** be empty and must have correct syntax for the code to run.
+    If data are only being forward modeled, only the :ref:`active topography cells<tdoctree_input_inv_ln7>` and :ref:`tol_ipcg max_iter_ipcg<tdoctree_input_inv_ln16>` fields are relevant. **However**, the remaining fields must **not** be empty and must have correct syntax for the code to run.
 
 .. _tdoctree_input_inv_ln8:
 
@@ -149,11 +149,11 @@ Line Descriptions
 
     - **Chi Factor:** The chi factor defines the target misfit for the inversion. A chi factor of 1 means the target misfit is equal to the total number of data observations.
 
-.. _e3d_input_inv_ln17:
+.. _tdoctree_input_inv_ln17:
 
     - **iter_per_beta nBetas:** Here, *iter_per_beta* is the number of Gauss-Newton iterations per beta value. *nBetas* is the number of times the inverse problem is solved for smaller and smaller trade-off parameters until it quits. See theory section for :ref:`cooling schedule <theory_cooling>` and :ref:`Gauss-Newton update <theory_GN>`.
 
-.. _e3d_input_inv_ln18:
+.. _tdoctree_input_inv_ln18:
 
     - **tol_ipcg max_iter_ipcg:** Here, the user specifies solver parameters. *tol_ipcg* defines how well the iterative solver does when solving for :math:`\delta m` and *max_iter_ipcg* is the maximum iterations of incomplete-preconditioned-conjugate gradient. See theory on :ref:`Gauss-Newton solve <theory_IPCG>`
 
