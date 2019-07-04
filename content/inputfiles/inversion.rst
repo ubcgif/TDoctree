@@ -166,4 +166,4 @@ Line Descriptions
 
 .. _tdoctree_input_inv_ln21:
 
-    - **Time channel indecies:**
+    - **Time channel indecies:** If the user would like to invert the data at all time channels, the flag "ALL_TIME_CHANNELS" is entered. At times the user may want to invert early time channels, then use the corresponding recovered model as a starting model for an inversion that includes data at later time channels. In the latter case, the user provides the *filepath* to a :ref:`time indecies file <timeindeciesFile>`
