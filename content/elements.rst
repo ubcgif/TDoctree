@@ -51,6 +51,8 @@ Here, we describe the formats of supporting files used to run TDoctree executabl
     Model File <files/model>
     Model and Face Weights Files <files/weights>
     Wave File <files/waveFile>
+    Time Indecies File <files/time_indecies>
+    Active Tiles File <files/active_tiles>
 
 
 

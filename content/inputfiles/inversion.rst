@@ -56,7 +56,7 @@ The inverse problem is solved using the executable program **tdoctree_tiled.exe*
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 | 23     | :ref:`Time Channel Indecies<tdoctree_input_inv_ln23>`                   | chooses time channels to be inverted                              |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 24     | :ref:`Tile Indecies<tdoctree_input_inv_ln24>`                           | chooses tiles used in inversion                                   |
+| 24     | :ref:`Active tiles file<tdoctree_input_inv_ln24>`                       | chooses tiles that are used in the sensitivity approximation      |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -181,8 +181,8 @@ Line Descriptions
 
 .. _tdoctree_input_inv_ln23:
 
-    - **Time channel indecies:**
+    **Time channel indecies:** If the user would like to invert the data at all time channels, the flag "ALL_TIME_CHANNELS" is entered. At times the user may want to invert early time channels, then use the corresponding recovered model as a starting model for an inversion that includes data at later time channels. In the latter case, the user provides the *filepath* to a :ref:`time indecies file <timeindeciesFile>`
 
 .. _tdoctree_input_inv_ln24:
 
-    - **Tile indecies:**
+    - **Active tiles file:** This line allows the user to invert only a subset of the data by specifying the tiles (local forward meshes) they wish to be used in the inversion. If the flag *USE_ALL_TILES* is used, then all the data are inverted; e.g. all the tiles are used. If the path to an :ref:`active tiles file<activeTilesFile>` is used, then only the 'active tiles' are inverted. The active tiles file is a vector of 1s and 0s, where a 1 denotes a local forward mesh that is used in the inversion, and a zero denotes a local forward mesh that is not. The number of values in the active tiles file must equal the number of local forward meshes.
