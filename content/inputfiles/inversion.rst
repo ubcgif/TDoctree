@@ -14,45 +14,52 @@ The inverse problem is solved using the executable program **tdoctree_v2.exe**. 
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 | 2      | :ref:`Observation File<tdoctree_input_inv_ln2>`                         | path to observations/survey file                                  |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 3      | :ref:`Transmitter options<tdoctree_input_inv_ln3>`                      | discretization options for transmitters                           |
+| 3      | :ref:`Transmitters file<tdoctree_input_inv_ln3>`                        | path to file defining transmitters                                |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 4      | :ref:`Wave file<tdoctree_input_inv_ln4>`                                | sets time steps for the time-dependent problem                    |
+| 4      | :ref:`Receivers file<tdoctree_input_inv_ln4>`                           | path to file defining receivers                                   |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 5      | :ref:`Initial/FWD Model<tdoctree_input_inv_ln5>`                        | initial/forward model                                             |
+| 5      | :ref:`Time channels file<tdoctree_input_inv_ln5>`                       | path to file defining time channels                               |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 6      | :ref:`Reference Model<tdoctree_input_inv_ln6>`                          | reference model                                                   |
+| 6      | :ref:`Wave file<tdoctree_input_inv_ln6>`                                | sets time stepping and waveform for the time-dependent problem    |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 7      | :ref:`Susceptibility model<tdoctree_input_inv_ln7>`                     | susceptibility model                                              |
+| 7      | :ref:`Initial/FWD Model<tdoctree_input_inv_ln7>`                        | initial/forward model                                             |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 8      | :ref:`Active Topography Cells<tdoctree_input_inv_ln8>`                  | topography                                                        |
+| 8      | :ref:`Reference Model<tdoctree_input_inv_ln8>`                          | reference model                                                   |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 9      | :ref:`Active Model Cells<tdoctree_input_inv_ln9>`                       | active model cells                                                |
+| 9      | :ref:`Susceptibility model<tdoctree_input_inv_ln9>`                     | susceptibility model                                              |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 10     | :ref:`Cell Weights<tdoctree_input_inv_ln10>`                            | additional cell weights                                           |
+| 10     | :ref:`Active Topography Cells<tdoctree_input_inv_ln10>`                 | topography                                                        |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 11     | :ref:`Face Weights<tdoctree_input_inv_ln11>`                            | additional face weights                                           |
+| 11     | :ref:`Active Model Cells<tdoctree_input_inv_ln11>`                      | active model cells                                                |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 12     | :ref:`beta_max beta_min beta_factor<tdoctree_input_inv_ln12>`           | cooling schedule for beta parameter                               |
+| 12     | :ref:`Cell Weights<tdoctree_input_inv_ln12>`                            | additional cell weights                                           |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 13     | :ref:`alpha_s alpha_x alpha_y alpha_z<tdoctree_input_inv_ln13>`         | weighting constants for smallness and smoothness constraints      |
+| 13     | :ref:`Face Weights<tdoctree_input_inv_ln13>`                            | additional face weights                                           |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 14     | :ref:`Chi Factor<tdoctree_input_inv_ln14>`                              | stopping criteria for inversion                                   |
+| 14     | :ref:`beta_max beta_min beta_factor<tdoctree_input_inv_ln14>`           | cooling schedule for beta parameter                               |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 15     | :ref:`iter_per_beta nbetas<tdoctree_input_inv_ln15>`                    | set the number of Gauss-Newton iteration for each beta value      |
+| 15     | :ref:`alpha_s alpha_x alpha_y alpha_z<tdoctree_input_inv_ln15>`         | weighting constants for smallness and smoothness constraints      |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 16     | :ref:`tol_ipcg max_iter_ipcg<tdoctree_input_inv_ln16>`                  | set the tolerance and number of iterations for Gauss-Newton solve |
+| 16     | :ref:`Chi Factor<tdoctree_input_inv_ln16>`                              | stopping criteria for inversion                                   |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 17     | :ref:`Reference Model Update<tdoctree_input_inv_ln17>`                  | reference model                                                   |
+| 17     | :ref:`iter_per_beta nbetas<tdoctree_input_inv_ln17>`                    | set the number of Gauss-Newton iteration for each beta value      |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 18     | :ref:`Hard Constraints<tdoctree_input_inv_ln18>`                        | use *SMOOTH_MOD* or *SMOOTH_MOD_DIFF*                             |
+| 18     | :ref:`tol_ipcg max_iter_ipcg<tdoctree_input_inv_ln18>`                  | set the tolerance and number of iterations for Gauss-Newton solve |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 19     | :ref:`Bounds<tdoctree_input_inv_ln19>`                                  | upper and lower bounds for recovered model                        |
+| 19     | :ref:`Reference Model Update<tdoctree_input_inv_ln19>`                  | reference model                                                   |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 20     | :ref:`huber_c<tdoctree_input_inv_ln20>`                                 | Huber constant (for sparse model recovery)                        |
+| 20     | :ref:`Hard Constraints<tdoctree_input_inv_ln20>`                        | use *SMOOTH_MOD* or *SMOOTH_MOD_DIFF*                             |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 21     | :ref:`Time Channel Indecies<tdoctree_input_inv_ln21>`                   | chooses time channels to be inverted                              |
+| 21     | :ref:`Bounds<tdoctree_input_inv_ln21>`                                  | upper and lower bounds for recovered model                        |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-
+| 22     | :ref:`huber_c<tdoctree_input_inv_ln22>`                                 | Huber constant (for sparse model recovery)                        |
++--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 23     | :ref:`Memory Options<tdoctree_input_inv_ln23>`                          | options for storing factorizations of forward system (RAM vs disk)|
++--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 24     | :ref:`Solver Options<tdoctree_input_inv_ln24>`                          | iterative or direct solver options                                |
++--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 25     | :ref:`Sensitivity Options<tdoctree_input_inv_ln25>`                     | sensitivity options                                               |
++--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 
 .. .. figure:: images/create_inv_input.png
@@ -71,21 +78,25 @@ Line Descriptions
 
 .. _tdoctree_input_inv_ln2:
 
-    - **Observation File:** file path to the :ref:`observed data file<obsFile>` or a :ref:`survey file<surveyFile>` (forward modeling only).
+    - **Observation File:** file path to the :ref:`observed data file<obsFile>` or a :ref:`survey index file<indexFile>` (forward modeling only).
 
 .. _tdoctree_input_inv_ln3:
-    
-    - **Transmitter Options:** On this line, we can change some aspects as to how the transmitter is discretized to the mesh. There are 3 flags that can be entered:
 
-        - *MOVE_TRX_EDGE:* Discretizes the transmitters to the nearest edge. Useful for large loop transmitters
-        - *MOVE_TRX_CENTER:* Discretizes the transmitters to the nearest cell center. Useful for dipole transmitters
-        - *NOT_MOVE_TRX:* Do no move the location of transmitters. Keep same as in survey file
+    - **Transmitters File:** file path to the :ref:`transmitters file<receiverFile>`
 
 .. _tdoctree_input_inv_ln4:
+
+    - **Receivers File:** file path to the :ref:`receivers file<receiverFile>`
+
+.. _tdoctree_input_inv_ln5:
+
+    - **Time Channels File:** file path to the :ref:`time channels file<timeFile>`
+
+.. _tdoctree_input_inv_ln6:
     
     - **Wave file:** Set the path to a :ref:`wave file<waveFile>`. This file defines the time-steps for the problem.
 
-.. _tdoctree_input_inv_ln5:
+.. _tdoctree_input_inv_ln7:
 
     - **Initial/FWD Model:** On this line we specify either the starting model for the inversion or the conductivity model for the forward modeling. On this line, there are 3 possible options:
 
@@ -96,67 +107,67 @@ Line Descriptions
 
 .. important::
 
-    If data are only being forward modeled, only the :ref:`active topography cells<e3d_input_inv2_ln7>` and :ref:`tol_ipcg max_iter_ipcg<e3d_input_inv2_ln16>` fields are relevant. **However**, the remaining fields must **not** be empty and must have correct syntax for the code to run.
+    If data are only being forward modeled, only the :ref:`active topography cells<tdoctree_input_inv_ln10>` and :ref:`tol_bicg tol_ipcg_bicg max_it_bicg<tdoctree_input_inv_ln24>` fields are relevant. **However**, the remaining fields must **not** be empty and must have correct syntax for the code to run.
 
-.. _tdoctree_input_inv_ln6:
+.. _tdoctree_input_inv_ln8:
 
     - **Reference Model:** The user may supply the file path to a reference conductivity model. If a homogeneous conductivity value is being used for all active cells, the user can enter "VALUE" followed by a space and a numerical value; example "VALUE 0.01".
 
-.. _tdoctree_input_inv_ln7:
+.. _tdoctree_input_inv_ln9:
 
     - **Susceptibility Model:** The user may supply the file path to a background susceptibility model. If a homogeneous conductivity value is being used for all active cells, the user can enter "VALUE" followed by a space and a numerical value; example "VALUE 0.01".
 
 
-.. _tdoctree_input_inv_ln8:
+.. _tdoctree_input_inv_ln10:
 
     - **Active Topography Cells:** Here, the user can choose to specify the cells which lie below the surface topography. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
-.. _tdoctree_input_inv_ln9:
+.. _tdoctree_input_inv_ln11:
 
     - **Active Model Cells:** Here, the user can choose to specify the model cells which are active during the inversion. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above. Values for inactive cells are provided by the background conductivity model.
 
-.. _tdoctree_input_inv_ln10:
+.. _tdoctree_input_inv_ln12:
 
     - **Cell Weights:** Here, the user specifies whether cell weights are supplied. If so, the user provides the file path to a :ref:`cell weights file <weightsFile>`  If no additional cell weights are supplied, the user enters "NO_WEIGHT".
 
-.. _tdoctree_input_inv_ln11:
+.. _tdoctree_input_inv_ln13:
 
     - **Face Weights:** Here, the user specifies whether face weights are supplied. If so, the user provides the file path to a face weights file :ref:`cell weights file <weightsFile>`. If no additional cell weights are supplied, the user enters "NO_FACE_WEIGHT". The user may also enter "EKBLOM" for 1-norm approximation to recover sharper edges.
 
-.. _tdoctree_input_inv_ln12:
+.. _tdoctree_input_inv_ln14:
 
     - **beta_max beta_min beta_factor:** Here, the user specifies protocols for the trade-off parameter (beta). *beta_max* is the initial value of beta, *beta_min* is the minimum allowable beta the program can use before quitting and *beta_factor* defines the factor by which beta is decreased at each iteration; example "1E4 10 0.2". The user may also enter "DEFAULT" if they wish to have beta calculated automatically.
 
-.. _tdoctree_input_inv_ln13:
+.. _tdoctree_input_inv_ln15:
 
     - **alpha_s alpha_x alpha_y alpha_z:** `Alpha parameters <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Alphas.html>`__ . Here, the user specifies the relative weighting between the smallness and smoothness component penalties on the recovered models.
 
-.. _tdoctree_input_inv_ln14:
+.. _tdoctree_input_inv_ln16:
 
     - **Chi Factor:** The chi factor defines the target misfit for the inversion. A chi factor of 1 means the target misfit is equal to the total number of data observations.
 
-.. _e3d_input_inv_ln15:
+.. _e3d_input_inv_ln17:
 
     - **iter_per_beta nBetas:** Here, *iter_per_beta* is the number of Gauss-Newton iterations per beta value. *nBetas* is the number of times the inverse problem is solved for smaller and smaller trade-off parameters until it quits. See theory section for :ref:`cooling schedule <theory_cooling>` and :ref:`Gauss-Newton update <theory_GN>`.
 
-.. _e3d_input_inv_ln16:
+.. _e3d_input_inv_ln18:
 
     - **tol_ipcg max_iter_ipcg:** Here, the user specifies solver parameters. *tol_ipcg* defines how well the iterative solver does when solving for :math:`\delta m` and *max_iter_ipcg* is the maximum iterations of incomplete-preconditioned-conjugate gradient. See theory on :ref:`Gauss-Newton solve <theory_IPCG>`
 
-.. _tdoctree_input_inv_ln17:
+.. _tdoctree_input_inv_ln19:
 
     - **Reference Model Update:** Here, the user specifies whether the reference model is updated at each inversion step result. If so, enter "CHANGE_MREF". If not, enter "NOT_CHANGE_MREF".
 
-.. _tdoctree_input_inv_ln18:
+.. _tdoctree_input_inv_ln20:
 
     - **Hard Constraints:** SMOOTH_MOD runs the inversion without implementing a reference model (essential :math:`m_{ref}=0`). "SMOOTH_MOD_DIF" constrains the inversion in the smallness and smoothness terms using a reference model.
 
-.. _tdoctree_input_inv_ln19:
+.. _tdoctree_input_inv_ln21:
 
     - **Bounds:** Bound constraints on the recovered model. Choose "BOUNDS_CONST" and enter the values of the minimum and maximum model conductivity; example "BOUNDS_CONST 1E-6 0.1". Enter "BOUNDS_NONE" if the inversion is unbounded, or if there is no a-prior information about the subsurface model.
 
 
-.. _tdoctree_input_inv_ln20:
+.. _tdoctree_input_inv_ln22:
 
     - **Huber constant:** Here, the user may control the sparseness of the recovered model by specifying the Huber constant (:math:`\epsilon`) within the Huber norm. The TDoctree code uses the Huber norm to define the smallness term (link) in the inversion. If a large value is used (*default = 10000*), the inversion will use an L2 norm for the smallness. If a sufficiently small value is used, the smallness will be similar to an L1 norm. The Huber norm is given by:
 
@@ -164,6 +175,23 @@ Line Descriptions
     \sum_{i=1}^M x_i^2 \;\;\;\; \textrm{where} \;\;\;\; x_i = \begin{cases} \sigma_i^2 \;\; \textrm{for} \;\; \sigma_i \leq \epsilon \\ \epsilon \big ( 2 |\sigma_i | - \epsilon \big ) \;\; \textrm{for} \;\; \sigma_i > \epsilon    \end{cases}
 
 
-.. _tdoctree_input_inv_ln21:
+.. _tdoctree_input_inv_ln23:
 
-    - **Time channel indecies:**
+    - **Memory Options:** This code uses a factorization to solve the forward system at each frequency. These factorizations must be stored. By using the flag ‘FACTOR_IC’ (in cpu), factorizations are stored within a computer’s RAM. Although this is faster, larger problems cannot be solved if insufficient temporary memory is available. The factorizations are stored in permanent memory (disk) if the flag ‘FACTOR_OOC’ (out of cpu) is used followed by the path to a directory. This is slower because the program must read these files many times. The second options is ill-advised if files are being transferred over a network.
+
+.. _tdoctree_input_inv_ln24:
+
+    - **Solver options:** Here the user chooses whether the forward problem is solved using a direct or iterative solver.
+
+        - For Pardiso solver, the flag ‘USE_DIRECT_PARDISO’ is used.
+
+        - For the BICG iterative solver, the flag ‘USE_ITER’ is used followed by values for the parameters *tol_bicg*, *tol_ipcg_bicg* and *max_it_bicg*.
+
+            - *tol_bicg*: relative tolerance (stopping criteria) when solver is used during forward modeling. Ideally, this number is very small (default = 1e-10).
+            - *tol_ipcg_bicg*: relative tolerance (stopping criteria) when solver needed in computation of δm during Gauss Newton iteration. This value does not need to be as large as the previous parameter (default = 1e-5).
+            - *max_it_bicg*: maximum number of BICG iterations (default = 100)
+
+
+.. _tdoctree_input_inv_ln25:
+
+    - **Sensitvitiy Options:**

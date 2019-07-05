@@ -1,4 +1,4 @@
-.. _freqFile:
+.. _timeFile:
 
 Time Channels File
 ==================

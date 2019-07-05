@@ -4,14 +4,8 @@ Background Theory
 =================
 
 This section aims to provide the user with a basic review of the physics, discretization, and optimization
-techniques used to solve the frequency domain electromagnetics problem. It is assumed
+techniques used to solve the time domain electromagnetics problem. It is assumed
 that the user has some background in these areas. For further reading see (:cite:`Nabighian1991`).
-
-.. important::
-
-    This code uses the following coordinate system and Fourier convention to solve Maxwell's equations:
-        - X = Easting, Y = Northing, Z +ve downward (left-handed)
-        - An :math:`e^{-i \omega t}` Fourier convention
 
 .. _theory_fundamentals:
 
@@ -19,22 +13,19 @@ Fundamental Physics
 -------------------
 
 Maxwell's equations provide the starting point from which an understanding of how electromagnetic
-fields can be used to uncover the substructure of the Earth. In the frequency domain Maxwell's
+fields can be used to uncover the substructure of the Earth. The time domain Maxwell's
 equations are:
 
 .. math::
     \begin{align}
-        \nabla \times &\mathbf{E} - i\omega\mu \mathbf{H} = 0 \\
-        \nabla \times &\mathbf{H} - \sigma \mathbf{E} = \mathbf{s} \\
-        &\mathbf{\hat{n} \times H} = 0
+        \nabla \times &\mathbf{E} = - \partial_t \mathbf{B} = 0 \\
+        \nabla \times & \mu_{-1} \mathbf{B} - \sigma \mathbf{E} = \mathbf{S} \, f(t)
     \end{align}
     :label: maxwells_eq
 
-where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{s}` is some external source and :math:`e^{-i\omega t}` is suppressed.
-Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
+where :math:`\mathbf{E}` and :math:`\mathbf{B}` are the electric field and magnetic flux density, :math:`\mathbf{S}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\sigma` are the magnetic permeability and conductivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
 solving the system;
 
-    - the curl operator has a non-trivial null space making the resulting linear system highly ill-conditioned
     - the conductivity :math:`\sigma` varies over several orders of magnitude
     - the fields can vary significantly near the sources, but smooth out at distance thus high resolution is required near sources
 
@@ -75,21 +66,56 @@ Forward Problem
 Direct Solver Approach
 ^^^^^^^^^^^^^^^^^^^^^^
 
-To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`maxwells_eq`, where :math:`e^{-i\omega t}` is suppressed. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
+To solve the forward problem, we must first discretize in space and then in time. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{e}`) are described by the following system:
 
 .. math::
-    \big [ \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma} \big ] \, \mathbf{u_e} = - i \omega \mathbf{s}
+    \mathbf{C^T \, M_\mu \, C \, e} + \mathbf{N_e^T \, M_\sigma \, N_e} \, \partial_t \mathbf{e} = - \mathbf{s} \, \partial_t f
     :label: discrete_e_sys
 
-where :math:`\mathbf{C}` is the curl operator and:
+where
 
 .. math::
     \begin{align}
     \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu^{-1}} \big ) \\
     \mathbf{M_\sigma} &= diag \big ( \mathbf{A^T_{e2c} V} \, \boldsymbol{\sigma} \big ) \\
+    \mathbf{C} &= \mathbf{N^T \, \tilde C \, N}
     \end{align}
 
-where :math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :math:`\mathbf{A_{f2c}}` averages from faces to cell centres and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres. The magnetic permeabilities and conductivities for each cell are contained within vectors :math:`\boldsymbol{\mu}` and :math:`\boldsymbol{\sigma}`, respectively.
+:math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :math:`\mathbf{A_{f2c}}` averages from faces to cell centres and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres. The inverse magnetic permeabilities and conductivities for each cell are contained within vectors :math:`\boldsymbol{\mu}` and :math:`\boldsymbol{\sigma}`, respectively. The matrix :math:`\mathbf{N_e}` provides edge constraints which address inaccuracies associated with 'hanging edges' in the OcTree mesh. :math:`\mathbf{\tilde C}` is the curl operator and :math:`\mathbf{C}` is a modified curl operator.
+
+Discretization in time is performed using backward Euler. Thus for every time step :math:`\Delta t`, we must solve:
+
+.. math::
+    \mathbf{A \, e_{k+1}} = \mathbf{-B \, e_k} + \mathbf{q}
+
+where
+
+.. math::
+    \begin{align}
+    \mathbf{A} &= \mathbf{C^T \, M_\mu \, C } + \Delta t^{-1} \mathbf{N_e^T \, M_\sigma \, N_e} \\
+    \mathbf{B} &= - \Delta t^{-1} \mathbf{N_e^T \, M_\sigma \, N_e} \\
+    \mathbf{q} &= - \Delta t^{-1} \mathbf{s} \big [ f_{k+1} - f_k \big ]
+    \end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Once the electric field on cell edges has been computed, the electric (:math:`\mathbf{E}`) and magnetic (:math:`\mathbf{H}`) fields at observation locations can be obtain via the following:
 
@@ -153,7 +179,7 @@ Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCG
 Sensitivity
 -----------
 
-Electric and magnetic field observations are split into their real and imaginary components. Thus the data at a particular frequency for a particular reading is organized in a vector of the form:
+Electric and magnetic field observations are split into their real and imaginary components. Thus the data at a particular time for a particular reading is organized in a vector of the form:
 
 .. math::
     \mathbf{d} = [E^\prime_{x}, E^{\prime \prime}_{x}, E^\prime_{y}, E^{\prime \prime}_{y}, E^\prime_{z}, E^{\prime \prime}_{z}, 
