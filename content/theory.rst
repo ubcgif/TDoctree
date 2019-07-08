@@ -102,7 +102,7 @@ Once obtained, the electric field on cell edges at :math:`t=t_0` is obtained via
     :label: e_0
 
 
-.. note:: This problem must be solved for each source.
+.. note:: This problem must be solved for each source. However, LU factorization is used to make solving for many right-hand sides more efficient.
 
 
 .. _theory_direct:
@@ -162,6 +162,8 @@ Now let :math:`\mathbf{A_{dc}}` and :math:`\mathbf{q_{dc}}` define the matrix an
 	:label: sys_forward
 
 
+.. note:: This problem must be solved for each source. However, LU factorization for each unique time step length is used to make solving for many right-hand sides more efficient.
+
 
 .. _theory_iterative:
 
@@ -204,6 +206,8 @@ To solve :eq:`maxwell_a_phi` we use a block preconditionned conjugate gradient a
      - **max_it_bicg:** maximum number of BICG iterations (~100)
 
 
+.. note:: This problem must be solved for each source. However, LU factorization for each unique time step length is used to make solving for many right-hand sides more efficient.
+
 .. _theory_initial_h:
 
 Magnetic Field at t = 0
@@ -240,7 +244,7 @@ Once we solve for :math:`\mathbf{a_0}`, the magnetic field is computed via:
 where :math:`\mathbf{C}` is define in :eq:`curl_operator`.
 
 
-.. note:: This problem must be solved for every source with a corresponding H-field measurement.
+.. note:: This problem must be solved for each source. However, LU factorization is used to make solving for many right-hand sides more efficient.
 
 
 .. _theory_data:
@@ -262,22 +266,23 @@ Linear interpolation is then used to compute the data for the correct time chann
 Time-Derivative of Magnetic Flux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_b}` is constructed to integrate the electric field over path of the receiver loop. By multiplying this by -1 we obtain the time-derivative of magnetic flux according to Faraday's law. Thus dB/dt data for time step :math:`i` is given by:
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_b}` is constructed to integrate the electric field over path of the receiver loop and multiply by -1. By Faraday's law, will compute the time-derivative of the magnetic flux density. Thus dB/dt data for time step :math:`i` is given by:
 
 .. math::
-	\mathbf{d_i} = - \mathbf{Q_b \, N_e \, e_i}
+	\mathbf{d_i} = \mathbf{Q_b \, N_e \, e_i}
 
 Linear interpolation is then used to compute the data for the correct time channel.
 
 H-Field
 ^^^^^^^
 
-The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. The magnetic field (:math:`\mathbf{b_0}`) at :math:`t=t_0` is computed by :ref:`solving an a-phi system <theory_initial_h>`. Let :math:`\mathbf{Q_h}` be a linear operator that applies the negative curl operator to the electric field on cell edges, then projects the resulting quantity from cell faces to the locations of the receivers. In this case, the H-field data are computed according to:
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. The magnetic field (:math:`\mathbf{b_0}`) at :math:`t=t_0` is computed by :ref:`solving an a-phi system <theory_initial_h>`. In this case, the H-field data are computed according to:
 
 .. math::
-	\mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_h \, e_i} 
+	\mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_b \, e_i} 
 
-where
+
+Where :math:`\mathbf{Q_h}` is a linear operator that projects :math:`\mathbf{b_0}` from cell faces to the locations of the receivers:
 
 .. math::
 	\mathbf{d_0} = \mu_0^{-1} \, \mathbf{Q_h \, b_0}
