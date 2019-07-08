@@ -18,17 +18,16 @@ equations are:
 
 .. math::
     \begin{align}
-        \nabla \times &\mathbf{E} = - \partial_t \mathbf{B} = 0 \\
-        \nabla \times & \mu_{-1} \mathbf{B} - \sigma \mathbf{E} = \mathbf{S} \, f(t)
+        \nabla \times &\vec{e} = - \partial_t \vec{b} = 0 \\
+        \nabla \times & \mu_{-1} \vec{b} - \sigma \vec{e} = \vec{s} \, f(t)
     \end{align}
     :label: maxwells_eq
 
-where :math:`\mathbf{E}` and :math:`\mathbf{B}` are the electric field and magnetic flux density, :math:`\mathbf{S}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\sigma` are the magnetic permeability and conductivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
+where :math:`\vec{e}` and :math:`\vec{b}` are the electric field and magnetic flux density, :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\sigma` are the magnetic permeability and conductivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
 solving the system;
 
     - the conductivity :math:`\sigma` varies over several orders of magnitude
     - the fields can vary significantly near the sources, but smooth out at distance thus high resolution is required near sources
-
 
 Octree Mesh
 -----------
@@ -59,120 +58,232 @@ Discretization of Operators
 
 The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see :cite:`Haber2012` for a detailed description of the discretization process.
 
+.. _theory_fwd:
 
 Forward Problem
 ---------------
 
+.. _theory_initial_e:
+
+Initial Conditions
+^^^^^^^^^^^^^^^^^^
+
+To solve for the first time step using direct or iterative methods, we will need to first solve for the electric fields at :math:`t=t_0`. Assuming the source is static for :math:`t \leq t_0`, :eq:`maxwells_eq` reduces to:
+
+.. math::
+    \begin{align}
+        \nabla \cdot \vec{j} &= - f_0 \, \nabla \cdot \vec{s} \\
+        \vec{j} &= \sigma \vec{e} \\
+        \vec{e} &= \nabla \phi
+    \end{align}
+    :label: maxwells_dc
+
+where :math:`\vec{j}` is the current density, :math:`\phi` is the scalar potential and :math:`f_0` is the waveform at :math:`t \leq t_0`. By applying the finite volume method, the static electric fields are obtained by solving the following system:
+
+.. math::
+    \big [ \mathbf{G^T \, N_e^T \, M_\sigma \, N_e \, G} \big ] \, \phi_0 = -f_0 \, \mathbf{G^T \, s_j}
+    :label: system_dc
+
+where :math:`\phi_0` lives on nodes, :math:`\mathbf{s_j}` defines the geometry of the source discretized to the mesh and
+
+.. math::
+    \begin{align}
+    \mathbf{M_\sigma} &= diag \big ( \mathbf{A^T_{e2c} V} \, \boldsymbol{\sigma} \big ) \\
+    \mathbf{G} &= \mathbf{P_n \, \tilde G \, N_n}
+    \end{align}
+    :label: grad_operator
+
+:math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres. The conductivity for each cell is contained within the vector :math:`\boldsymbol{\sigma}`. The matrix :math:`\mathbf{N_e}` provides edge constraints which address inaccuracies associated with 'hanging edges' in the OcTree mesh. The matrix :math:`\mathbf{N_n}` provides nodal constraints which address inaccuracies associated with 'hanging nodes' in the OcTree mesh. :math:`\mathbf{P_n}` is a projection matrix. :math:`\mathbf{\tilde G}` is the gradient operator, thus :math:`\mathbf{G}` is a modified gradient operator.
+
+Once obtained, the electric field on cell edges at :math:`t=t_0` is obtained via:
+
+.. math::
+    \mathbf{e_0} = \mathbf{G \, \phi_0}
+    :label: e_0
+
+
+.. note:: This problem must be solved for each source.
+
+
+.. _theory_direct:
+
 Direct Solver Approach
 ^^^^^^^^^^^^^^^^^^^^^^
 
-To solve the forward problem, we must first discretize in space and then in time. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{e}`) are described by the following system:
+To solve the forward problem :eq:`maxwells_eq`, we must first discretize in space and then in time. Using finite volume approach, the electric fields on cell edges (:math:`\mathbf{e}`) discretized in space are described by:
 
 .. math::
     \mathbf{C^T \, M_\mu \, C \, e} + \mathbf{N_e^T \, M_\sigma \, N_e} \, \partial_t \mathbf{e} = - \mathbf{s} \, \partial_t f
     :label: discrete_e_sys
 
-where
+where :math:`\mathbf{M_\sigma}` and :math:`\mathbf{N_e}` are defined in :eq:`system_dc` and
 
 .. math::
     \begin{align}
     \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu^{-1}} \big ) \\
-    \mathbf{M_\sigma} &= diag \big ( \mathbf{A^T_{e2c} V} \, \boldsymbol{\sigma} \big ) \\
-    \mathbf{C} &= \mathbf{N^T \, \tilde C \, N}
+    \mathbf{C} &= \mathbf{\tilde C \, N_e}
     \end{align}
+    :label: curl_operator
 
-:math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :math:`\mathbf{A_{f2c}}` averages from faces to cell centres and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres. The inverse magnetic permeabilities and conductivities for each cell are contained within vectors :math:`\boldsymbol{\mu}` and :math:`\boldsymbol{\sigma}`, respectively. The matrix :math:`\mathbf{N_e}` provides edge constraints which address inaccuracies associated with 'hanging edges' in the OcTree mesh. :math:`\mathbf{\tilde C}` is the curl operator and :math:`\mathbf{C}` is a modified curl operator.
+:math:`\mathbf{A_{f2c}}` averages from faces to cell centres. The inverse magnetic permeability for each cell is contained within the vector :math:`\boldsymbol{\mu}`. :math:`\mathbf{\tilde C}` is the curl operator and :math:`\mathbf{C}` is a modified curl operator.
 
-Discretization in time is performed using backward Euler. Thus for every time step :math:`\Delta t`, we must solve:
+Discretization in time is performed using backward Euler. Thus for a single transmitter, we must solve the following for every time step :math:`\Delta t_i`:
 
 .. math::
-    \mathbf{A \, e_{k+1}} = \mathbf{-B \, e_k} + \mathbf{q}
+    \mathbf{A_i \, e_{k+1}} = \mathbf{-B_i \, e_k} + \mathbf{q_i}
+    :label: back_euler
 
 where
 
 .. math::
     \begin{align}
-    \mathbf{A} &= \mathbf{C^T \, M_\mu \, C } + \Delta t^{-1} \mathbf{N_e^T \, M_\sigma \, N_e} \\
-    \mathbf{B} &= - \Delta t^{-1} \mathbf{N_e^T \, M_\sigma \, N_e} \\
-    \mathbf{q} &= - \Delta t^{-1} \mathbf{s} \big [ f_{k+1} - f_k \big ]
+    \mathbf{A_i} &= \mathbf{C^T \, M_\mu \, C } + \Delta t_i^{-1} \mathbf{N_e^T \, M_\sigma \, N_e} \\
+    \mathbf{B_i} &= - \Delta t_i^{-1} \mathbf{N_e^T \, M_\sigma \, N_e} \\
+    \mathbf{q_i} &= - \Delta t_i^{-1} \mathbf{N_e^T \, s} \big [ f_{k+1} - f_k \big ]
     \end{align}
+    :label: a_operator 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Once the electric field on cell edges has been computed, the electric (:math:`\mathbf{E}`) and magnetic (:math:`\mathbf{H}`) fields at observation locations can be obtain via the following:
+Now let :math:`\mathbf{A_{dc}}` and :math:`\mathbf{q_{dc}}` define the matrix and right-hand side in :eq:`system_dc`. The forward problem can be expressed as:
 
 .. math::
-    \begin{align}
-    \mathbf{E} &= \mathbf{Q_e \, u_e} = \mathbf{Q_c \, A_{e2c} \, u_e} \\
-    \mathbf{H} &= \mathbf{Q_h \, u_e} = \frac{1}{i \omega} \mathbf{Q_c} \, diag(\boldsymbol{\mu}^{-1}) \, \mathbf{A_{f2c} C \, u_e}
-    \end{align}
-    :label: fields_projected
-
-where :math:`\mathbf{Q_c}` represents the appropriate projection matrix from cell centers to a particular receiver (Ex, Ey, Ez, Hx, Hy or Hz). If we let
-
-.. math::
-    \mathbf{A}(\sigma) = \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma}
-    :label: A_operator
-
-then :eq:`fields_projected` can be written as:
-
-.. math::
-    \begin{align}
-    \mathbf{E} &= -i\omega \mathbf{Q_e \, A}(\sigma)^{-1} \, \mathbf{s} \\
-    \mathbf{H} &= -i\omega \mathbf{Q_h \, A}(\sigma)^{-1} \, \mathbf{s}
-    \end{align}
-    :label: fwd_solution
+	\begin{bmatrix}
+	\mathbf{A_{dc}} & & & & & \\
+	\mathbf{B_1 \, G} & \mathbf{A_1} & & & & \\
+	& \mathbf{B_2} & \mathbf{A_2} & & & \\
+	& & & \ddots & & \\
+	& & & & \mathbf{B_n} & \mathbf{A_n}
+	\end{bmatrix}
+	\begin{bmatrix}
+	\phi_0 \\ \mathbf{e_1} \\ \mathbf{e_2} \\ \vdots \\ \mathbf{e_n}
+	\end{bmatrix} =
+	\begin{bmatrix}
+	\mathbf{q_{dc}} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
+	\end{bmatrix}
+	:label: sys_forward
 
 
-.. _theory_solver:
+
+.. _theory_iterative:
 
 Iterative Solver Approach
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this approach we decompose the electric field as follows:
+For this approach we decompose the electric field according to the Helmholtz decomposition:
 
 .. math::
-    \mathbf{u_e} = \mathbf{a} + \mathbf{G} \phi
+    \vec{e} = \vec{a} + \nabla \phi
     :label: e_decomposition
 
-where :math:`\mathbf{u_e}` is the fields on cell edges, :math:`\mathbf{a}` is the vector potential, :math:`\phi` is the scalar potential and :math:`\mathbf{G}` is the discrete gradient operator. To compute the electric fields, the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm is used to solve the following system:
+After formulating Maxwell's equations in terms of :math:`\vec{a}` and :math:`\phi`, discretizing in space according to the finite volume method and discretizing in time according to backward Euler, we must solve the following numerical system at each time step :math:`\Delta t_i`:
 
 .. math::
-    \begin{bmatrix} \mathbf{A} (\sigma) + \mathbf{D} & -i\omega \mathbf{M_\sigma G} \\ -i\omega \mathbf{G^T M_\sigma} & -i\omega \mathbf{G^T M_\sigma G} \end{bmatrix}
-    \begin{bmatrix} \mathbf{a} \\ \phi \end{bmatrix} = 
-    \begin{bmatrix} -i\omega\mathbf{s} \\ -i\omega \mathbf{G^T s} \end{bmatrix}
+    \begin{bmatrix} \mathbf{A_i} + \mathbf{D} & - \mathbf{B_i \, G} \\ - \mathbf{G^T \, B_i} & \Delta t_i \, \mathbf{G^T \, B_i \, G} \end{bmatrix}
+    \begin{bmatrix} \mathbf{a_i} \\ \phi_i \end{bmatrix} = 
+    \begin{bmatrix} \mathbf{b_i}  \\ \mathbf{G^T \, b_i} \end{bmatrix}
     :label: maxwell_a_phi
 
-where
+where :math:`\mathbf{a_i}` is the vector potential on edges, :math:`\phi_i` is the scalar potential on nodes, :math:`\mathbf{G}` is the modified gradient operator given by :eq:`grad_operator` and
 
 .. math::
-    \mathbf{D} = \mathbf{G}  \, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{G^T}
+    \begin{align}
+    \mathbf{D} &= \mathbf{G}  \, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{G^T} \\
+    \mathbf{b_i} &= \mathbf{q_i - B_i \, e_k}
+    \end{align}
 
-is a matrix that is added to the (1,1) block of Eq. :eq:`maxwell_a_phi` to improve the stability of the system and :math:`\mathbf{A}` is given by Eq. :eq:`A_operator`. Once Eq. :eq:`maxwell_a_phi` is solved, Eq. :eq:`e_decomposition` is used to obtain the electric fields on cell edges and Eq. :eq:`fields_projected` computes the fields at the receivers.
+The matrix :math:`\mathbf{N_n}` provides nodal constraints which address inaccuracies associated with 'hanging nodes' in the OcTree mesh. :math:`\mathbf{P_n}` is a projection matrix. And :math:`\mathbf{\tilde G}` is the gradient operator. :math:`\mathbf{D}` is a matrix that is added to the (1,1) block of Eq. :eq:`maxwell_a_phi` to improve the stability of the system. :math:`\mathbf{A_i}`, :math:`\mathbf{B_i}` and :math:`\mathbf{q_i}` are defined in :eq:`a_operator`.
 
-Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
+Once :eq:`maxwell_a_phi` is solved, the electric fields on cell edges can be computed numerically according to:
+
+.. math::
+	\mathbf{e_i} = \mathbf{a_i} + \mathbf{G \, \phi_i}
+
+To solve :eq:`maxwell_a_phi` we use a block preconditionned conjugate gradient algorithm. For the preconditionner, we do 2 SSOR iterations of :eq:`maxwell_a_phi`. Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
 
      - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
      - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
      - **max_it_bicg:** maximum number of BICG iterations (~100)
+
+
+.. _theory_initial_h:
+
+Magnetic Field at t = 0
+^^^^^^^^^^^^^^^^^^^^^^^
+
+When computing magnetic field data (not needed for :math:`\vec{e}` or :math:`\partial_t \vec{b}`), we will need to compute magnetic fields at :math:`t=t_0`. Assuming the source is static for :math:`t \leq t_0`, :eq:`maxwells_eq` can be reformulated in terms of a vector potential :math:`\vec{a}` and a scalar potential :math:`\phi`:
+
+.. math::
+	\begin{align}
+	\nabla \times \mu_{-1} \times \vec{a} + \nabla \mu^{-1} \nabla \cdot \vec{a} &= \sigma \nabla \phi + \vec{s}\, f_0 \\
+	\vec{b} &= \nabla \times \vec{a} \\
+	\vec{e} &= \nabla \phi
+	\end{align}
+
+where the second term is added for stability assuming the Coulomb Gauge (:math:`\nabla \cdot \vec{a} = 0`) condition holds. Using the finite volume approach, we can solve for the discrete vector potential :math:`\mathbf{a_0}`:
+
+.. math::
+	\mathbf{A_{m} \, a_0} = \mathbf{q_m}
+
+
+where :math:`\mathbf{a_0}` lives on edges and
+
+.. math::
+    \begin{align}
+        \mathbf{A_{m}} &= \mathbf{C^T \, M_\mu \, C + G \, N_n^T }\, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{N_n \, G^T} \\
+        \mathbf{q_{m}} &= \mathbf{s} \, f_0 + \mathbf{M_\sigma G \, e_0}
+    \end{align}
+
+Once we solve for :math:`\mathbf{a_0}`, the magnetic field is computed via:
+
+.. math::
+	\mathbf{b_0} = \mathbf{C \, a_0}
+
+where :math:`\mathbf{C}` is define in :eq:`curl_operator`.
+
+
+.. note:: This problem must be solved for every source with a corresponding H-field measurement.
+
+
+.. _theory_data:
+
+Data
+----
+
+Electric Field
+^^^^^^^^^^^^^^
+
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_e}` is constructed to integrate the electric field over the length of the receiver wire and divide by its length. Thus the electric field data for time step :math:`i` is given by:
+
+.. math::
+	\mathbf{d_i} = \mathbf{Q_e \, N_e \, e_i}
+
+Linear interpolation is then used to compute the data for the correct time channel.
+
+
+Time-Derivative of Magnetic Flux
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_b}` is constructed to integrate the electric field over path of the receiver loop. By multiplying this by -1 we obtain the time-derivative of magnetic flux according to Faraday's law. Thus dB/dt data for time step :math:`i` is given by:
+
+.. math::
+	\mathbf{d_i} = - \mathbf{Q_b \, N_e \, e_i}
+
+Linear interpolation is then used to compute the data for the correct time channel.
+
+H-Field
+^^^^^^^
+
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. The magnetic field (:math:`\mathbf{b_0}`) at :math:`t=t_0` is computed by :ref:`solving an a-phi system <theory_initial_h>`. Let :math:`\mathbf{Q_h}` be a linear operator that applies the negative curl operator to the electric field on cell edges, then projects the resulting quantity from cell faces to the locations of the receivers. In this case, the H-field data are computed according to:
+
+.. math::
+	\mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_h \, e_i} 
+
+where
+
+.. math::
+	\mathbf{d_0} = \mu_0^{-1} \, \mathbf{Q_h \, b_0}
+
+Linear interpolation is then used to compute the data for the correct time channel.
+
 
 .. _theory_sensitivity:
 
