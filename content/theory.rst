@@ -18,15 +18,17 @@ equations are:
 
 .. math::
     \begin{align}
-        \nabla \times &\vec{e} = - \partial_t \vec{b} = 0 \\
-        \nabla \times & \mu_{-1} \vec{b} - \sigma \vec{e} = \vec{s} \, f(t)
+        \nabla \times & \vec{e} = - \partial_t \vec{b} \\
+        \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
+        \rho \vec{j} &= \vec{e} \\
+        \vec{b} = \mu \vec{h}
     \end{align}
     :label: maxwells_eq
 
-where :math:`\vec{e}` and :math:`\vec{b}` are the electric field and magnetic flux density, :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\sigma` are the magnetic permeability and conductivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
+where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\rho` represent the magnetic permeability and electrical resistivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
 solving the system;
 
-    - the conductivity :math:`\sigma` varies over several orders of magnitude
+    - the resistivity :math:`\rho` varies over several orders of magnitude
     - the fields can vary significantly near the sources, but smooth out at distance thus high resolution is required near sources
 
 Octree Mesh
@@ -63,7 +65,7 @@ The operators div, grad, and curl are discretized using a finite volume formulat
 Forward Problem
 ---------------
 
-.. _theory_initial_e:
+.. _theory_initial_h:
 
 Initial Conditions
 ^^^^^^^^^^^^^^^^^^
@@ -206,12 +208,12 @@ To solve :eq:`maxwell_a_phi` we use a block preconditionned conjugate gradient a
      - **max_it_bicg:** maximum number of BICG iterations (~100)
 
 
-.. note:: This problem must be solved for each source. However, LU factorization for each unique time step length is used to make solving for many right-hand sides more efficient.
+.. note:: This problem must be solved for each source.
 
 .. _theory_initial_h:
 
-Magnetic Field at t = 0
-^^^^^^^^^^^^^^^^^^^^^^^
+Magnetic Field at t0
+^^^^^^^^^^^^^^^^^^^^
 
 When computing magnetic field data (not needed for :math:`\vec{e}` or :math:`\partial_t \vec{b}`), we will need to compute magnetic fields at :math:`t=t_0`. Assuming the source is static for :math:`t \leq t_0`, :eq:`maxwells_eq` can be reformulated in terms of a vector potential :math:`\vec{a}` and a scalar potential :math:`\phi`:
 
@@ -289,13 +291,12 @@ Where :math:`\mathbf{Q_h}` is a linear operator that projects :math:`\mathbf{b_0
 
 Linear interpolation is then used to compute the data for the correct time channel.
 
-
 .. _theory_sensitivity:
 
 Sensitivity
 -----------
 
-Electric and magnetic field observations are split into their real and imaginary components. Thus the data at a particular time for a particular reading is organized in a vector of the form:
+Electric and magnetic field observations are split into their real and imaginary components. Thus the data at a particular frequency for a particular reading is organized in a vector of the form:
 
 .. math::
     \mathbf{d} = [E^\prime_{x}, E^{\prime \prime}_{x}, E^\prime_{y}, E^{\prime \prime}_{y}, E^\prime_{z}, E^{\prime \prime}_{z}, 
@@ -339,7 +340,7 @@ Inverse Problem
 We are interested in recovering the conductivity distribution for the Earth. However, the numerical stability of the inverse problem is made more challenging by the fact rock conductivities can span many orders of magnitude. To deal with this, we define the model as the log-conductivity for each cell, e.g.:
 
 .. math::
-    \mathbf{m} = log (\boldsymbol{\sigma})
+    \mathbf{m} = log (\boldsymbol{\rho})
 
 
 The inverse problem is solved by minimizing the following global objective function with respect to the model:
