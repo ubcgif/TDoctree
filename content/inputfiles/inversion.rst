@@ -158,7 +158,7 @@ Line Descriptions
 
 .. _tdoctree_input_inv_ln20:
 
-    - **Huber constant:** Here, the user may control the sparseness of the recovered model by specifying the Huber constant (:math:`\epsilon`) within the Huber norm. The TDoctree code uses the Huber norm to define the smallness term (link) in the inversion. If a large value is used (*default = 10000*), the inversion will use an L2 norm for the smallness. If a sufficiently small value is used, the smallness will be similar to an L1 norm. The Huber norm is given by:
+    - **Huber constant:** Here, the user may control the sparseness of the recovered model by specifying the Huber constant (:math:`\epsilon`) within the Huber norm. The TDoctree code uses the Huber norm to define the smallness term in the inversion. If a large value is used (*default = 10000*), the inversion will use an L2 norm for the smallness. If a sufficiently small value is used, the smallness will be similar to an L1 norm. The Huber norm is given by:
 
 .. math::
     \sum_{i=1}^M x_i^2 \;\;\;\; \textrm{where} \;\;\;\; x_i = \begin{cases} \sigma_i^2 \;\; \textrm{for} \;\; \sigma_i \leq \epsilon \\ \epsilon \big ( 2 |\sigma_i | - \epsilon \big ) \;\; \textrm{for} \;\; \sigma_i > \epsilon    \end{cases}
