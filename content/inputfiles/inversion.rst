@@ -121,8 +121,7 @@ Line Descriptions
 
 .. _tdoctree_input_inv_ln10:
 
-    - **Susceptibility Model:** The user may supply the file path to a background susceptibility model. If a homogeneous conductivity value is being used for all active cells, the user can enter "VALUE" followed by a space and a numerical value; example "VALUE 0.01".
-
+    - **Susceptibility Model:** The user may supply the file path to a background susceptibility model. Or the user may enter the flag *NO_SUS* if the background susceptibility is zero.
 
 .. _tdoctree_input_inv_ln11:
 
