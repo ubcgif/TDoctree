@@ -101,20 +101,20 @@ where
 If we organize all time-steps into a single system, and by letting :math:`\mathbf{K} = \mathbf{C^T \; M_\rho \, C}`, the forward problem can be expressed as :math:`\mathbf{A \, u} = \mathbf{\tilde q}`:
 
 .. math::
-	\begin{bmatrix}
-	\mathbf{K} & & & & & \\
-	\mathbf{B_1} & \mathbf{A_1} & & & & \\
-	& \mathbf{B_2} & \mathbf{A_2} & & & \\
-	& & & \ddots & & \\
-	& & & & \mathbf{B_n} & \mathbf{A_n}
-	\end{bmatrix}
-	\begin{bmatrix}
-	\mathbf{u_0} \\ \mathbf{u_1} \\ \mathbf{u_2} \\ \vdots \\ \mathbf{u_n}
-	\end{bmatrix} =
-	\begin{bmatrix}
-	\mathbf{q_0} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
-	\end{bmatrix}
-	:label: sys_forward
+    \begin{bmatrix}
+    \mathbf{K} & & & & & \\
+    \mathbf{B_1} & \mathbf{A_1} & & & & \\
+    & \mathbf{B_2} & \mathbf{A_2} & & & \\
+    & & & \ddots & & \\
+    & & & & \mathbf{B_n} & \mathbf{A_n}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \mathbf{u_0} \\ \mathbf{u_1} \\ \mathbf{u_2} \\ \vdots \\ \mathbf{u_n}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \mathbf{q_0} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
+    \end{bmatrix}
+    :label: sys_forward
 
 
 .. note:: This problem must be solved for each source. However, LU factorization for each unique time step length is used to make solving for many right-hand sides more efficient.
@@ -127,7 +127,7 @@ Defining the Vector q
 The TDoctree version 1 package models EM responses with inductive sources (e.g. a closed loop). For these types of sources, analytic solutions exist for the magnetostatic solution. We assume this is the case for :math:`t \leq t_0`. Let :math:`\mathbf{u_0}` define the static magnetic field within the domain discretized to cell edges. From :eq:`discrete_h_sys`, the time-derivative at :math:`t \leq t_0` is zero, thus:
 
 .. math::
-	\mathbf{C^T \, M_\rho \, C \, u_0} = f_0 \, \mathbf{q}
+    \mathbf{C^T \, M_\rho \, C \, u_0} = f_0 \, \mathbf{q}
 
 For each :math:`\mathbf{q_i}` defined in :eq:`a_operator` we can use vector :math:`\mathbf{q}` obtained here.
 
@@ -139,27 +139,27 @@ Data
 We have the magnetic field on cell edges at all time steps. Let :math:`Q` be a linear operator that averages the magnetic fields from cell edges to cell centers then interpolates each Cartesian component to the locations of the receivers. Where
 
 .. math::
-	t_i = t_0 + \sum_{k=0}^i \Delta t_k
+    t_i = t_0 + \sum_{k=0}^i \Delta t_k
 
 the Cartesian components of the magnetic field at the receivers at all time steps is:
 
 .. math::
-	\mathbf{h_i} = Q \, \mathbf{ u_i}
-	:label: rec_interp
+    \mathbf{h_i} = Q \, \mathbf{ u_i}
+    :label: rec_interp
 
 and the time-derivative of the magnetic flux is:
 
 .. math::
-	\frac{\partial \mathbf{b_i}}{\partial t} = - \mu_0 \Bigg [
-	\Bigg ( \frac{t_{i+1}-t_i}{t_{i+1} - t_{i-1}} \Bigg ) \Bigg ( \frac{\mathbf{h_i} - \mathbf{h_{i-1}}}{t_i - t_{i-1}} \Bigg )
-	+ \Bigg ( \frac{t_i - t_{i-1}}{t_{i+1} - t_{i-1}} \Bigg ) \Bigg ( \frac{\mathbf{h_{i+1}} - \mathbf{h_{i}}}{t_{i+1} - t_i} \Bigg ) \Bigg ]
-	:label: dbdt_interp
+    \frac{\partial \mathbf{b_i}}{\partial t} = - \mu_0 \Bigg [
+    \Bigg ( \frac{t_{i+1}-t_i}{t_{i+1} - t_{i-1}} \Bigg ) \Bigg ( \frac{\mathbf{h_i} - \mathbf{h_{i-1}}}{t_i - t_{i-1}} \Bigg )
+    + \Bigg ( \frac{t_i - t_{i-1}}{t_{i+1} - t_{i-1}} \Bigg ) \Bigg ( \frac{\mathbf{h_{i+1}} - \mathbf{h_{i}}}{t_{i+1} - t_i} \Bigg ) \Bigg ]
+    :label: dbdt_interp
 
 Once the field an its time-derivative have been computed at the receivers for every time channel, linear interpolation is carried out to compute the fields at the correct time channels. Where :math:`\mathbf{Q}` is a block-diagonal matrix of :math:`Q` that takes the magnetic fields from edges to the receivers at all times, :math:`\mathbf{P}` performs the operation in :eq:`dbdt_interp`, :math:`\mathbf{I}` is an identity matrix, :math:`\mathbf{L_1}` performs the linear interpolation to the correct time channels for the magnetic field and :math:`\mathbf{L_2}` performs the linear interpolation to the correct time channels for the time-derivative, the predicted data is given by:
 
 .. math::
-	\mathbf{d} = \begin{bmatrix} \mathbf{L_1} & \\ & \mathbf{L_2} \end{bmatrix} \begin{bmatrix} \mathbf{I} \\ \mathbf{P} \end{bmatrix} \mathbf{Q \, u} = \mathbf{Q_t \, u}
-	:label: dpre
+    \mathbf{d} = \begin{bmatrix} \mathbf{L_1} & \\ & \mathbf{L_2} \end{bmatrix} \begin{bmatrix} \mathbf{I} \\ \mathbf{P} \end{bmatrix} \mathbf{Q \, u} = \mathbf{Q_t \, u}
+    :label: dpre
 
 We let :math:`\mathbf{Q_t}` represent an operator that projects the magnetic fields on cell edges to the data. :math:`\mathbf{u}` is a vector that contains the magnetic fields on cell edges at all time steps (see :eq:`sys_forward`)
 
@@ -171,17 +171,17 @@ Sensitivities
 To solve the inverse problem, we will need to compute the sensitivity matrix. By differentiating the data with respect to the resistivities: 
 
 .. math::
-	\mathbf{J} = \frac{\partial \mathbf{d}}{\partial \boldsymbol{\rho}} = - \mathbf{Q_t \, A^{-1} \, G}
+    \mathbf{J} = \frac{\partial \mathbf{d}}{\partial \boldsymbol{\rho}} = - \mathbf{Q_t \, A^{-1} \, G}
 
 :math:`\mathbf{A}` is the full system defined in :eq:`sys_forward`, :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
 
 .. math::
-	\mathbf{G} = \mathbf{C^T} \, diag \big ( \mathbf{C} \, (\mathbf{u - \tilde u_0} ) \big )  \, \mathbf{A_{fc}^T} \, diag \big ( \mathbf{V} \,\boldsymbol{\rho} \big ) 
+    \mathbf{G} = \mathbf{C^T} \, diag \big ( \mathbf{C} \, (\mathbf{u - \tilde u_0} ) \big )  \, \mathbf{A_{fc}^T} \, diag \big ( \mathbf{V} \,\boldsymbol{\rho} \big ) 
 
 where
 
 .. math::
-	\mathbf{\tilde u_0} = f_0^{-1} \begin{bmatrix} f_0 \mathbf{u_0} \\ f_1 \mathbf{u_0} \\ \vdots \\ f_n \mathbf{u_0} \end{bmatrix}
+    \mathbf{\tilde u_0} = f_0^{-1} \begin{bmatrix} f_0 \mathbf{u_0} \\ f_1 \mathbf{u_0} \\ \vdots \\ f_n \mathbf{u_0} \end{bmatrix}
 
 
 
