@@ -65,7 +65,7 @@ The operators div, grad, and curl are discretized using a finite volume formulat
 Forward Problem
 ---------------
 
-.. _theory_initial_h:
+.. _theory_initial_cond:
 
 Initial Conditions
 ^^^^^^^^^^^^^^^^^^

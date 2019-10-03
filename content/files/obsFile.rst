@@ -39,7 +39,7 @@ This file is input when forward modeling or inverting field-collected data. Usin
 
 .. _tdoctree_obs_ln3:
 
-    - **t_ind:** The index corresponding to the desired frequency within the :ref:`frequencies file<freqFile>`.
+    - **t_ind:** The index corresponding to the desired time channel within the :ref:`time channels file<timeFile>`.
 
 .. _tdoctree_obs_ln4:
 
