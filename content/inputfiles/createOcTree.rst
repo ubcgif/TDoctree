@@ -27,7 +27,7 @@ The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using t
 +--------+-------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | 8      |:ref:`rxFile<tdoctree_input_octreeln8>`                                        | the file defining all receivers                                   |
 +--------+-------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 9      |:ref:`freqFile<tdoctree_input_octreeln9>`                                      | the file containing the frequencies being measured                |
+| 9      |:ref:`timeFile<tdoctree_input_octreeln9>`                                      | the file containing the times being measured                      |
 +--------+-------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | 10     |:ref:`topoFile<tdoctree_input_octreeln10>`                                     | sets topography                                                   |
 +--------+-------------------------------------------------------------------------------+-------------------------------------------------------------------+
@@ -81,7 +81,7 @@ Line Descriptions
 
 .. _tdoctree_input_octreeln9:
 
-    - **timeFile:** Path to the file defining the time channels measured in the survey; i.e. the :ref:`time channels file<freqFile>`. 
+    - **timeFile:** Path to the file defining the time channels measured in the survey; i.e. the :ref:`time channels file<timeFile>`. 
 
 .. _tdoctree_input_octreeln10:
 
