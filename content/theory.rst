@@ -25,6 +25,7 @@ equations are:
     \end{align}
     :label: maxwells_eq
 
+
 where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\rho` represent the magnetic permeability and electrical resistivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in Nabighian, 1991). By doing so, some difficulties arise when
 solving the system;
 
@@ -42,7 +43,7 @@ The figure below shows an example of an Octree mesh, with nine cells, eight of w
 
 .. figure:: images/OcTree.png
      :align: center
-     :width: 700
+     :width: 600
 
 
 When working with Octree meshes, the underlying mesh is defined as a regular 3D orthogonal grid where
@@ -75,10 +76,11 @@ where :math:`\mathbf{C}` is the curl operator, :math:`f(t)` is a time-dependent 
 
 .. math::
     \begin{align}
-    \mathbf{M_\rho} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\rho} \big ) \\
-    \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu} \big )
+        \mathbf{M_\rho} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\rho} \big ) \\
+        \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu} \big )
     \end{align}
     :label: mass_matrix
+
 
 :math:`\mathbf{V}` is a diagonal matrix that contains the volume for each cell. Vectors :math:`\boldsymbol{\rho}` and :math:`\boldsymbol{\mu}` are vectors containing the electrical resistivity and magnetic permeability of each cell, respectively. :math:`\mathbf{A_{f2c}}` averages from faces to cell centres and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres.
 
@@ -92,27 +94,28 @@ where
 
 .. math::
     \begin{align}
-    \mathbf{A_i} &= \mathbf{C^T \, M_\rho \, C } + \Delta t_i^{-1} \mathbf{M_\mu} \\
-    \mathbf{B_i} &= - \Delta t_i^{-1} \mathbf{M_\mu} \\
-    \mathbf{q_i} &= f_i \, \mathbf{q}
+        \mathbf{A_i} &= \mathbf{C^T \, M_\rho \, C } + \Delta t_i^{-1} \mathbf{M_\mu} \\
+        \mathbf{B_i} &= - \Delta t_i^{-1} \mathbf{M_\mu} \\
+        \mathbf{q_i} &= f_i \, \mathbf{q}
     \end{align}
     :label: a_operator 
+
 
 If we organize all time-steps into a single system, and by letting :math:`\mathbf{K} = \mathbf{C^T \; M_\rho \, C}`, the forward problem can be expressed as :math:`\mathbf{A \, u} = \mathbf{\tilde q}`:
 
 .. math::
     \begin{bmatrix}
-    \mathbf{K} & & & & & \\
-    \mathbf{B_1} & \mathbf{A_1} & & & & \\
-    & \mathbf{B_2} & \mathbf{A_2} & & & \\
-    & & & \ddots & & \\
-    & & & & \mathbf{B_n} & \mathbf{A_n}
+        \mathbf{K} & & & & & \\
+        \mathbf{B_1} & \mathbf{A_1} & & & & \\
+        & \mathbf{B_2} & \mathbf{A_2} & & & \\
+        & & & \ddots & & \\
+        & & & & \mathbf{B_n} & \mathbf{A_n}
     \end{bmatrix}
     \begin{bmatrix}
-    \mathbf{u_0} \\ \mathbf{u_1} \\ \mathbf{u_2} \\ \vdots \\ \mathbf{u_n}
+        \mathbf{u_0} \\ \mathbf{u_1} \\ \mathbf{u_2} \\ \vdots \\ \mathbf{u_n}
     \end{bmatrix} =
     \begin{bmatrix}
-    \mathbf{q_0} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
+        \mathbf{q_0} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
     \end{bmatrix}
     :label: sys_forward
 
@@ -129,6 +132,7 @@ The TDoctree version 1 package models EM responses with inductive sources (e.g. 
 .. math::
     \mathbf{C^T \, M_\rho \, C \, u_0} = f_0 \, \mathbf{q}
 
+
 For each :math:`\mathbf{q_i}` defined in :eq:`a_operator` we can use vector :math:`\mathbf{q}` obtained here.
 
 .. _theory_data:
@@ -141,11 +145,13 @@ We have the magnetic field on cell edges at all time steps. Let :math:`Q` be a l
 .. math::
     t_i = t_0 + \sum_{k=0}^i \Delta t_k
 
+
 the Cartesian components of the magnetic field at the receivers at all time steps is:
 
 .. math::
     \mathbf{h_i} = Q \, \mathbf{ u_i}
     :label: rec_interp
+
 
 and the time-derivative of the magnetic flux is:
 
@@ -155,11 +161,13 @@ and the time-derivative of the magnetic flux is:
     + \Bigg ( \frac{t_i - t_{i-1}}{t_{i+1} - t_{i-1}} \Bigg ) \Bigg ( \frac{\mathbf{h_{i+1}} - \mathbf{h_{i}}}{t_{i+1} - t_i} \Bigg ) \Bigg ]
     :label: dbdt_interp
 
+
 Once the field an its time-derivative have been computed at the receivers for every time channel, linear interpolation is carried out to compute the fields at the correct time channels. Where :math:`\mathbf{Q}` is a block-diagonal matrix of :math:`Q` that takes the magnetic fields from edges to the receivers at all times, :math:`\mathbf{P}` performs the operation in :eq:`dbdt_interp`, :math:`\mathbf{I}` is an identity matrix, :math:`\mathbf{L_1}` performs the linear interpolation to the correct time channels for the magnetic field and :math:`\mathbf{L_2}` performs the linear interpolation to the correct time channels for the time-derivative, the predicted data is given by:
 
 .. math::
     \mathbf{d} = \begin{bmatrix} \mathbf{L_1} & \\ & \mathbf{L_2} \end{bmatrix} \begin{bmatrix} \mathbf{I} \\ \mathbf{P} \end{bmatrix} \mathbf{Q \, u} = \mathbf{Q_t \, u}
     :label: dpre
+
 
 We let :math:`\mathbf{Q_t}` represent an operator that projects the magnetic fields on cell edges to the data. :math:`\mathbf{u}` is a vector that contains the magnetic fields on cell edges at all time steps (see :eq:`sys_forward`)
 
@@ -173,7 +181,8 @@ To solve the inverse problem, we will need to compute the sensitivity matrix. By
 .. math::
     \mathbf{J} = \frac{\partial \mathbf{d}}{\partial \boldsymbol{\rho}} = - \mathbf{Q_t \, A^{-1} \, G}
 
-:math:`\mathbf{A}` is the full system defined in :eq:`sys_forward`, :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
+
+Where :math:`\mathbf{A}` is the full system defined in :eq:`sys_forward`, :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
 
 .. math::
     \mathbf{G} = \mathbf{C^T} \, diag \big ( \mathbf{C} \, (\mathbf{u - \tilde u_0} ) \big )  \, \mathbf{A_{fc}^T} \, diag \big ( \mathbf{V} \,\boldsymbol{\rho} \big ) 
@@ -201,6 +210,7 @@ The inverse problem is solved by minimizing the following global objective funct
 .. math::
     \phi (\mathbf{m}) = \phi_d (\mathbf{m}) + \beta \phi_m (\mathbf{m})
     :label: global_objective
+
 
 where :math:`\phi_d` is the data misfit, :math:`\phi_m` is the model objective function and :math:`\beta` is the trade-off parameter. The data misfit ensures the recovered model adequately explains the set of field observations. The model objective function adds geological constraints to the recovered model. The trade-off parameter weights the relative emphasis between fitting the data and imposing geological structures.
 
