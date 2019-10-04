@@ -5,7 +5,7 @@ Background Theory
 
 This section aims to provide the user with a basic review of the physics, discretization, and optimization
 techniques used to solve the time domain electromagnetics problem. It is assumed
-that the user has some background in these areas. For further reading see (:cite:`Nabighian1991`).
+that the user has some background in these areas. For further reading see (Nabighian, 1991).
 
 .. _theory_fundamentals:
 
@@ -23,7 +23,8 @@ equations are:
     \vec{b} = \mu \vec{h}
     :label: maxwells_eq
 
-where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\rho` represent the magnetic permeability and electrical resistivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
+
+where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\rho` represent the magnetic permeability and electrical resistivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in Nabighian, 1991`. By doing so, some difficulties arise when
 solving the system;
 
     - the resistivity :math:`\rho` varies over several orders of magnitude
@@ -56,7 +57,7 @@ only refined when the model begins to change rapidly.
 Discretization of Operators
 ---------------------------
 
-The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq` , they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see :cite:`Haber2012` for a detailed description of the discretization process.
+The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq` , they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see Haber (2012) for a detailed description of the discretization process.
 
 .. _theory_fwd:
 
@@ -123,6 +124,7 @@ where :math:`\mathbf{M_\sigma}` and :math:`\mathbf{N_e}` are defined in :eq:`sys
     \mathbf{C} &= \mathbf{\tilde C \, N_e}
     :label: curl_operator
 
+
 :math:`\mathbf{A_{f2c}}` averages from faces to cell centres. The inverse magnetic permeability for each cell is contained within the vector :math:`\boldsymbol{\mu}`. :math:`\mathbf{\tilde C}` is the curl operator and :math:`\mathbf{C}` is a modified curl operator.
 
 Discretization in time is performed using backward Euler. Thus for a single transmitter, we must solve the following for every time step :math:`\Delta t_i`:
@@ -140,23 +142,24 @@ where
     \mathbf{q_i} &= - \Delta t_i^{-1} \mathbf{N_e^T \, s} \big [ f_{k+1} - f_k \big ]
     :label: a_operator 
 
+
 Now let :math:`\mathbf{A_{dc}}` and :math:`\mathbf{q_{dc}}` define the matrix and right-hand side in :eq:`system_dc` . The forward problem can be expressed as:
 
 .. math::
-	\begin{bmatrix}
-	\mathbf{A_{dc}} & & & & & \\
-	\mathbf{B_1 \, G} & \mathbf{A_1} & & & & \\
-	& \mathbf{B_2} & \mathbf{A_2} & & & \\
-	& & & \ddots & & \\
-	& & & & \mathbf{B_n} & \mathbf{A_n}
-	\end{bmatrix}
-	\begin{bmatrix}
-	\phi_0 \\ \mathbf{e_1} \\ \mathbf{e_2} \\ \vdots \\ \mathbf{e_n}
-	\end{bmatrix} =
-	\begin{bmatrix}
-	\mathbf{q_{dc}} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
-	\end{bmatrix}
-	:label: sys_forward
+    \begin{bmatrix}
+    \mathbf{A_{dc}} & & & & & \\
+    \mathbf{B_1 \, G} & \mathbf{A_1} & & & & \\
+    & \mathbf{B_2} & \mathbf{A_2} & & & \\
+    & & & \ddots & & \\
+    & & & & \mathbf{B_n} & \mathbf{A_n}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \phi_0 \\ \mathbf{e_1} \\ \mathbf{e_2} \\ \vdots \\ \mathbf{e_n}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \mathbf{q_{dc}} \\ \mathbf{q_1} \\ \mathbf{q_2} \\ \vdots \\ \mathbf{q_n}
+    \end{bmatrix}
+    :label: sys_forward
 
 
 .. note:: This problem must be solved for each source. However, LU factorization for each unique time step length is used to make solving for many right-hand sides more efficient.
@@ -195,7 +198,7 @@ The matrix :math:`\mathbf{N_n}` provides nodal constraints which address inaccur
 Once :eq:`maxwell_a_phi` is solved, the electric fields on cell edges can be computed numerically according to:
 
 .. math::
-	\mathbf{e_i} = \mathbf{a_i} + \mathbf{G \, \phi_i}
+    \mathbf{e_i} = \mathbf{a_i} + \mathbf{G \, \phi_i}
 
 
 To solve :eq:`maxwell_a_phi` we use a block preconditionned conjugate gradient algorithm. For the preconditionner, we do 2 SSOR iterations of :eq:`maxwell_a_phi` . Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
@@ -215,14 +218,15 @@ Magnetic Field at t0
 When computing magnetic field data (not needed for :math:`\vec{e}` or :math:`\partial_t \vec{b}`), we will need to compute magnetic fields at :math:`t=t_0`. Assuming the source is static for :math:`t \leq t_0`, :eq:`maxwells_eq` can be reformulated in terms of a vector potential :math:`\vec{a}` and a scalar potential :math:`\phi`:
 
 .. math::
-	\nabla \times \mu_{-1} \times \vec{a} + \nabla \mu^{-1} \nabla \cdot \vec{a} &= \sigma \nabla \phi + \vec{s}\, f_0 \\
-	\vec{b} &= \nabla \times \vec{a} \\
-	\vec{e} &= \nabla \phi
+    \nabla \times \mu_{-1} \times \vec{a} + \nabla \mu^{-1} \nabla \cdot \vec{a} &= \sigma \nabla \phi + \vec{s}\, f_0 \\
+    \vec{b} &= \nabla \times \vec{a} \\
+    \vec{e} &= \nabla \phi
+
 
 where the second term is added for stability assuming the Coulomb Gauge (:math:`\nabla \cdot \vec{a} = 0`) condition holds. Using the finite volume approach, we can solve for the discrete vector potential :math:`\mathbf{a_0}`:
 
 .. math::
-	\mathbf{A_{m} \, a_0} = \mathbf{q_m}
+    \mathbf{A_{m} \, a_0} = \mathbf{q_m}
 
 
 where :math:`\mathbf{a_0}` lives on edges and
@@ -235,7 +239,8 @@ where :math:`\mathbf{a_0}` lives on edges and
 Once we solve for :math:`\mathbf{a_0}`, the magnetic field is computed via:
 
 .. math::
-	\mathbf{b_0} = \mathbf{C \, a_0}
+    \mathbf{b_0} = \mathbf{C \, a_0}
+
 
 where :math:`\mathbf{C}` is define in :eq:`curl_operator` .
 
@@ -254,7 +259,7 @@ Electric Field
 The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_e}` is constructed to integrate the electric field over the length of the receiver wire and divide by its length. Thus the electric field data for time step :math:`i` is given by:
 
 .. math::
-	\mathbf{d_i} = \mathbf{Q_e \, N_e \, e_i}
+    \mathbf{d_i} = \mathbf{Q_e \, N_e \, e_i}
 
 
 Linear interpolation is then used to compute the data for the correct time channel.
@@ -266,7 +271,7 @@ Time-Derivative of Magnetic Flux
 The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_b}` is constructed to integrate the electric field over path of the receiver loop and multiply by -1. By Faraday's law, will compute the time-derivative of the magnetic flux density. Thus dB/dt data for time step :math:`i` is given by:
 
 .. math::
-	\mathbf{d_i} = \mathbf{Q_b \, N_e \, e_i}
+    \mathbf{d_i} = \mathbf{Q_b \, N_e \, e_i}
 
 
 Linear interpolation is then used to compute the data for the correct time channel.
@@ -277,13 +282,13 @@ H-Field
 The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. The magnetic field (:math:`\mathbf{b_0}`) at :math:`t=t_0` is computed by :ref:`solving an a-phi system <theory_initial_h>`. In this case, the H-field data are computed according to:
 
 .. math::
-	\mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_b \, e_i} 
+    \mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_b \, e_i} 
 
 
 Where :math:`\mathbf{Q_h}` is a linear operator that projects :math:`\mathbf{b_0}` from cell faces to the locations of the receivers:
 
 .. math::
-	\mathbf{d_0} = \mu_0^{-1} \, \mathbf{Q_h \, b_0}
+    \mathbf{d_0} = \mu_0^{-1} \, \mathbf{Q_h \, b_0}
 
 
 Linear interpolation is then used to compute the data for the correct time channel.
@@ -352,12 +357,13 @@ Due to the ill-posedness of the problem, there are no stable solutions obtained 
     + \frac{\alpha_z}{2} \!\int_\Omega w_z \Bigg | \frac{\partial}{\partial z} \big (m - m_{ref} \big ) \Bigg |^2 dV
     :label: MOF1
 
+
 where :math:`\alpha_s, \alpha_x, \alpha_y` and :math:`\alpha_z` weight the relative emphasis on minimizing differences from the reference model and the smoothness along each gradient direction. And :math:`w_s, w_x, w_y` and :math:`w_z` are additional user defined weighting functions.
 
 An important consideration comes when discretizing the regularization onto the mesh. The gradient operates on
 cell centered variables in this instance. Applying a short distance approximation is second order
 accurate on a domain with uniform cells, but only :math:`\mathcal{O}(1)` on areas where cells are non-uniform. To
-rectify this a higher order approximation is used (:cite:`Haber2012`). The second order approximation of the model
+rectify this a higher order approximation is used (Haber, 2012). The second order approximation of the model
 objective function can be expressed as:
 
 .. math::
@@ -373,6 +379,7 @@ where the regularizer is given by:
     & + \alpha_z \mathbf{G_z^T} \textrm{diag} (\mathbf{w_z \odot v_z}) \mathbf{G_z}
     :label: MOF
 
+
 The Hadamard product is given by :math:`\odot`, :math:`\mathbf{v_x}` is the volume of each cell averaged to x-faces, :math:`\mathbf{w_x}` is the weighting function :math:`w_x` evaluated on x-faces and :math:`\mathbf{G_x}` computes the x-component of the gradient from cell centers to cell faces. Similarly for y and z.
 
 If we require that the recovered model values lie between :math:`\mathbf{m_L  \preceq m \preceq m_H}` , the resulting bounded optimization problem we must solve is:
@@ -384,7 +391,7 @@ If we require that the recovered model values lie between :math:`\mathbf{m_L  \p
 
 
 A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
-information refer again to :cite:`Haber2012` and references therein.
+information refer again to Haber (2012) and references therein.
 
 
 Inversion Parameters and Tolerances
@@ -430,19 +437,19 @@ using the current model :math:`\mathbf{m}_k` and update the model according to:
 
 where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` is the gradient of the global objective function, :math:`\mathbf{H}_k` is an approximation of the Hessian and :math:`\alpha` is a scaling constant. This process is repeated until any of the following occurs:
 
-|
+
 1. The gradient is sufficiently small, i.e.:
 
 .. math::
     \| \nabla \phi_k \|^2 < tol \_ nl
 
-|
+
 2. The smallest component of the model perturbation its small in absolute value, i.e.:
 
 .. math::
     \textrm{max} ( |\mathbf{\delta m}_k | ) < mindm
 
-|
+
 3. A max number of GN iterations have been performed, i.e.
 
 .. math::
