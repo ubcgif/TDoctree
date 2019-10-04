@@ -17,12 +17,10 @@ fields can be used to uncover the substructure of the Earth. The time domain Max
 equations are:
 
 .. math::
-    \begin{align}
-        \nabla \times & \vec{e} = - \partial_t \vec{b} \\
-        \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
-        \rho \vec{j} &= \vec{e} \\
-        \vec{b} &= \mu \vec{h}
-    \end{align}
+    \nabla \times & \vec{e} = - \partial_t \vec{b} \\
+    \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
+    \rho \vec{j} &= \vec{e} \\
+    \vec{b} &= \mu \vec{h}
     :label: maxwells_eq
 
 
@@ -76,10 +74,8 @@ To solve the forward problem :eq:`maxwells_eq`, we must first discretize in spac
 where :math:`\mathbf{C}` is the curl operator, :math:`f(t)` is a time-dependent waveform, :math:`\mathbf{q}` defines the time-independent portion of the right-hand side (:ref:`explained here <theory_rhs>`) and
 
 .. math::
-    \begin{align}
-        \mathbf{M_\rho} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\rho} \big ) \\
-        \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu} \big )
-    \end{align}
+    \mathbf{M_\rho} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\rho} \big ) \\
+    \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu} \big )
     :label: mass_matrix
 
 
@@ -95,11 +91,9 @@ Discretization in time is performed using backward Euler. Thus for a single tran
 where
 
 .. math::
-    \begin{align}
-        \mathbf{A_i} &= \mathbf{C^T \, M_\rho \, C } + \Delta t_i^{-1} \mathbf{M_\mu} \\
-        \mathbf{B_i} &= - \Delta t_i^{-1} \mathbf{M_\mu} \\
-        \mathbf{q_i} &= f_i \, \mathbf{q}
-    \end{align}
+    \mathbf{A_i} &= \mathbf{C^T \, M_\rho \, C } + \Delta t_i^{-1} \mathbf{M_\mu} \\
+    \mathbf{B_i} &= - \Delta t_i^{-1} \mathbf{M_\mu} \\
+    \mathbf{q_i} &= f_i \, \mathbf{q}
     :label: a_operator 
 
 
@@ -248,12 +242,10 @@ Model Objective Function
 Due to the ill-posedness of the problem, there are no stable solutions obtained by freely minimizing the data misfit, and thus regularization is needed. The regularization uses penalties for both smoothness, and likeness to a reference model :math:`m_{ref}` supplied by the user. The model objective function is given by:
 
 .. math::
-    \begin{align}
     \phi_m = \frac{\alpha_s}{2} \!\int_\Omega w_s | m - & m_{ref} |^2 dV
     + \frac{\alpha_x}{2} \!\int_\Omega w_x \Bigg | \frac{\partial}{\partial x} \big (m - m_{ref} \big ) \Bigg |^2 dV \\
     &+ \frac{\alpha_y}{2} \!\int_\Omega w_y \Bigg | \frac{\partial}{\partial y} \big (m - m_{ref} \big ) \Bigg |^2 dV
     + \frac{\alpha_z}{2} \!\int_\Omega w_z \Bigg | \frac{\partial}{\partial z} \big (m - m_{ref} \big ) \Bigg |^2 dV
-    \end{align}
     :label: MOF1
 
 
@@ -272,12 +264,10 @@ objective function can be expressed as:
 where the regularizer is given by:
 
 .. math::
-    \begin{align}
     \mathbf{W^T W} =& \;\;\;\;\alpha_s \textrm{diag} (\mathbf{w_s \odot v}) \\
     & + \alpha_x \mathbf{G_x^T} \textrm{diag} (\mathbf{w_x \odot v_x}) \mathbf{G_x} \\
     & + \alpha_y \mathbf{G_y^T} \textrm{diag} (\mathbf{w_y \odot v_y}) \mathbf{G_y} \\
     & + \alpha_z \mathbf{G_z^T} \textrm{diag} (\mathbf{w_z \odot v_z}) \mathbf{G_z}
-    \end{align}
     :label: MOF
 
 
@@ -286,10 +276,8 @@ The Hadamard product is given by :math:`\odot`, :math:`\mathbf{v_x}` is the volu
 If we require that the recovered model values lie between :math:`\mathbf{m_L  \preceq m \preceq m_H}` , the resulting bounded optimization problem we must solve is:
 
 .. math::
-    \begin{align}
     &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m}) \\
     &\; \textrm{s.t.} \;\; \mathbf{m_L \preceq m \preceq m_H}
-    \end{align}
     :label: inverse_problem
 
 
@@ -308,10 +296,8 @@ Cooling Schedule
 Our goal is to solve Eq. :eq:`inverse_problem`, i.e.:
 
 .. math::
-    \begin{align}
     &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m - m_{ref}}) \\
     &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
-    \end{align}
 
 
 but how do we choose an acceptable trade-off parameter :math:`\beta`? For this, we use a cooling schedule. This is described in the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Beta.html>`__ . The cooling schedule can be defined using the following parameters:
