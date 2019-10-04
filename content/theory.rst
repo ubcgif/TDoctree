@@ -72,6 +72,7 @@ To solve the forward problem :eq:`maxwells_eq`, we must first discretize in spac
     \mathbf{C^T \, M_\rho \, C \, u} + \mathbf{M_\mu} \, \partial_t \mathbf{u} = f(t) \, \mathbf{q}
     :label: discrete_h_sys
 
+
 where :math:`\mathbf{C}` is the curl operator, :math:`f(t)` is a time-dependent waveform, :math:`\mathbf{q}` defines the time-independent portion of the right-hand side (:ref:`explained here <theory_rhs>`) and
 
 .. math::
@@ -188,6 +189,7 @@ Where :math:`\mathbf{A}` is the full system defined in :eq:`sys_forward`, :math:
 .. math::
     \mathbf{G} = \mathbf{C^T} \, diag \big ( \mathbf{C} \, (\mathbf{u - \tilde u_0} ) \big )  \, \mathbf{A_{fc}^T} \, diag \big ( \mathbf{V} \,\boldsymbol{\rho} \big ) 
 
+
 where
 
 .. math::
@@ -252,7 +254,8 @@ Due to the ill-posedness of the problem, there are no stable solutions obtained 
     &+ \frac{\alpha_y}{2} \!\int_\Omega w_y \Bigg | \frac{\partial}{\partial y} \big (m - m_{ref} \big ) \Bigg |^2 dV
     + \frac{\alpha_z}{2} \!\int_\Omega w_z \Bigg | \frac{\partial}{\partial z} \big (m - m_{ref} \big ) \Bigg |^2 dV
     \end{align}
-    :label:
+    :label: MOF1
+
 
 where :math:`\alpha_s, \alpha_x, \alpha_y` and :math:`\alpha_z` weight the relative emphasis on minimizing differences from the reference model and the smoothness along each gradient direction. And :math:`w_s, w_x, w_y` and :math:`w_z` are additional user defined weighting functions.
 
@@ -265,6 +268,7 @@ objective function can be expressed as:
 .. math::
     \phi_m (\mathbf{m}) = \mathbf{\big (m-m_{ref} \big )^T W^T W \big (m-m_{ref} \big )}
 
+
 where the regularizer is given by:
 
 .. math::
@@ -276,6 +280,7 @@ where the regularizer is given by:
     \end{align}
     :label: MOF
 
+
 The Hadamard product is given by :math:`\odot`, :math:`\mathbf{v_x}` is the volume of each cell averaged to x-faces, :math:`\mathbf{w_x}` is the weighting function :math:`w_x` evaluated on x-faces and :math:`\mathbf{G_x}` computes the x-component of the gradient from cell centers to cell faces. Similarly for y and z.
 
 If we require that the recovered model values lie between :math:`\mathbf{m_L  \preceq m \preceq m_H}` , the resulting bounded optimization problem we must solve is:
@@ -286,6 +291,7 @@ If we require that the recovered model values lie between :math:`\mathbf{m_L  \p
     &\; \textrm{s.t.} \;\; \mathbf{m_L \preceq m \preceq m_H}
     \end{align}
     :label: inverse_problem
+
 
 A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
 information refer again to (Haber, 2012) and references therein.
@@ -307,12 +313,14 @@ Our goal is to solve Eq. :eq:`inverse_problem`, i.e.:
     &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
     \end{align}
 
+
 but how do we choose an acceptable trade-off parameter :math:`\beta`? For this, we use a cooling schedule. This is described in the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Beta.html>`__ . The cooling schedule can be defined using the following parameters:
 
     - **beta_max:** The initial value for :math:`\beta`
     - **beta_factor:** The factor at which :math:`\beta` is decrease to a subsequent solution of Eq. :eq:`inverse_problem`
     - **beta_min:** The minimum :math:`\beta` for which Eq. :eq:`inverse_problem` is solved before the inversion will quit
     - **Chi Factor:** The inversion program stops when the data misfit :math:`\phi_d \leq N \times Chi \; Factor`, where :math:`N` is the number of data observations
+
 
 .. _theory_GN:
 
