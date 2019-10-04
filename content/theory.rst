@@ -90,6 +90,7 @@ Discretization in time is performed using backward Euler. Thus for a single tran
     \mathbf{A_i \, u_{i}} = \mathbf{-B_i \, u_{i-1}} + \mathbf{q_i}
     :label: back_euler
 
+
 where
 
 .. math::
@@ -127,7 +128,7 @@ If we organize all time-steps into a single system, and by letting :math:`\mathb
 Defining the Vector q
 ^^^^^^^^^^^^^^^^^^^^^
 
-The TDoctree version 1 package models EM responses with inductive sources (e.g. a closed loop). For these types of sources, analytic solutions exist for the magnetostatic solution. We assume this is the case for :math:`t \leq t_0`. Let :math:`\mathbf{u_0}` define the static magnetic field within the domain discretized to cell edges. From :eq:`discrete_h_sys`, the time-derivative at :math:`t \leq t_0` is zero, thus:
+The TDoctree version 1 package models EM responses with inductive sources (e.g. a closed loop). For these types of sources, analytic solutions exist for the magnetostatic solution. We assume this is the case for :math:`t \leq t_0`. Let :math:`\mathbf{u_0}` define the static magnetic field within the domain discretized to cell edges. From :eq:`discrete_h_sys` , the time-derivative at :math:`t \leq t_0` is zero, thus:
 
 .. math::
     \mathbf{C^T \, M_\rho \, C \, u_0} = f_0 \, \mathbf{q}

@@ -33,7 +33,7 @@ sys.path.append(os.path.abspath('./_ext'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.mathjax',
+    'sphinx.ext.imgmath',
     'sphinxcontrib.bibtex',
         'edit_on_github',
     'purpose',
