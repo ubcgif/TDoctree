@@ -16,7 +16,7 @@ are discretized on an Octree mesh.
 
 .. figure:: images/OcTree.png
      :align: center
-     :width: 700
+     :width: 601
 
      2D (QuadTree) mesh discretization about a ring (left). Cell refinement for OcTree mesh (right).
 

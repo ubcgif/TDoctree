@@ -17,13 +17,12 @@ fields can be used to uncover the substructure of the Earth. The time domain Max
 equations are:
 
 .. math::
-    \begin{align}
-        \nabla \times & \vec{e} = - \partial_t \vec{b} \\
-        \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
-        \rho \vec{j} &= \vec{e} \\
-        \vec{b} &= \mu \vec{h}
-    \end{align}
+    \nabla \times & \vec{e} = - \partial_t \vec{b} \\
+    \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
+    \rho \vec{j} &= \vec{e} \\
+    \vec{b} &= \mu \vec{h}
     :label: maxwells_eq
+
 
 where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\rho` represent the magnetic permeability and electrical resistivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in Nabighian, 1991). By doing so, some difficulties arise when
 solving the system;
@@ -58,27 +57,27 @@ only refined when the model begins to change rapidly.
 Discretization of Operators
 ---------------------------
 
-The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see Haber (2012) for a detailed description of the discretization process.
+The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq` , they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see Haber (2012) for a detailed description of the discretization process.
 
 .. _theory_fwd:
 
 Forward Problem
 ---------------
 
-To solve the forward problem :eq:`maxwells_eq`, we must first discretize in space and then in time. Using finite volume approach, the magnetic fields on cell edges (:math:`\mathbf{u}`) discretized in space are described by:
+To solve the forward problem :eq:`maxwells_eq` , we must first discretize in space and then in time. Using finite volume approach, the magnetic fields on cell edges (:math:`\mathbf{u}`) discretized in space are described by:
 
 .. math::
     \mathbf{C^T \, M_\rho \, C \, u} + \mathbf{M_\mu} \, \partial_t \mathbf{u} = f(t) \, \mathbf{q}
     :label: discrete_h_sys
 
+
 where :math:`\mathbf{C}` is the curl operator, :math:`f(t)` is a time-dependent waveform, :math:`\mathbf{q}` defines the time-independent portion of the right-hand side (:ref:`explained here <theory_rhs>`) and
 
 .. math::
-    \begin{align}
     \mathbf{M_\rho} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\rho} \big ) \\
     \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu} \big )
-    \end{align}
     :label: mass_matrix
+
 
 :math:`\mathbf{V}` is a diagonal matrix that contains the volume for each cell. Vectors :math:`\boldsymbol{\rho}` and :math:`\boldsymbol{\mu}` are vectors containing the electrical resistivity and magnetic permeability of each cell, respectively. :math:`\mathbf{A_{f2c}}` averages from faces to cell centres and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres.
 
@@ -88,15 +87,15 @@ Discretization in time is performed using backward Euler. Thus for a single tran
     \mathbf{A_i \, u_{i}} = \mathbf{-B_i \, u_{i-1}} + \mathbf{q_i}
     :label: back_euler
 
+
 where
 
 .. math::
-    \begin{align}
     \mathbf{A_i} &= \mathbf{C^T \, M_\rho \, C } + \Delta t_i^{-1} \mathbf{M_\mu} \\
     \mathbf{B_i} &= - \Delta t_i^{-1} \mathbf{M_\mu} \\
     \mathbf{q_i} &= f_i \, \mathbf{q}
-    \end{align}
     :label: a_operator 
+
 
 If we organize all time-steps into a single system, and by letting :math:`\mathbf{K} = \mathbf{C^T \; M_\rho \, C}`, the forward problem can be expressed as :math:`\mathbf{A \, u} = \mathbf{\tilde q}`:
 
@@ -124,10 +123,11 @@ If we organize all time-steps into a single system, and by letting :math:`\mathb
 Defining the Vector q
 ^^^^^^^^^^^^^^^^^^^^^
 
-The TDoctree version 1 package models EM responses with inductive sources (e.g. a closed loop). For these types of sources, analytic solutions exist for the magnetostatic solution. We assume this is the case for :math:`t \leq t_0`. Let :math:`\mathbf{u_0}` define the static magnetic field within the domain discretized to cell edges. From :eq:`discrete_h_sys`, the time-derivative at :math:`t \leq t_0` is zero, thus:
+The TDoctree version 1 package models EM responses with inductive sources (e.g. a closed loop). For these types of sources, analytic solutions exist for the magnetostatic solution. We assume this is the case for :math:`t \leq t_0`. Let :math:`\mathbf{u_0}` define the static magnetic field within the domain discretized to cell edges. From :eq:`discrete_h_sys` , the time-derivative at :math:`t \leq t_0` is zero, thus:
 
 .. math::
     \mathbf{C^T \, M_\rho \, C \, u_0} = f_0 \, \mathbf{q}
+
 
 For each :math:`\mathbf{q_i}` defined in :eq:`a_operator` we can use vector :math:`\mathbf{q}` obtained here.
 
@@ -147,6 +147,7 @@ the Cartesian components of the magnetic field at the receivers at all time step
     \mathbf{h_i} = Q \, \mathbf{ u_i}
     :label: rec_interp
 
+
 and the time-derivative of the magnetic flux is:
 
 .. math::
@@ -155,13 +156,14 @@ and the time-derivative of the magnetic flux is:
     + \Bigg ( \frac{t_i - t_{i-1}}{t_{i+1} - t_{i-1}} \Bigg ) \Bigg ( \frac{\mathbf{h_{i+1}} - \mathbf{h_{i}}}{t_{i+1} - t_i} \Bigg ) \Bigg ]
     :label: dbdt_interp
 
-Once the field an its time-derivative have been computed at the receivers for every time channel, linear interpolation is carried out to compute the fields at the correct time channels. Where :math:`\mathbf{Q}` is a block-diagonal matrix of :math:`Q` that takes the magnetic fields from edges to the receivers at all times, :math:`\mathbf{P}` performs the operation in :eq:`dbdt_interp`, :math:`\mathbf{I}` is an identity matrix, :math:`\mathbf{L_1}` performs the linear interpolation to the correct time channels for the magnetic field and :math:`\mathbf{L_2}` performs the linear interpolation to the correct time channels for the time-derivative, the predicted data is given by:
+Once the field an its time-derivative have been computed at the receivers for every time channel, linear interpolation is carried out to compute the fields at the correct time channels. Where :math:`\mathbf{Q}` is a block-diagonal matrix of :math:`Q` that takes the magnetic fields from edges to the receivers at all times, :math:`\mathbf{P}` performs the operation in :eq:`dbdt_interp` , :math:`\mathbf{I}` is an identity matrix, :math:`\mathbf{L_1}` performs the linear interpolation to the correct time channels for the magnetic field and :math:`\mathbf{L_2}` performs the linear interpolation to the correct time channels for the time-derivative, the predicted data is given by:
 
 .. math::
     \mathbf{d} = \begin{bmatrix} \mathbf{L_1} & \\ & \mathbf{L_2} \end{bmatrix} \begin{bmatrix} \mathbf{I} \\ \mathbf{P} \end{bmatrix} \mathbf{Q \, u} = \mathbf{Q_t \, u}
     :label: dpre
 
-We let :math:`\mathbf{Q_t}` represent an operator that projects the magnetic fields on cell edges to the data. :math:`\mathbf{u}` is a vector that contains the magnetic fields on cell edges at all time steps (see :eq:`sys_forward`)
+
+We let :math:`\mathbf{Q_t}` represent an operator that projects the magnetic fields on cell edges to the data. :math:`\mathbf{u}` is a vector that contains the magnetic fields on cell edges at all time steps (see :eq:`sys_forward` )
 
 .. _theory_sensitivity:
 
@@ -173,10 +175,12 @@ To solve the inverse problem, we will need to compute the sensitivity matrix. By
 .. math::
     \mathbf{J} = \frac{\partial \mathbf{d}}{\partial \boldsymbol{\rho}} = - \mathbf{Q_t \, A^{-1} \, G}
 
-:math:`\mathbf{A}` is the full system defined in :eq:`sys_forward`, :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
+
+:math:`\mathbf{A}` is the full system defined in :eq:`sys_forward` , :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
 
 .. math::
     \mathbf{G} = \mathbf{C^T} \, diag \big ( \mathbf{C} \, (\mathbf{u - \tilde u_0} ) \big )  \, \mathbf{A_{fc}^T} \, diag \big ( \mathbf{V} \,\boldsymbol{\rho} \big ) 
+
 
 where
 
@@ -201,6 +205,7 @@ The inverse problem is solved by minimizing the following global objective funct
 .. math::
     \phi (\mathbf{m}) = \phi_d (\mathbf{m}) + \beta \phi_m (\mathbf{m})
     :label: global_objective
+
 
 where :math:`\phi_d` is the data misfit, :math:`\phi_m` is the model objective function and :math:`\beta` is the trade-off parameter. The data misfit ensures the recovered model adequately explains the set of field observations. The model objective function adds geological constraints to the recovered model. The trade-off parameter weights the relative emphasis between fitting the data and imposing geological structures.
 
@@ -235,13 +240,12 @@ Model Objective Function
 Due to the ill-posedness of the problem, there are no stable solutions obtained by freely minimizing the data misfit, and thus regularization is needed. The regularization uses penalties for both smoothness, and likeness to a reference model :math:`m_{ref}` supplied by the user. The model objective function is given by:
 
 .. math::
-    \begin{align}
     \phi_m = \frac{\alpha_s}{2} \!\int_\Omega w_s | m - & m_{ref} |^2 dV
     + \frac{\alpha_x}{2} \!\int_\Omega w_x \Bigg | \frac{\partial}{\partial x} \big (m - m_{ref} \big ) \Bigg |^2 dV \\
     &+ \frac{\alpha_y}{2} \!\int_\Omega w_y \Bigg | \frac{\partial}{\partial y} \big (m - m_{ref} \big ) \Bigg |^2 dV
     + \frac{\alpha_z}{2} \!\int_\Omega w_z \Bigg | \frac{\partial}{\partial z} \big (m - m_{ref} \big ) \Bigg |^2 dV
-    \end{align}
     :label:
+
 
 where :math:`\alpha_s, \alpha_x, \alpha_y` and :math:`\alpha_z` weight the relative emphasis on minimizing differences from the reference model and the smoothness along each gradient direction. And :math:`w_s, w_x, w_y` and :math:`w_z` are additional user defined weighting functions.
 
@@ -257,24 +261,22 @@ objective function can be expressed as:
 where the regularizer is given by:
 
 .. math::
-    \begin{align}
     \mathbf{W^T W} =& \;\;\;\;\alpha_s \textrm{diag} (\mathbf{w_s \odot v}) \\
     & + \alpha_x \mathbf{G_x^T} \textrm{diag} (\mathbf{w_x \odot v_x}) \mathbf{G_x} \\
     & + \alpha_y \mathbf{G_y^T} \textrm{diag} (\mathbf{w_y \odot v_y}) \mathbf{G_y} \\
     & + \alpha_z \mathbf{G_z^T} \textrm{diag} (\mathbf{w_z \odot v_z}) \mathbf{G_z}
-    \end{align}
     :label: MOF
+
 
 The Hadamard product is given by :math:`\odot`, :math:`\mathbf{v_x}` is the volume of each cell averaged to x-faces, :math:`\mathbf{w_x}` is the weighting function :math:`w_x` evaluated on x-faces and :math:`\mathbf{G_x}` computes the x-component of the gradient from cell centers to cell faces. Similarly for y and z.
 
 If we require that the recovered model values lie between :math:`\mathbf{m_L  \preceq m \preceq m_H}` , the resulting bounded optimization problem we must solve is:
 
 .. math::
-    \begin{align}
     &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m}) \\
     &\; \textrm{s.t.} \;\; \mathbf{m_L \preceq m \preceq m_H}
-    \end{align}
     :label: inverse_problem
+
 
 A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
 information refer again to (Haber, 2012) and references therein.
@@ -288,13 +290,12 @@ Inversion Parameters and Tolerances
 Cooling Schedule
 ~~~~~~~~~~~~~~~~
 
-Our goal is to solve Eq. :eq:`inverse_problem`, i.e.:
+Our goal is to solve Eq. :eq:`inverse_problem` , i.e.:
 
 .. math::
-    \begin{align}
     &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m - m_{ref}}) \\
     &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
-    \end{align}
+
 
 but how do we choose an acceptable trade-off parameter :math:`\beta`? For this, we use a cooling schedule. This is described in the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Beta.html>`__ . The cooling schedule can be defined using the following parameters:
 
@@ -325,7 +326,7 @@ using the current model :math:`\mathbf{m}_k` and update the model according to:
 where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` is the gradient of the global objective function, :math:`\mathbf{H}_k` is an approximation of the Hessian and :math:`\alpha` is a scaling constant. This process is repeated until a max number of GN iterations have been performed, i.e.
 
 .. math::
-    k = \textrm{iter_per_beta} 
+    k = iter \_ per \_ beta 
 
 
 .. _theory_IPCG:
@@ -333,7 +334,7 @@ where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` i
 Gauss-Newton Solve
 ~~~~~~~~~~~~~~~~~~
 
-Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF`, we must solve:
+Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF` , we must solve:
 
 .. math::
     \Big [ \mathbf{J^T W_d^T W_d J + \beta \mathbf{W^T W}} \Big ] \mathbf{\delta m}_k =
@@ -343,16 +344,18 @@ Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-N
 
 where :math:`\mathbf{J}` is the sensitivity of the data to the current model :math:`\mathbf{m}_k`. The system is solved for :math:`\mathbf{\delta m}_k` using the incomplete-preconditioned-conjugate gradient (IPCG) method. This method is iterative and exits with an approximation for :math:`\mathbf{\delta m}_k`. Let :math:`i` denote an IPCG iteration and let :math:`\mathbf{\delta m}_k^{(i)}` be the solution to :eq:`GN_expanded` at the :math:`i^{th}` IPCG iteration, then the algorithm quits when:
 
-    1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
+|
+1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
 
-        .. math::
-            \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < \textrm{tol_ipcg}
+.. math::
+    \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < tol \_ ipcg
 
 
-    2. a maximum allowable number of IPCG iterations has been completed, i.e.:
+|
+2. a maximum allowable number of IPCG iterations has been completed, i.e.:
 
-        .. math::
-            i = \textrm{max_iter_ipcg}
+.. math::
+    i = max \_ iter \_ ipcg
 
 
 
