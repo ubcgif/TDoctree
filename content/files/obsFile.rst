@@ -45,8 +45,8 @@ This file is input when forward modeling or inverting field-collected data. Usin
 
     - **data_opt:**
 
-        - A flag value of *--------* is entered if the datum is the magnetic field *H* in units A/m
-        - A flag value of *--------* is entered if the datum is the time-derivative *dB/dt* in units T/s
+        - A flag value of *2* is entered if the datum is the magnetic field *H* in units A/m
+        - A flag value of *1* is entered if the datum is the time-derivative *dB/dt* in units T/s
 
 .. _tdoctree_obs_ln5:
 
