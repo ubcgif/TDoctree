@@ -344,14 +344,14 @@ Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-N
 
 where :math:`\mathbf{J}` is the sensitivity of the data to the current model :math:`\mathbf{m}_k`. The system is solved for :math:`\mathbf{\delta m}_k` using the incomplete-preconditioned-conjugate gradient (IPCG) method. This method is iterative and exits with an approximation for :math:`\mathbf{\delta m}_k`. Let :math:`i` denote an IPCG iteration and let :math:`\mathbf{\delta m}_k^{(i)}` be the solution to :eq:`GN_expanded` at the :math:`i^{th}` IPCG iteration, then the algorithm quits when:
 
-|
+
 1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
 
 .. math::
     \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < tol \_ ipcg
 
 
-|
+
 2. a maximum allowable number of IPCG iterations has been completed, i.e.:
 
 .. math::
