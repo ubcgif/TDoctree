@@ -330,7 +330,7 @@ using the current model :math:`\mathbf{m}_k` and update the model according to:
 where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` is the gradient of the global objective function, :math:`\mathbf{H}_k` is an approximation of the Hessian and :math:`\alpha` is a scaling constant. This process is repeated until a max number of GN iterations have been performed, i.e.
 
 .. math::
-    k = iter \_ per \_ beta} 
+    k = iter \_ per \_ beta
 
 
 .. _theory_IPCG:
