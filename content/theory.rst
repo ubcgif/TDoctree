@@ -57,21 +57,21 @@ only refined when the model begins to change rapidly.
 Discretization of Operators
 ---------------------------
 
-The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see Haber (2012) for a detailed description of the discretization process.
+The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`maxwells_eq` , they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see Haber (2012) for a detailed description of the discretization process.
 
 .. _theory_fwd:
 
 Forward Problem
 ---------------
 
-To solve the forward problem :eq:`maxwells_eq`, we must first discretize in space and then in time. Using finite volume approach, the magnetic fields on cell edges (:math:`\mathbf{u}`) discretized in space are described by:
+To solve the forward problem :eq:`maxwells_eq` , we must first discretize in space and then in time. Using finite volume approach, the magnetic fields on cell edges (:math:`\mathbf{u}`) discretized in space are described by:
 
 .. math::
     \mathbf{C^T \, M_\rho \, C \, u} + \mathbf{M_\mu} \, \partial_t \mathbf{u} = f(t) \, \mathbf{q}
     :label: discrete_h_sys
 
 
-where :math:`\mathbf{C}` is the curl operator, :math:`f(t)` is a time-dependent waveform, :math:`\mathbf{q}` defines the time-independent portion of the right-hand side (:ref:`explained here <theory_rhs>`) and
+where :math:`\mathbf{C}` is the curl operator, :math:`f(t)` is a time-dependent waveform, :math:`\mathbf{q}` defines the time-independent portion of the right-hand side (:ref:`explained here <theory_rhs>` ) and
 
 .. math::
     \mathbf{M_\rho} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\rho} \big ) \\
@@ -165,7 +165,7 @@ Once the field an its time-derivative have been computed at the receivers for ev
     :label: dpre
 
 
-We let :math:`\mathbf{Q_t}` represent an operator that projects the magnetic fields on cell edges to the data. :math:`\mathbf{u}` is a vector that contains the magnetic fields on cell edges at all time steps (see :eq:`sys_forward`)
+We let :math:`\mathbf{Q_t}` represent an operator that projects the magnetic fields on cell edges to the data. :math:`\mathbf{u}` is a vector that contains the magnetic fields on cell edges at all time steps (see :eq:`sys_forward` )
 
 .. _theory_sensitivity:
 
@@ -178,7 +178,7 @@ To solve the inverse problem, we will need to compute the sensitivity matrix. By
     \mathbf{J} = \frac{\partial \mathbf{d}}{\partial \boldsymbol{\rho}} = - \mathbf{Q_t \, A^{-1} \, G}
 
 
-Where :math:`\mathbf{A}` is the full system defined in :eq:`sys_forward`, :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
+Where :math:`\mathbf{A}` is the full system defined in :eq:`sys_forward` , :math:`\mathbf{Q_t}` is defined in :eq:`dpre` and
 
 .. math::
     \mathbf{G} = \mathbf{C^T} \, diag \big ( \mathbf{C} \, (\mathbf{u - \tilde u_0} ) \big )  \, \mathbf{A_{fc}^T} \, diag \big ( \mathbf{V} \,\boldsymbol{\rho} \big ) 
@@ -293,7 +293,7 @@ Inversion Parameters and Tolerances
 Cooling Schedule
 ~~~~~~~~~~~~~~~~
 
-Our goal is to solve Eq. :eq:`inverse_problem`, i.e.:
+Our goal is to solve Eq. :eq:`inverse_problem` , i.e.:
 
 .. math::
     &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m - m_{ref}}) \\
@@ -338,7 +338,7 @@ where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` i
 Gauss-Newton Solve
 ~~~~~~~~~~~~~~~~~~
 
-Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF`, we must solve:
+Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF` , we must solve:
 
 .. math::
     \Big [ \mathbf{J^T W_d^T W_d J + \beta \mathbf{W^T W}} \Big ] \mathbf{\delta m}_k =
@@ -347,17 +347,19 @@ Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-N
 
 
 where :math:`\mathbf{J}` is the sensitivity of the data to the current model :math:`\mathbf{m}_k`. The system is solved for :math:`\mathbf{\delta m}_k` using the incomplete-preconditioned-conjugate gradient (IPCG) method. This method is iterative and exits with an approximation for :math:`\mathbf{\delta m}_k`. Let :math:`i` denote an IPCG iteration and let :math:`\mathbf{\delta m}_k^{(i)}` be the solution to :eq:`GN_expanded` at the :math:`i^{th}` IPCG iteration, then the algorithm quits when:
+|
 
-    1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
+1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
 
-        .. math::
-            \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < \textrm{tol_ipcg}
+.. math::
+    \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < \textrm{tol_ipcg}
 
 
-    2. a maximum allowable number of IPCG iterations has been completed, i.e.:
+|
+2. a maximum allowable number of IPCG iterations has been completed, i.e.:
 
-        .. math::
-            i = \textrm{max_iter_ipcg}
+.. math::
+    i = \textrm{max_iter_ipcg}
 
 
 
