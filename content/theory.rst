@@ -330,7 +330,7 @@ using the current model :math:`\mathbf{m}_k` and update the model according to:
 where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` is the gradient of the global objective function, :math:`\mathbf{H}_k` is an approximation of the Hessian and :math:`\alpha` is a scaling constant. This process is repeated until a max number of GN iterations have been performed, i.e.
 
 .. math::
-    k = \textrm{iter_per_beta} 
+    k = iter \_ per \_ beta} 
 
 
 .. _theory_IPCG:
@@ -352,14 +352,14 @@ where :math:`\mathbf{J}` is the sensitivity of the data to the current model :ma
 1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
 
 .. math::
-    \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < \textrm{tol_ipcg}
+    \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < tol \_ ipcg
 
 
 |
 2. a maximum allowable number of IPCG iterations has been completed, i.e.:
 
 .. math::
-    i = \textrm{max_iter_ipcg}
+    i = max \_ iter \_ ipcg
 
 
 
