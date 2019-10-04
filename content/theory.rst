@@ -474,13 +474,13 @@ where :math:`\mathbf{J}` is the sensitivity of the data to the current model :ma
     1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
 
         .. math::
-            \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < \textrm{tol_ipcg}
+            \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < tol \_ ipcg
 
 
     2. a maximum allowable number of IPCG iterations has been completed, i.e.:
 
         .. math::
-            i = \textrm{max_iter_ipcg}
+            i = max \_ iter \_ ipcg
 
 
 
