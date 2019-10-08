@@ -37,6 +37,12 @@ The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using t
 +--------+-------------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 
+.. figure:: images/octree_input.png
+     :align: center
+     :width: 700
+
+     Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree/assets/input_files/octree_mesh.inp>`__ )
+
 
 
 Line Descriptions
@@ -96,7 +102,7 @@ Line Descriptions
 
     - **read/create mesh:** If the global inversion mesh has already been created, then it may be loaded by typing "READ_LARGE_MESH *filepath*". In this case, the global inversion mesh is used to define the local forward meshes. If the global inversion mesh needs to be created, the user types "CREATE_LARGE_MESH *filename*", where the global inversion mesh is output to the file *filename*.
 
-.. note:: This functionality is relevant to the *tdoctree_v2_tiled* code. For *tdoctree_v2*, use "CREATE_LARGE_MESH *filename*"
+
 
 
 

@@ -1,0 +1,8 @@
+input_files/octree_mesh.txt               ! octree mesh file
+input_files/active_cells_topo.txt         ! active cells model
+NO_MODEL                                  ! NO_MODEL | model file
+LOG_MODEL                                 ! LIN_MODEL | LOG_MODEL
+1e-3 1e-4                                 ! grad_tol replace_tol
+4                                         ! # surface layers
+40 20 10 5                                ! surface weight values for X and Y for each layer
+interface_weights.txt                     ! output file name

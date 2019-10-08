@@ -64,11 +64,11 @@ The inverse problem is solved using the executable program **tdoctree_v2.exe**. 
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 
-.. .. figure:: images/create_inv_input.png
-..      :align: center
-..      :width: 700
+.. figure:: images/inv_input.png
+     :align: center
+     :width: 700
 
-..      Example input file for the inversion program (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctreeinv.inp>`__ ). Example input file for forward modeling only (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctreefwd.inp>`__ ).
+     Example input file for the inversion program (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree_v2/assets/input_files/tdoctreeinv.inp>`__ ). Example input file for forward modeling only (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree_v2/assets/input_files/tdoctreefwd.inp>`__ ).
 
 
 Line Descriptions
@@ -196,7 +196,3 @@ Line Descriptions
             - *tol_ipcg_bicg*: relative tolerance (stopping criteria) when solver needed in computation of δm during Gauss Newton iteration. This value does not need to be as large as the previous parameter (default = 1e-5).
             - *max_it_bicg*: maximum number of BICG iterations (default = 100)
 
-
-.. _tdoctree_input_inv_ln26:
-
-    - **Sensitivity Options:**

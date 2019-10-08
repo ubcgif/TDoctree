@@ -1,5 +1,0 @@
-1e-8                                         ! background conductivity
-3                                            ! number of blocks
--10000 10000 -10000 10000 0 -10000 0.01      ! x1 x2 y1 y2 z_top z_bottom conductivity
-200 500 -500 500 -100 -400 0.2               ! x1 x2 y1 y2 z_top z_bottom conductivity
--500 500 200 500 -100 -400 0.2               ! x1 x2 y1 y2 z_top z_bottom conductivity

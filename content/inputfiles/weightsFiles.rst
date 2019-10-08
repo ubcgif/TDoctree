@@ -33,7 +33,7 @@ The parameters used to create interface weights are defined in the input file. T
      :align: center
      :width: 700
 
-     Example input file for creating interface weights.
+     Example input file for creating interface weights (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree/assets/input_files/interface_weights.inp>`__ )
 
 
 .. _tdoctree_input_face_weights_lines:
