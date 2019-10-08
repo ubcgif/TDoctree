@@ -1,0 +1,12 @@
+30. 30. 25.                               ! min_dx, min_dy, min_dz
+1 1 64                                    ! mincellfactor  mincellsize_fwd  max_topo_cell
+10000.  10000.  10000.  10000.            ! total_expansion_x total_expansion_y total_expansion_z_ground expansion_air
+500 600 800                               ! depth_core  depth_core2  depth_core3
+4  1  1                                   ! # of small cells around receivers,  ncell2,  ncell4
+input_files/locFile.txt                   ! location index file
+input_files/txFile.txt                    ! transmitter file
+input_files/rxFile.txt                    ! receiver file
+input_files/timesFile.txt                 ! time channels file
+TOPO_CONST 0.                             ! TOPO_CONST value | topography file
+MAKE_POLYGON 200                          ! MAKE_POLYGON val | points file
+CREATE_LARGE_MESH octree_mesh.txt         ! CREATE_LARGE_MESH filename ! READ_LARGE_MESH filename

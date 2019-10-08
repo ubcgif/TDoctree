@@ -3,7 +3,7 @@
 Create OcTree Mesh Input File
 =============================
 
-The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using the program **create_octree_1mesh_td.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines within the input file are as follows:
+The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using the program **create_octree_mesh_td.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines within the input file are as follows:
 
 
 .. tabularcolumns:: |C|C|C|
@@ -28,11 +28,11 @@ The :ref:`OcTree mesh<octreeFile>` used in the TDoctree code are created using t
 
 
 
-.. .. figure:: images/create_octree_input.png
-..      :align: center
-..      :width: 700
+.. figure:: images/octree_input.png
+     :align: center
+     :width: 700
 
-..      Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctree_mesh.inp>`__ )
+     Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree/assets/input_files/octree_mesh.inp>`__ )
 
 
 Line Descriptions
