@@ -6,7 +6,7 @@ Create OcTree Mesh
 Here, the code **create_octree_mesh_td_tiled.exe** and the input file **octree_mesh.inp** (:ref:`see format <tdoctree_input_octree>`) are used to create an OcTree mesh based on the set of observation locations. Files relevant to this part of the example are in the sub-folder *octree_mesh*. Before running this example, you may want to do the following:
 
 	- `Download and open the zip folder containing the entire TDoctree tiled example <ttps://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/tdoctree_v1_tiled_example.zip>`__ (if not done already)
-	- :ref:`Learn how to run code from command line <tdoctreeoctree>`
+	- :ref:`Learn how to run code from command line <tdoctree_octree>`
 	- :ref:`Learn the format of the input file <tdoctree_input_octree>`
 
 To generate the OcTree mesh, the following input file was used:
