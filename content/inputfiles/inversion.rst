@@ -61,11 +61,11 @@ The inverse problem is solved using the executable program **tdoctree_tiled.exe*
 
 
 
-.. .. figure:: images/create_inv_input.png
-..      :align: center
-..      :width: 700
+.. figure:: images/inv_input.png
+     :align: center
+     :width: 700
 
-..      Example input file for the inversion program (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctreeinv.inp>`__ ). Example input file for forward modeling only (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctreefwd.inp>`__ ).
+     Example input file for the inversion program (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/input_files/tdoctreeinv.inp>`__ ). Example input file for forward modeling only (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/input_files/tdoctreefwd.inp>`__ ).
 
 
 Line Descriptions

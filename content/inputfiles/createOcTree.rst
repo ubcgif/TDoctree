@@ -34,11 +34,11 @@ Create OcTree Mesh Input File
 
 
 
-.. .. figure:: images/create_octree_input.png
-..      :align: center
-..      :width: 700
+.. figure:: images/octree_input.png
+     :align: center
+     :width: 700
 
-..      Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctreeinv/assets/input_files1/tdoctree_mesh.inp>`__ )
+     Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/input_files/octree_mesh.inp>`__ )
 
 
 Line Descriptions

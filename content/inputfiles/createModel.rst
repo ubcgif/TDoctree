@@ -29,11 +29,11 @@ The file **blk3cellOct.inp** defines the model (conductivity/active). The user s
 
 where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular block. :math:`x_1,x_2,y_1,y_2,z_1` and :math:`z_2` define the nodes of each block and :math:`m` defines conductivity/susceptibility value.
 
-.. .. figure:: images/create_blk3cellOct_input.png
-..      :align: center
-..      :width: 700
+.. figure:: images/blk3cellOct_input.png
+     :align: center
+     :width: 700
 
-..      Example input file for creating octree mesh (`Download <https://github.com/ubcgif/e3dmt/raw/e3d_ver2_tiled/assets/e3d_ver2_tiled_input/blk3cellOct.inp>`__ )
+     Example input file for creating octree mesh (`Download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/input_files/blk3cellOct.inp>`__ )
 
 
 

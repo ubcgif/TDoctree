@@ -1,9 +1,0 @@
-50 50 50                              ! min dx, dy, dz
-2600 2600 1800 3200                   ! x_pad y_pad down_pad up_pad (padding thickness)
-500 200 400                           ! h1 h2 h3 (discretization in core mesh region)
-5 5 5                                 ! n1 n2 n3 (# of small cells around receivers)
-ONLY_LOC input_files\surveyFile.txt   ! Survey (data locations) file
-input_files\topo.txt                  ! topo data file | TOPO_CONST val
-NOT_SHIFT_DATA                        ! SHIFT_DATA | NOT_SHIFT_DATA
-APPROXTOPO                            ! APPROXTOPO | GOODTOPO
-START_LARGE_CELLS                     ! START_LARGE_CELLS | START_SMALL_CELLS
