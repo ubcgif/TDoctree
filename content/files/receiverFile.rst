@@ -32,6 +32,14 @@ The lines of a transmitter/receiver file are formatted as follows:
 |
 
 
+
+
+Below is an example of a transmitters or receivers file.
+
+.. figure:: images/receiver_file.png
+     :align: center
+     :width: 500
+
 Parameter Descriptions
 ----------------------
 

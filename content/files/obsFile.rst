@@ -14,7 +14,7 @@ This file is input when forward modeling or inverting field-collected data. Usin
 | :ref:`tx_ind<tdoctree_obs_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_obs_ln2>` :math:`\;` :ref:`t_ind<tdoctree_obs_ln3>` :math:`\;` :ref:`data_opt<tdoctree_obs_ln4>` :math:`\;` :ref:`data<tdoctree_obs_ln5>` :math:`\;` :ref:`uncertainty<tdoctree_obs_ln6>`
 | :ref:`tx_ind<tdoctree_obs_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_obs_ln2>` :math:`\;` :ref:`t_ind<tdoctree_obs_ln3>` :math:`\;` :ref:`data_opt<tdoctree_obs_ln4>` :math:`\;` :ref:`data<tdoctree_obs_ln5>` :math:`\;` :ref:`uncertainty<tdoctree_obs_ln6>`
 | :ref:`tx_ind<tdoctree_obs_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_obs_ln2>` :math:`\;` :ref:`t_ind<tdoctree_obs_ln3>` :math:`\;` :ref:`data_opt<tdoctree_obs_ln4>` :math:`\;` :ref:`data<tdoctree_obs_ln5>` :math:`\;` :ref:`uncertainty<tdoctree_obs_ln6>`
-| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
 | :ref:`tx_ind<tdoctree_obs_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_obs_ln2>` :math:`\;` :ref:`t_ind<tdoctree_obs_ln3>` :math:`\;` :ref:`data_opt<tdoctree_obs_ln4>` :math:`\;` :ref:`data<tdoctree_obs_ln5>` :math:`\;` :ref:`uncertainty<tdoctree_obs_ln6>`
 |
 |
@@ -24,6 +24,15 @@ This file is input when forward modeling or inverting field-collected data. Usin
         - First by transmitter
         - Then by receiver
         - Then by time channel
+
+
+Below is an example of an observations file.
+
+.. figure:: images/dobs.png
+     :align: center
+     :width: 500
+
+
 
 
 **Parameter Descriptions**
