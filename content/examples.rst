@@ -3,9 +3,6 @@
 Examples
 ========
 
-.. raw:: html
-    :file: ../underconstruction.html
-
 Here, the program libraries for tdoctree v2 will be used to:
 
     - create an Octree mesh based on the survey
