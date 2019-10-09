@@ -50,7 +50,7 @@ Parameter Descriptions
 
 .. _tdoctree_rec_ln2:
 
-    - **N:** The number of points defining the transmitter/receiver loop. The first and last node **must** be the same; i.e. you must close the loop.
+    - **N:** The number of points defining the transmitter/receiver.
 
 .. _tdoctree_rec_ln3:
 
@@ -60,9 +60,9 @@ Parameter Descriptions
 
     - :math:`\mathbf{x_i \;\; y_i \;\; z_i}`: Denotes the X (Easting), Y (Northing) and Z (elevation) locations for nodes defining transmitter/receiver.
 
-    	- **Loop transmitter/receiver:** Loop transmitters and receivers **must** be defined in a left-handed (clockwise) manner. For example, a horizontal loop must be defined in a clockwise manner for its dipole moment to be in the vertical direction. For *N* loop segments, you will need to define *N+1* nodes; e.g. you must close the loop. If a closed loop is used to define a receiver, the corresponding data are the magnetic field in units A/m.
-    	
-    	- **Wire transmitter/receiver:** Wire transmitters and receivers are defined using 2 node locations. If a single wire segment is used to define a receiver, the corresponding data are the electric field in units V/m.
+    	- **Loop transmitter/receiver:** When defining a loop transmitter or receiver, you **must** close the loop; e.g. the fist and last nodes must be at the same locations. The transmitters and receivers are defined in a **left-handed (clockwise) manner**. For example, a horizontal loop must be defined in a clockwise manner for its dipole moment to be in the vertical direction. Magnetic field measurements are in units A/m and the time-derivative is units T/s.
+        
+        - **Wire transmitter/receiver:** If the first and last nodes are not in the same place, the user will define a grounded receiver which measures the electric field. The grounded loop can be more than one segment long. In this case, the corresponding data are the electric field in units V/m.
 
 
 
