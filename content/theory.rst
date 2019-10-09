@@ -20,7 +20,7 @@ equations are:
     \nabla \times & \vec{e} = - \partial_t \vec{b} \\
     \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
     \rho \vec{j} &= \vec{e} \\
-    \vec{b} = \mu \vec{h}
+    \vec{b} &= \mu \vec{h}
     :label: maxwells_eq
 
 
@@ -204,7 +204,7 @@ Once :eq:`maxwell_a_phi` is solved, the electric fields on cell edges can be com
 To solve :eq:`maxwell_a_phi` we use a block preconditionned conjugate gradient algorithm. For the preconditionner, we do 2 SSOR iterations of :eq:`maxwell_a_phi` . Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
 
      - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys` . Ideally, this number is very small (~1e-10).
-     - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen` . This value does not need to be as large as the previous parameter (~1e-5).
+     - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; needed to solve Eq. :eq:`GN_gen` . This value does not need to be as large as the previous parameter (~1e-5).
      - **max_it_bicg:** maximum number of BICG iterations (~100)
 
 

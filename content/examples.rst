@@ -25,7 +25,6 @@ The full examples are parse into 4 sections:
     Create octree mesh <example/create_octree>
     Create octree model <example/create_model>
     Forward modeling <example/fwd>
-    Create interface weights <example/create_weights>
     Inversion <example/inv>
 
 

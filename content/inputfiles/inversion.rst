@@ -60,7 +60,7 @@ The inverse problem is solved using the executable program **tdoctree_v2.exe**. 
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 | 25     | :ref:`Solver Options<tdoctree_input_inv_ln25>`                          | iterative or direct solver options                                |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
-| 26     | :ref:`Sensitivity Options<tdoctree_input_inv_ln26>`                     | sensitivity options                                               |
+| 26     | :ref:`Sensitivity Weighting Options<tdoctree_input_inv_ln26>`           | sensitivity weighting options                                     |
 +--------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -195,4 +195,15 @@ Line Descriptions
             - *tol_bicg*: relative tolerance (stopping criteria) when solver is used during forward modeling. Ideally, this number is very small (default = 1e-10).
             - *tol_ipcg_bicg*: relative tolerance (stopping criteria) when solver needed in computation of δm during Gauss Newton iteration. This value does not need to be as large as the previous parameter (default = 1e-5).
             - *max_it_bicg*: maximum number of BICG iterations (default = 100)
+
+
+.. _tdoctree_input_inv_ln26:
+
+    - **Sensitivity weighting options:**
+
+        - For no sensitivity weighting, use the flag *NOT_USE_SENS_WEIGHT*
+        - For sensitivity weighting, use the flag *USE_SENS_WEIGHT* followed by the parameters *nsample* and *maxSens*, where:
+
+            - *nsample* is the number of time an iterative process is use to approximate the sensitivity
+            - *maxSens* is the maximum sensitivity weighting allowed for cells
 
