@@ -5,7 +5,7 @@ Background Theory
 
 This section aims to provide the user with a basic review of the physics, discretization, and optimization
 techniques used to solve the time domain electromagnetics problem. It is assumed
-that the user has some background in these areas. For further reading see (Nabighian, 1991).
+that the user has some background in these areas. For further reading see :cite:`Nabighian1991`.
 
 .. _theory_fundamentals:
 
