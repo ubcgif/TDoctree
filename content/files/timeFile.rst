@@ -24,7 +24,7 @@ where
 
     - :math:`N` is the number of unique times within the file
     - :math:`k_i` defines the index value (1,2,....,N) for a particular time channel. Should be ordered 1 to N.
-    - :math:`t_i` is the frequency in seconds.
+    - :math:`t_i` is the time in seconds.
 
 Below we see an example of a time channel file which defines 7 unique times.
 

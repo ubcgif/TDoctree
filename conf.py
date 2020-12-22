@@ -36,8 +36,6 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinxcontrib.bibtex',
         'edit_on_github',
-    'purpose',
-    'example',
 ]
 
 # Number figures
