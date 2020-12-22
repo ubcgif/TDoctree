@@ -38,6 +38,9 @@ extensions = [
     'edit_on_github',
 ]
 
+# Basic bibfile extension configuration
+bibtex_bibfiles = ['references.bib']
+
 # Number figures
 numfig = True
 
