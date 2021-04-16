@@ -44,7 +44,7 @@ For a unit step-off waveform, an example wave file is shown below. This wave fil
      :align: center
      :width: 500
 
-     Click to `download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/wave_examples/stepoff.txt>`__ ). 
+     Click to `download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/wave_examples/stepoff.txt>`__ . 
 
 
 Square pulse example
@@ -60,7 +60,7 @@ Here, we consider the wave file for a square pulse waveform. The on-time begins 
      :align: center
      :width: 500
 
-     Click to `download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/wave_examples/square.txt>`__ ).
+     Click to `download <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/wave_examples/square.txt>`__ .
 
 
 
@@ -72,6 +72,6 @@ Here, we consider the wave file corresponding to an arbitrary waveform. In this 
     - the waveform during the on-time was discretized to finer time-steps as we approached the off-time. This was done to more accuately model the early time data
     - we made sure to minimize the number of distinct time-step lengths used to model the data. In this case, we discretized the waveform to use step lengths of 5e-6 s, 5e-5 s and 5e-4 s. Thus, the code only needs to store the factorizations of 3 linear systems.
 
-Click to `download and see this file <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/wave_examples/arbitrary.txt>`__ ).
+Click to `download and see this file <https://github.com/ubcgif/tdoctree/raw/tdoctree_tiled/assets/wave_examples/arbitrary.txt>`__ .
 
 
