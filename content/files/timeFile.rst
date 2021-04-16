@@ -28,7 +28,7 @@ where
 
 Below we see an example of a time channel file which defines 7 unique times.
 
-.. figure:: images/timefile.png
+.. figure:: images/timefile.PNG
      :align: center
      :width: 500
 
