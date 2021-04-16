@@ -18,12 +18,17 @@ This file is input when forward modeling or inverting field-collected data. Usin
 | :ref:`tx_ind<tdoctree_obs_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_obs_ln2>` :math:`\;` :ref:`t_ind<tdoctree_obs_ln3>` :math:`\;` :ref:`data_opt<tdoctree_obs_ln4>` :math:`\;` :ref:`data<tdoctree_obs_ln5>` :math:`\;` :ref:`uncertainty<tdoctree_obs_ln6>`
 |
 |
+|
 
-.. important:: 
-    Due to the way the forward problem is solved, it is imperative that the user sort the observations:
-        - First by transmitter
-        - Then by receiver
-        - Then by time channel
+
+
+Click here to `see an example file <https://github.com/ubcgif/tdoctree/raw/tdoctree_v2/assets/supporting_files/dobs.txt>`__ for an airborne TEM survey.
+
+.. important:: Due to the way the forward problem is solved, it is imperative that the user sort the observations:
+
+    - First by transmitter
+    - Then by receiver
+    - Then by time channel
 
 
 Below is an example of an observations file.

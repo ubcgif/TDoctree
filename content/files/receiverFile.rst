@@ -34,7 +34,7 @@ The lines of a transmitter/receiver file are formatted as follows:
 
 
 
-Below is an example of a transmitters or receivers file.
+Below is an example of a transmitters or receivers file where the respective items are closed horizontal loops.
 
 .. figure:: images/receiver_file.png
      :align: center

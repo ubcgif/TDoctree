@@ -13,13 +13,17 @@ This file is input when forward modeling data. Using 4 columns, the observation 
 | :ref:`tx_ind<tdoctree_survey_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_survey_ln2>` :math:`\;` :ref:`t_ind<tdoctree_survey_ln3>` :math:`\;` :ref:`data_opt<tdoctree_survey_ln4>`
 |
 |
+|
 
 
-.. important:: 
-    Due to the way the forward problem is solved, it is imperative that the user sort the observations:
-        - First by transmitter
-        - Then by receiver
-        - Then by time channel
+
+Click here to `see an example file <https://github.com/ubcgif/tdoctree/raw/tdoctree_v2/assets/supporting_files/indFile.txt>`__ for an airborne TEM survey.
+
+.. important:: Due to the way the forward problem is solved, it is imperative that the user sort the observations:
+
+    - First by transmitter
+    - Then by receiver
+    - Then by time channel
 
 
 **Parameter Descriptions**

@@ -13,6 +13,12 @@ predicted data files output from **tdoctree_v2.exe** contain the transmitter, re
 | :ref:`tx_ind<tdoctree_pre_ln1>` :math:`\;` :ref:`rx_ind<tdoctree_pre_ln2>` :math:`\;` :ref:`t_ind<tdoctree_pre_ln3>` :math:`\;` :ref:`data_opt<tdoctree_pre_ln4>` :math:`\;` :ref:`data<tdoctree_pre_ln5>`
 |
 |
+|
+
+
+
+Click here to `see an example file <https://github.com/ubcgif/tdoctree/raw/tdoctree_v2/assets/supporting_files/dpred.txt>`__ for an airborne TEM survey.
+
 
 **Parameter Descriptions**
 
