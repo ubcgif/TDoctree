@@ -19,15 +19,15 @@ equations are:
 .. math::
     \nabla \times & \vec{e} = - \partial_t \vec{b} \\
     \nabla \times & \vec{h} - \vec{j} = \vec{s} \, f(t) \\
-    \rho \vec{j} &= \vec{e} \\
+    \vec{j} &= \sigma \vec{e} \\
     \vec{b} &= \mu \vec{h}
     :label: maxwells_eq
 
 
-where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\rho` represent the magnetic permeability and electrical resistivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in Nabighian, 1991`. By doing so, some difficulties arise when
+where :math:`\vec{e}`, :math:`\vec{h}`, :math:`\vec{j}` and :math:`\vec{b}` are the electric field, magnetic field, current density and magnetic flux density, respectively. :math:`\vec{s}` contains the geometry of the source term and :math:`f(t)` is a time-dependent waveform. Symbols :math:`\mu` and :math:`\sigma` represent the magnetic permeability and electrical conductivity, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in Nabighian, 1991`. By doing so, some difficulties arise when
 solving the system;
 
-    - the resistivity :math:`\rho` varies over several orders of magnitude
+    - the electrical conductivity :math:`\sigma` varies over several orders of magnitude
     - the fields can vary significantly near the sources, but smooth out at distance thus high resolution is required near sources
 
 Octree Mesh
@@ -85,7 +85,7 @@ where :math:`\vec{j}` is the current density, :math:`\phi` is the scalar potenti
     :label: system_dc
 
 
-where :math:`\phi_0` lives on nodes, :math:`\mathbf{s_j}` defines the geometry of the source discretized to the mesh and
+where :math:`\phi_0` lives on nodes, :math:`\mathbf{s_j}` defines the geometry of the source (as a current density) discretized to the mesh and
 
 .. math::
     \mathbf{M_\sigma} &= diag \big ( \mathbf{A^T_{e2c} V} \, \boldsymbol{\sigma} \big ) \\
@@ -102,7 +102,7 @@ Once obtained, the electric field on cell edges at :math:`t=t_0` is obtained via
     :label: e_0
 
 
-.. note:: This problem must be solved for each source. However, LU factorization is used to make solving for many right-hand sides more efficient.
+.. note:: Equation :eq:`system_dc` must be solved for each source. However, LU factorization is used to make solving for many right-hand sides more efficient.
 
 
 .. _theory_direct:
@@ -117,7 +117,7 @@ To solve the forward problem :eq:`maxwells_eq` , we must first discretize in spa
     :label: discrete_e_sys
 
 
-where :math:`\mathbf{M_\sigma}` and :math:`\mathbf{N_e}` are defined in :eq:`system_dc` and
+where :math:`\mathbf{M_\sigma}` and :math:`\mathbf{N_e}` were defined in :eq:`system_dc`, and
 
 .. math::
     \mathbf{M_\mu} &= diag \big ( \mathbf{A^T_{f2c} V} \, \boldsymbol{\mu^{-1}} \big ) \\
@@ -256,42 +256,51 @@ Data
 Electric Field
 ^^^^^^^^^^^^^^
 
-The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_e}` is constructed to integrate the electric field over the length of the receiver wire and divide by its length. Thus the electric field data for time step :math:`i` is given by:
+The electric field on cell edges at each time step (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. :math:`\mathbf{Q_e}` is time-independent linear operator that acts on :math:`\mathbf{e_i}`. It integrates the electric field at the particular over the length of the receiver wire then divides by its length. The data are therefore the average electric field value over the length of the wire path in units V/m.
+
+The measured electric field for time step :math:`i` is given by:
 
 .. math::
     \mathbf{d_i} = \mathbf{Q_e \, N_e \, e_i}
+    :label: e_field_data
 
-
-Linear interpolation is then used to compute the data for the correct time channel.
+where :math:`\mathbf{N_e}` was defined in expression :eq:`system_dc`. Linear interpolation is then used to compute the data for the correct time channel from values defined at each time step.
 
 
 Time-Derivative of Magnetic Flux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. A linear operator :math:`\mathbf{Q_b}` is constructed to integrate the electric field over path of the receiver loop and multiply by -1. By Faraday's law, will compute the time-derivative of the magnetic flux density. Thus dB/dt data for time step :math:`i` is given by:
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. :math:`\mathbf{Q_b}` is a time-independent linear operator that acts on :math:`\mathbf{e_i}`. The operator
+
+    - integrates the electric field over path of the receiver loop
+    - multiplies by -1
+    - then normalizes by the area of the loop
+
+By Faraday's law, this results in a computation of average value of dB/dt through the loop in units of T/s. For time step :math:`i`, the dB/dt measurement at the receiver is given by:
 
 .. math::
     \mathbf{d_i} = \mathbf{Q_b \, N_e \, e_i}
+    :label: b_field_data
 
 
-Linear interpolation is then used to compute the data for the correct time channel.
+where :math:`\mathbf{N_e}` was defined in expression :eq:`system_dc`. Linear interpolation is then used to compute the data for the correct time channel from values defined at each time step.
 
 H-Field
 ^^^^^^^
 
-The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. The magnetic field (:math:`\mathbf{b_0}`) at :math:`t=t_0` is computed by :ref:`solving an a-phi system <theory_initial_h>`. In this case, the H-field data are computed according to:
-
-.. math::
-    \mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_b \, e_i} 
-
-
-Where :math:`\mathbf{Q_h}` is a linear operator that projects :math:`\mathbf{b_0}` from cell faces to the locations of the receivers:
+The electric field on cell edges at each time step  (:math:`\mathbf{e_i}`) is computed using direct or iterative methods. The magnetic flux density (:math:`\mathbf{b_0}`) at :math:`t=t_0` is computed by :ref:`solving an a-phi system <theory_initial_h>`. Where :math:`\mathbf{Q_h}` is a linear operator that projects :math:`\mathbf{b_0}` from cell faces to the location of the receiver, the H-field value at :math:`t=t_0` is:
 
 .. math::
     \mathbf{d_0} = \mu_0^{-1} \, \mathbf{Q_h \, b_0}
 
+For subsequent time-steps, the H-field data are computed according to:
 
-Linear interpolation is then used to compute the data for the correct time channel.
+.. math::
+    \mathbf{d_i} = \mathbf{d_{i-1}} - \mu_0^{-1} \Delta t_i \, \mathbf{Q_b \, N_e \, e_i}
+    :label: h_field_data
+
+where the term :math:`\mathbf{Q_b \, N_e \, e_i}` is equivalent to the dB/dt value at time-step :math:`i` according to equation :eq:`b_field_data`.
+Once computed at all time-steps, linear interpolation is then used to compute the data for the correct time channel. The data represent the average magnetic field value through the loop in units A/m.
 
 .. _theory_sensitivity:
 

@@ -60,11 +60,19 @@ Parameter Descriptions
 
     - :math:`\mathbf{x_i \;\; y_i \;\; z_i}`: Denotes the X (Easting), Y (Northing) and Z (elevation) locations for nodes defining transmitter/receiver.
 
-    	- **Loop transmitter/receiver:** When defining a loop transmitter or receiver, you **must** close the loop; e.g. the fist and last nodes must be at the same locations. The transmitters and receivers are defined in a **left-handed (clockwise) manner**. For example, a horizontal loop must be defined in a clockwise manner for its dipole moment to be in the vertical direction. Magnetic field measurements are in units A/m and the time-derivative is units T/s.
+    	- **Loop transmitter/receiver:** When defining a loop transmitter or receiver, you **must** close the loop; e.g. the fist and last nodes must be at the same locations. The transmitters and receivers are defined in a **left-handed (clockwise) manner**. For example, a horizontal loop must be defined in a clockwise manner for its dipole moment to be in the vertical direction.
         
-        - **Wire transmitter/receiver:** If the first and last nodes are not in the same place, the user will define a grounded receiver which measures the electric field. The grounded loop can be more than one segment long. In this case, the corresponding data are the electric field in units V/m.
+        - **Wire transmitter/receiver:** If the first and last nodes are not in the same place, the user will define a grounded receiver which measures the electric field. The grounded loop can be more than one segment long.
 
 
+Comments on Data Units
+----------------------
+
+**Electric Field Data (e):** For electric field measurements, the code intergrates the electric field of the path of the wire then divides by its length. Thus electric field data are the average electric field measured over the path of the wire in units V/m.
+
+**Time-Derivative of Magnetic Flux Data (db/dt):** For dB/dt measurements, the code integrates the electric field over the path of the wire, multiplies by -1 (giving the EMF), then normalizes by the area of the loop. The data are therefore the average value of dB/dt in the direction of the loop's moment. The units for dB/dt measurements are T/s.
+
+**Magnetic Field Data (h):** Similar to the time-derivative, H-field measurements represent the average value H in the direction of the loop's moment. H-field measurements are in units of A/m. 
 
 
 
