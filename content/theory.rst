@@ -483,4 +483,28 @@ where :math:`\mathbf{J}` is the sensitivity of the data to the current model :ma
             i = max \_ iter \_ ipcg
 
 
+.. _theory_sens_weights:
 
+Sensitivity Weights
+-------------------
+
+Sensitivity weights are used to counteract common artifacts associated with TDEM inversion; e.g. ring artifacts observed in the inversion of airborne TDEM data. To construct an appropriate sensitivity weights model, we begin by computing the root mean squared sensitivities.
+Where *n* is the number of data and :math:`v_j` is the volume of cell :math:`j`, the root mean squared sensitivity of cell :math:`j` is given by:
+
+.. math::
+    s_j = \frac{1}{v_j} \Bigg [ \sum_{i=1}^n J_{i,j}^2 \; \Bigg ]^{1/2} = \frac{1}{v_j} \Bigg [ diag(\mathbf{J^T J})_j \, \Bigg ]^{1/2}
+
+Thus to compute root mean squared sensitivities for all cells, we must compute the diagonal elements of :math:`\mathbf{J^T J}`. Once obtained, the diagonal elements can be divided by their corresponding cell volumes. We approximate the diagonal elements of :math:`\mathbf{J^T J}` iteratively using the probing method:
+
+.. math::
+    diag( \mathbf{J^T J}) = \frac{1}{K} \sum_{k=1}^K diag (\mathbf{u}) \mathbf{J^T J u}
+
+where :math:`\mathbf{u}` is a random probing vector and the accuracy of the approximation improves as K increases. The probing method is easy to implement since we have sub-routines for computing the products of :math:`\mathbf{J}` and :math:`\mathbf{J^T}` with a vector.
+
+The root mean squared sensitivities defined on the mesh are small in magnitude and span many orders of magnitude. To create practical sensitivity weights, the root mean squared sensitivities must be normalized and truncated. This process is explained as follows.
+
+For a vector of root mean squared sensitivities :math:`\mathbf{s}`, and a maximum sensitivity weight value of :math:`\tau > 1`, the sensitivity weights are obtained by:
+
+    1. normalizing :math:`\mathbf{s}` by its maximum value
+    2. multiplying the resulting vector by :math:`\tau`
+    3. all values less than 1 are set to equal 1

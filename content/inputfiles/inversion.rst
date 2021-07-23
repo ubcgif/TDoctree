@@ -202,8 +202,9 @@ Line Descriptions
     - **Sensitivity weighting options:**
 
         - For no sensitivity weighting, use the flag *NOT_USE_SENS_WEIGHT*
-        - For sensitivity weighting, use the flag *USE_SENS_WEIGHT* followed by the parameters *nsample* and *maxSens*, where:
+        - To apply sensitivity weighting, use the flag *USE_SENS_WEIGHT* followed by values for the parameters *nsample* and *maxSens*. If applied, sensitivity weights are constructed using the starting model and the weights used in the inversion are output to the file *sensitivity.txt*.
+        The parameters *nsample* and *maxSens* are defined as follows:
 
-            - *nsample* is the number of time an iterative process is use to approximate the sensitivity
-            - *maxSens* is the maximum sensitivity weighting allowed for cells
+            - *nsample* is the number of iterations used to approximate the root mean squares sensitivities with the probing method; see :ref:`sensitivity weights <theory_sens_weights>`. *nsample* corresponds to the value of the variable :math:`K` in the mathematical description. Generally *nsample* is an integer value between 5 and 10. 
+            - *maxSens* is the maximum value for the sensitivity weights; see :ref:`sensitivity weights<theory_sens_weights>`. *maxSens* corresponds to the variable :math:`\tau` in the mathematical description. Generally this is a number between 10 and 1000.
 
