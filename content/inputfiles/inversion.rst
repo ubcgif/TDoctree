@@ -123,10 +123,6 @@ Line Descriptions
 
     - **Susceptibility Model:** The user may supply the file path to a background susceptibility model. Or the user may enter the flag *NO_SUS* if the background susceptibility is zero.
 
-.. important::
-
-    Modeling non-zero susceptibility is possible using the TD OcTree v1 package. **However** , the initial magnetostatic problem is very difficult to solve for a non-zero transmitter current with our choice in discretization. To model with non-zero susceptibility, **you must discretize the entire transmitter waveform and it must start with a current amplitude of 0 at** :math:`t=t_0` **!!!**
-
 .. _tdoctree_input_inv_ln11:
 
     - **Active Topography Cells:** Here, the user can choose to specify the cells which lie below the surface topography. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
