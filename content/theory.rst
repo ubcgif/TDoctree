@@ -133,6 +133,12 @@ The TDoctree version 1 package models EM responses with inductive sources (e.g. 
 
 For each :math:`\mathbf{q_i}` defined in :eq:`a_operator` we can use vector :math:`\mathbf{q}` obtained here.
 
+Modeling with Non-Zero Susceptibility
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Modeling non-zero susceptibility is possible using the TD OcTree v1 package. **However** , the initial magnetostatic problem is very difficult to solve for a non-zero transmitter current with our choice in discretization. To model with non-zero susceptibility, **you must discretize the entire transmitter waveform and it must start with a current amplitude of 0 at** :math:`t=t_0` **!!!**
+
+
 .. _theory_data:
 
 Data

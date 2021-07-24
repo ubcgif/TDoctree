@@ -106,6 +106,8 @@ Line Descriptions
 
     - **Susceptibility Model:** The user may supply the file path to a background susceptibility model. If a homogeneous conductivity value is being used for all active cells, the user can enter "VALUE" followed by a space and a numerical value; example "VALUE 0.01".
 
+.. important:: Modeling non-zero susceptibility is possible using the TD OcTree v1 package. **However** , the initial magnetostatic problem is very difficult to solve for a non-zero transmitter current with our choice in discretization. To model with non-zero susceptibility, **you must discretize the entire transmitter waveform and it must start with a current amplitude of 0 at** :math:`t=t_0` **!!!**
+
 
 .. _tdoctree_input_inv_ln8:
 
