@@ -212,40 +212,10 @@ To solve :eq:`maxwell_a_phi` we use a block preconditionned conjugate gradient a
 
 .. _theory_initial_h:
 
-Magnetic Field at t0
-^^^^^^^^^^^^^^^^^^^^
+Modeling with Non-Zero Susceptibility
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When computing magnetic field data (not needed for :math:`\vec{e}` or :math:`\partial_t \vec{b}`), we will need to compute magnetic fields at :math:`t=t_0`. Assuming the source is static for :math:`t \leq t_0`, :eq:`maxwells_eq` can be reformulated in terms of a vector potential :math:`\vec{a}` and a scalar potential :math:`\phi`:
-
-.. math::
-    \nabla \times \mu_{-1} \times \vec{a} + \nabla \mu^{-1} \nabla \cdot \vec{a} &= \sigma \nabla \phi + \vec{s}\, f_0 \\
-    \vec{b} &= \nabla \times \vec{a} \\
-    \vec{e} &= \nabla \phi
-
-
-where the second term is added for stability assuming the Coulomb Gauge (:math:`\nabla \cdot \vec{a} = 0`) condition holds. Using the finite volume approach, we can solve for the discrete vector potential :math:`\mathbf{a_0}`:
-
-.. math::
-    \mathbf{A_{m} \, a_0} = \mathbf{q_m}
-
-
-where :math:`\mathbf{a_0}` lives on edges and
-
-.. math::
-    \mathbf{A_{m}} &= \mathbf{C^T \, M_\mu \, C + G \, N_n^T }\, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{N_n \, G^T} \\
-    \mathbf{q_{m}} &= \mathbf{s} \, f_0 + \mathbf{M_\sigma G \, e_0}
-
-
-Once we solve for :math:`\mathbf{a_0}`, the magnetic field is computed via:
-
-.. math::
-    \mathbf{b_0} = \mathbf{C \, a_0}
-
-
-where :math:`\mathbf{C}` is define in :eq:`curl_operator` .
-
-
-.. note:: This problem must be solved for each source. However, LU factorization is used to make solving for many right-hand sides more efficient.
+Modeling non-zero susceptibility is possible using the TD OcTree v1 package. **However** , the initial magnetostatic problem is very difficult to solve for a non-zero transmitter current with our choice in discretization. To model with non-zero susceptibility, **you must discretize the entire transmitter waveform and it must start with a current amplitude of 0 at** :math:`t=t_0` **!!!**
 
 
 .. _theory_data:
