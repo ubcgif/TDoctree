@@ -5,7 +5,7 @@ Inversion
 
 Here, the code **tdoctree.exe** and the input file **tdoctreeinv.inp** (:ref:`see format <tdoctree_input_inv>`) are used to invert dBz/dt data. TEM data were created in the example ":ref:`forward modeling<example_fwd>`". Gaussian noise was added to the synthetic data. The noise had a standard deviation of 1e-14 T/s +/- 5\%. Files relevant to this part of the example are in the sub-folder *inv*. Before running this example, you may want to do the following:
 
-	- `Download and open the zip folder containing the entire tdoctree version 1 example <https://github.com/ubcgif/tdoctree/raw/tdoctree/assets/tdoctree_v1_example.zip>`__ (if not done already)
+	- `Download and open the zip folder containing the entire TDoctree version 1 example <https://github.com/ubcgif/tdoctree/raw/tdoctree/assets/tdoctree_v1_example.zip>`__ (if not done already)
 	- :ref:`Learn how to run code from command line <tdoctree_inv>`
 	- :ref:`Learn the format of the input file <tdoctree_input_inv>`
 
