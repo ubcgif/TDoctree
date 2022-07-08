@@ -12,8 +12,10 @@ The wave file defines the time-dependent current in the transmitter during both 
     - The first time defining the transmitter waveform(s) **must** be before the earliest time channel 
     - The first column in the wave file must have increasing values
 
-General Format
---------------
+Simple Format
+-------------
+
+Here, the current is defined explicitly at every time step.
 
 Single Waveform for All Transmitters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -34,7 +36,7 @@ In this case, the same waveform is used for all transmitters. The format for the
 where
 
     - :math:`t_i` is a particular time in seconds
-    - :math:`1` is a flag denoting that the same waveform is being used for all transmitters
+    - :math:`1` is a specific value used for this case
     - :math:`I_i` is the current in the transmitter at time :math:`t_i`
 
 
@@ -55,15 +57,15 @@ We have also provided an `example file for an arbitrary waveform <https://github
 Unique Waveform for Each Transmitter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this case, a separate waveform is used for each transmitters. The format for the wave file is as follows:
+In this case, a separate waveform is used for each transmitters. For each transmitter in the transmitter file, the user must add a column defining the waveform current at each time. The format for the wave file is as follows:
 
 |
 |
-| :math:`t_0 \;\;\; n \;\;\; I_0^{(1)} \;\;\; I_0^{(2)} \cdots \; I_0^{(n)}`
-| :math:`t_1 \;\;\; n \;\;\; I_1^{(1)} \;\;\; I_1^{(2)} \cdots \; I_1^{(n)}`
-| :math:`t_2 \;\;\; n \;\;\; I_2^{(1)} \;\;\; I_2^{(2)} \cdots \; I_2^{(n)}`
+| :math:`t_0 \;\;\; 1 \;\;\; I_0^{(1)} \;\;\; I_0^{(2)} \cdots \; I_0^{(n)}`
+| :math:`t_1 \;\;\; 1 \;\;\; I_1^{(1)} \;\;\; I_1^{(2)} \cdots \; I_1^{(n)}`
+| :math:`t_2 \;\;\; 1 \;\;\; I_2^{(1)} \;\;\; I_2^{(2)} \cdots \; I_2^{(n)}`
 | :math:`\, \vdots \;\;\;\;\, \vdots \;\;\;\;\; \vdots \;\;\;\;\;\;\;\, \vdots \;\;\;\,\ddots\;\; \vdots`
-| :math:`t_f \;\;\; n \;\;\; I_f^{(1)} \;\;\; I_f^{(2)} \cdots \; I_f^{(n)}`
+| :math:`t_f \;\;\; 1 \;\;\; I_f^{(1)} \;\;\; I_f^{(2)} \cdots \; I_f^{(n)}`
 |
 |
 
@@ -71,7 +73,7 @@ In this case, a separate waveform is used for each transmitters. The format for 
 where
 
     - :math:`t_i` is a particular time in seconds
-    - :math:`n` indicates the total number of transmitters (same integer number on every row!)
+    - :math:`1` is a specific value used for this case
     - :math:`I_i^{(j)}` is the current at time :math:`t_i` for transmitter :math:`j`
 
 
@@ -84,7 +86,7 @@ We have also provided an `example file for an arbitrary waveform file <https://g
 Compact Format
 --------------
 
-A compact format can be used to define a single waveform will be used for all transmitters. The format in this case is as follows:
+A compact format can be used to define waveform files; either a single waveform for all transmitters or a distinct waveform for each transmitter. For a single waveform used by all transmitters, the format is:
 
 
 |
@@ -99,7 +101,8 @@ A compact format can be used to define a single waveform will be used for all tr
 where
 
     - :math:`t_i` is a particular time in seconds
-    - :math:`n_i` is the number of linear time steps between times :math:`t_{i-1}` and :math:`t_i`. *Note that* :math:`n_0=1` *always*
+    - :math:`1` must be used as the entry for the second entry on the first line
+    - :math:`n_i` is the number of linear time steps between times :math:`t_{i-1}` and :math:`t_i`
     - :math:`I_i` is the current in the transmitter at all times within interval :math:`i`; i.e. for :math:`t_{i-1} < t \leq t_i`
 
 
